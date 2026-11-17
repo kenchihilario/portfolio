@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Summary card with the contact form beside it, and the "currently
+   building" block that follows it.
+   ========================================================================== */
+
+/* ---- summary card (a two-column grid: text left, form right) ---- */
+.kh-about{
+  margin:0 var(--kh-gutter);
+  padding:clamp(28px,5vw,56px);
+  border-radius:24px;
+  background:var(--kh-wash);
+}
+.kh-about-grid{
+  display:grid; grid-template-columns:1.35fr 1fr; align-items:start;
+  gap:clamp(28px,4vw,72px);
+}
+.kh-about h2{
+  margin-bottom:16px;
+  font-family:var(--kh-display); font-weight:400; text-transform:uppercase;
+  font-size:clamp(28px,4vw,52px);
+}
+/* note: this also reaches the form's own paragraphs, which then override size/colour where they need to */
+.kh-about p{
+  max-width:74ch;
+  font-size:clamp(16px,1.35vw,19px); line-height:1.6;
+  color:#403D36;
+}
+.kh-about p + p{ margin-top:16px; }
+.kh-hl{ color:var(--kh-accent); font-weight:700; }
+.kh-about .kh-about-meta{
+  margin-top:20px;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--kh-muted);
+}
+
+/* ---- the form ---- */
+.kh-form{ display:flex; flex-direction:column; gap:7px; }
+.kh-form h3{
+  margin-bottom:6px;
+  font-size:clamp(19px,1.7vw,24px); font-weight:700; letter-spacing:-.015em;
+}
+.kh-form label{
+  margin-top:8px;
+  font-family:var(--kh-mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--kh-muted);
+}
+.kh-form input,.kh-form textarea{
+  width:100%; padding:12px 14px; resize:vertical;
+  font:inherit; font-size:15px; color:var(--kh-ink);
+  background:#fff;
+  border:1.5px solid var(--kh-rule); border-radius:12px;
+  transition:border-color .18s ease-out, box-shadow .18s ease-out;
+}
+.kh-form ::placeholder{ color:#8A8479; }
+.kh-form input:focus,.kh-form textarea:focus{
+  outline:none; border-color:var(--kh-ink); box-shadow:0 0 0 3px rgba(140,155,255,.22);
+}
+.kh-form input:user-invalid,.kh-form textarea:user-invalid{ border-color:var(--kh-pink); }
+.kh-form input[aria-invalid="true"],.kh-form textarea[aria-invalid="true"]{
+  border-color:#B4335F; box-shadow:0 0 0 3px rgba(180,51,95,.15);
+}
+.kh-form button[type=submit]{
+  align-self:flex-start; margin-top:16px; padding:14px 26px; cursor:pointer;
+  font-family:var(--kh-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--kh-paper); background:var(--kh-ink); border:0; border-radius:99px;
+  transition:background .18s ease-out, translate .18s ease-out;
+}
+.kh-form button[type=submit]:hover{ background:var(--kh-accent); translate:0 -2px; }
+
+/* inline error under a field; script adds .on when there is something to say */
+.kh-form-err{
+  display:none; align-items:center; gap:7px; margin-top:6px;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.07em; line-height:1.45;
+  color:#B4335F;
+}
+.kh-form-err.on{ display:flex; }
+.kh-form-err::before{ content:""; flex:none; width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+
+/* ---- dark theme: the card and its fields flip to the dark palette ---- */
+html[data-mode="dark"] .kh-about{ background:var(--kh-sec-hi); }
+html[data-mode="dark"] .kh-about h2,
+html[data-mode="dark"] .kh-form h3{ color:var(--kh-text); }
+html[data-mode="dark"] .kh-about p,
+html[data-mode="dark"] .kh-about .kh-about-meta,
+html[data-mode="dark"] .kh-form label{ color:var(--kh-pill-text); }
+html[data-mode="dark"] .kh-form input,
+html[data-mode="dark"] .kh-form textarea{ color:var(--kh-text); background:var(--kh-sec-hi); border-color:var(--kh-pill-edge); }
+html[data-mode="dark"] .kh-form ::placeholder{ color:var(--kh-pill-text); }
+html[data-mode="dark"] .kh-form button[type=submit]{ color:var(--kh-sec-hi); background:var(--kh-text); }
+
+/* ---- "currently building" ---- */
+.kh-next{
+  display:flex; flex-direction:column; align-items:flex-start;
+  gap:clamp(11px,1.3vw,17px);
+  margin:clamp(16px,2.2vw,32px) var(--kh-gutter) 0;
+  padding:clamp(28px,4.4vw,56px) 0;
+}
+.kh-next-kick{
+  font-family:var(--kh-mono); font-size:11px; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--kh-accent);
+}
+.kh-next-title{
+  font-family:var(--kh-display); font-weight:400; text-transform:uppercase; line-height:1;
+  font-size:clamp(28px,4vw,54px); color:var(--kh-ink);
+}
+.kh-next p{ max-width:58ch; font-size:clamp(15px,1.15vw,18px); line-height:1.62; color:#403D36; }
+.kh-next-meta{
+  font-family:var(--kh-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--kh-muted);
+}
+html[data-mode="dark"] .kh-next p{ color:var(--kh-pill-text); }
+
+@media (max-width:900px){ .kh-about-grid{ grid-template-columns:1fr; } }
+@media (max-width:760px){
+  .kh-next{ padding:clamp(22px,6vw,34px); }
+  .kh-form button[type=submit]{ align-self:stretch; min-height:48px; text-align:center; }
+}

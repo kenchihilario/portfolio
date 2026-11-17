@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Tech stack
+   Bare logos in three groups. The first group (networking) is the one that
+   matters most, so its marks and names are drawn larger.
+   ========================================================================== */
+
+.kh-stack{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(24px,2.6vw,42px);
+}
+
+.kh-stack-title{
+  margin-bottom:clamp(15px,1.7vw,23px);
+  padding-bottom:9px;
+  border-bottom:1px solid var(--kh-rule);
+  font-family:var(--kh-mono);
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--kh-muted);
+}
+.kh-stack-main .kh-stack-title{
+  border-bottom:2px solid var(--kh-ink);
+  color:var(--kh-ink);
+}
+
+.kh-stack-list{
+  --tile:clamp(46px,4vw,64px);
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(calc(var(--tile) * 1.35 + 22px),1fr));
+  gap:clamp(18px,2vw,30px) clamp(12px,1.4vw,22px);
+  padding:0;
+  list-style:none;
+}
+.kh-stack-main .kh-stack-list{--tile:clamp(56px,5.2vw,84px)}
+
+.kh-tool{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+  text-align:center;
+  transition:translate .18s ease-out;
+}
+.kh-tool:hover{translate:0 -5px}
+
+/* Every logo gets the same square. --v-k (set inline on the small ones) scales
+   a mark up so they all carry about the same visual weight. */
+.kh-tool img{
+  width:var(--tile);
+  height:var(--tile);
+  object-fit:contain;
+  scale:var(--v-k,1);
+}
+.kh-tool img.tkn{object-fit:contain;scale:1}
+
+.kh-tool-name{
+  font-size:clamp(12px,.92vw,14px);
+  font-weight:700;
+  letter-spacing:-.01em;
+  line-height:1.2;
+}
+.kh-stack-main .kh-tool-name{font-size:clamp(14px,1.15vw,18px)}
+
+/* ---------- dark theme ----------
+   A few marks are solid black or dark-on-transparent, so on the dark grid
+   they get a light tile or an inverted fill. Everything else keeps its own colours. */
+html[data-mode="dark"] .kh-mono-lg{filter:invert(1) brightness(1.35)}
+html[data-mode="dark"] .kh-tool img[src*="openai.png"]{filter:brightness(0) invert(1)}
+html[data-mode="dark"] .kh-tool img[src*="logos/tech/git.png"]{
+  margin-bottom:8px;
+  background:#EAEEFB;
+  border-radius:6px;
+  box-shadow:0 0 0 5px #EAEEFB;
+}
+html[data-mode="dark"] .kh-tool img[src*="n-proxmox"],
+html[data-mode="dark"] .kh-tool img[src*="n-packet-tracer"]{
+  padding:10px;
+  box-sizing:border-box;
+  background:#EAEEFB;
+  border-radius:14px;
+}
+html[data-mode="dark"] .kh-tool img[src*="n-ansible"]{
+  border-radius:50%;
+  box-shadow:0 0 0 2px #8C9BFF;
+}

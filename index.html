@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenchi Hilario | Portfolio</title>
+<meta name="description" content="Portfolio of Kenchi Paul M. Hilario, a Diploma in Computer Engineering Technology student (Networking) at PUP. Cisco CCNA 1 earned, TESDA Computer Systems Servicing NC II, looking for an OJT or internship in networking, IT infrastructure or cybersecurity.">
+<meta name="author" content="Kenchi Paul M. Hilario">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kenchi Paul M. Hilario | Computer Engineering Technology">
+<meta property="og:description" content="Networking and cybersecurity projects, Cisco certifications and experience. Looking for an OJT or internship in networking, IT infrastructure or cybersecurity.">
+<meta property="og:image" content="/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kenchi Paul M. Hilario, Computer Engineering Technology student">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kenchi Paul M. Hilario | Computer Engineering Technology">
+<meta name="twitter:description" content="Networking and cybersecurity projects, Cisco certifications and experience.">
+<meta name="twitter:image" content="/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<!-- One theme-color tag. scripts/mode-toggle.js keeps it matched to the
+     site's own dark/light mode (not the OS setting). Starts dark, like the
+     inline attribute below. -->
+<meta name="theme-color" content="#0E1330" id="chrome-tint">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+/* Dark is the default look. Set it before first paint so there is no flash. */
+document.documentElement.setAttribute('data-mode', 'dark');
+</script>
+<link rel="stylesheet" href="styles/theme-vars.css">
+<link rel="stylesheet" href="styles/shell.css">
+<link rel="stylesheet" href="styles/navbar.css">
+<link rel="stylesheet" href="styles/section-layout.css">
+<link rel="stylesheet" href="styles/education.css">
+<link rel="stylesheet" href="styles/experience.css">
+<link rel="stylesheet" href="styles/stack.css">
+<link rel="stylesheet" href="styles/ledger.css">
+<link rel="stylesheet" href="styles/projects.css">
+<link rel="stylesheet" href="styles/popup.css">
+<link rel="stylesheet" href="styles/contact.css">
+<link rel="stylesheet" href="styles/footer.css">
+<link rel="stylesheet" href="styles/status.css">
+<link rel="stylesheet" href="styles/sky-layer.css">
+<link rel="stylesheet" href="styles/redesign.css">
+<link rel="stylesheet" href="styles/landing.css">
+<link rel="stylesheet" href="styles/finish.css">
+<link rel="stylesheet" href="styles/signature.css">
+<script defer src="scripts/project-rail.js"></script>
+<script defer src="scripts/timeline.js"></script>
+<script defer src="scripts/project-popup.js"></script>
+<script defer src="scripts/contact-form.js"></script>
+<script defer src="scripts/topbar-state.js"></script>
+<script defer src="scripts/audio.js"></script>
+<script defer src="scripts/mode-toggle.js"></script>
+<script defer src="scripts/project-grid.js"></script>
+<script defer src="scripts/nav-menu.js"></script>
+<script defer src="scripts/access-labels.js"></script>
+<script defer src="scripts/intro-and-notices.js"></script>
+<script defer src="scripts/night-sky.js"></script>
+<script defer src="scripts/extras.js"></script>
+<script defer src="scripts/badge-viewer.js"></script>
+<script defer src="scripts/polish.js"></script>
+<script defer src="scripts/project-zoom.js"></script>
+</head>
+<body>
+
+<!-- Background sky: stars at night, birds in daylight. Fixed behind the page
+     and masked around the portrait by night-sky.js. Decorative only. -->
+<div class="kh-sky" id="sky-layer" aria-hidden="true">
+  <canvas class="sky-canvas"></canvas>
+  <div class="sun"><div class="sun-in"><i class="sun-rays"></i><i class="sun-glow"></i><i class="sun-halo"></i><i class="sun-core"></i></div></div>
+</div>
+
+<!-- Opening screen. Hidden by default and shown by the inline script below,
+     so a visitor with JavaScript off is never stuck behind it. -->
+<div class="kh-load" id="curtain" aria-hidden="true">
+  <svg class="kh-load-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M8 14H22V43H38V14H52V41L79 14H94L58 50L94 86H79L52 59V86H38V57H22V86H8Z"/></svg>
+  <p class="kh-load-name">Kenchi Hilario</p>
+  <div class="kh-load-rail"><i class="kh-load-fill" id="curtain-fill"></i></div>
+  <p class="kh-load-meta" id="curtain-meta">Loading&hellip;</p>
+  <ul class="kh-load-log" id="curtain-log"><li>init interface</li><li>load fonts and images</li><li>open route: recruiter &rarr; kenchi</li><li>link up</li></ul>
+</div>
+<script>
+/* Opening screen controller. It runs first and always finishes, even if
+   something else on the page fails. */
+(function () {
+  var html = document.documentElement;
+  html.classList.add('js', 'loading');
+
+  /* Hold the screen briefly so a fast load does not just flash. Visitors who
+     prefer reduced motion wait much less. */
+  var HOLD = matchMedia('(prefers-reduced-motion: reduce)').matches ? 400 : 1700;
+  var began = Date.now();
+  var waiting = null;
+  var lifted = false;
+  window.__intro = { t0: began, min: HOLD };
+
+  function lift() {
+    if (lifted) return;
+    lifted = true;
+    window.__introDone = true;
+    document.dispatchEvent(new CustomEvent('introdone'));
+    setTimeout(function () {
+      html.classList.add('ready');
+      html.classList.remove('loading');
+      setTimeout(function () {
+        var screen = document.getElementById('curtain');
+        if (screen) screen.remove();
+      }, 700);
+    }, 180);
+  }
+
+  /* skipWait is the emergency path and ignores the hold. */
+  function showPage(skipWait) {
+    if (lifted) return;
+    var remaining = skipWait ? 0 : HOLD - (Date.now() - began);
+    if (remaining > 0) {
+      if (!waiting) waiting = setTimeout(function () { waiting = null; lift(); }, remaining);
+      return;
+    }
+    clearTimeout(waiting);
+    waiting = null;
+    lift();
+  }
+
+  window.__showPage = showPage;
+  setTimeout(function () { showPage(true); }, 4500);
+  addEventListener('load', function () { showPage(); });
+  addEventListener('error', function () { setTimeout(showPage, 300); }, true);
+})();
+</script>
+
+<div class="kh-toasts" id="notices" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<noscript>
+  <p class="kh-nojs">This site uses JavaScript for its two profiles and the contact form &mdash; with it switched off you can still read everything here, and reach me at
+    <a href="mailto:kenchihilario@gmail.com">kenchihilario@gmail.com</a>.</p>
+</noscript>
+
+<a class="kh-skip" href="#main">Skip to content</a>
+
+<header class="kh-dock" id="topbar">
+  <i class="kh-dock-prog" aria-hidden="true"></i>
+  <button class="kh-dock-home" type="button" id="back-top" aria-label="Back to top"><svg class="kh-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M8 14H22V43H38V14H52V41L79 14H94L58 50L94 86H79L52 59V86H38V57H22V86H8Z"/></svg>Home</button>
+  <button class="kh-menu" type="button" id="menu-toggle"
+          aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+    <span class="kh-menu-ico" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="kh-menu-lab">Menu</span>
+  </button>
+  <nav class="kh-dock-links" aria-label="Sections">
+    <a style="--i:0" href="#education">Education</a>
+    <a style="--i:1" href="#experience">Experience</a><a style="--i:2" href="#infra">Infrastructure</a>
+    <a style="--i:3" href="#work">Projects</a>
+    <a style="--i:4" href="#stack">Stack</a>
+    <a style="--i:5" href="#certs">Certifications</a><a style="--i:6" href="#events">Events</a>
+    <a style="--i:7" href="#contact">Contacts</a>
+    <span class="kh-dock-glow" aria-hidden="true"></span>
+  </nav>
+  <div class="kh-dock-tools">
+  <span class="kh-dock-pct" id="scroll-meter" aria-hidden="true">0%</span>
+  <button class="snd-btn" type="button" id="snd-toggle" aria-pressed="false" aria-label="Toggle interface sound">
+    <svg class="snd-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><g class="snd-mute"><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></g><g class="snd-signal"><path class="snd-wave1" d="M15 8.2a5.2 5.2 0 0 1 0 7.6"/><path class="snd-wave2" d="M18.3 5a9.5 9.5 0 0 1 0 14"/></g></svg>
+    <span class="snd-lab">Sound off</span>
+  </button>
+  <button class="mode-btn" type="button" aria-pressed="false" aria-label="Toggle dark and light theme">
+    <svg class="mode-ico" viewBox="0 0 20 20" aria-hidden="true">
+      <g class="ic-sun"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.4v2.2M10 16.4v2.2M1.4 10h2.2M16.4 10h2.2M4 4l1.6 1.6M14.4 14.4L16 16M16 4l-1.6 1.6M5.6 14.4L4 16"/></g>
+      <g class="ic-moon"><path d="M16 12.4A6.8 6.8 0 0 1 7.6 4a6.8 6.8 0 1 0 8.4 8.4z"/></g>
+    </svg>
+    <span class="mode-lab">Dark</span>
+  </button>
+  </div>
+</header>
+
+<!-- Phone menu: the section links and the mode/sound buttons move into this
+     drawer, since the top bar has no room for them. Links are copied from the
+     desktop nav by nav-menu.js. -->
+<div class="kh-sheet" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="kh-sheet-top">
+    <span class="kh-sheet-title">Menu</span>
+    <button class="kh-sheet-close" type="button" id="drawer-close" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="kh-sheet-links" id="drawer-nav" aria-label="Sections"></nav>
+  <div class="kh-sheet-foot">
+    <div class="kh-sheet-ctl">
+      <button class="mode-btn" type="button" aria-pressed="false" aria-label="Toggle dark and light theme">
+        <svg class="mode-ico" viewBox="0 0 20 20" aria-hidden="true">
+          <g class="ic-sun"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.4v2.2M10 16.4v2.2M1.4 10h2.2M16.4 10h2.2M4 4l1.6 1.6M14.4 14.4L16 16M16 4l-1.6 1.6M5.6 14.4L4 16"/></g>
+          <g class="ic-moon"><path d="M16 12.4A6.8 6.8 0 0 1 7.6 4a6.8 6.8 0 1 0 8.4 8.4z"/></g>
+        </svg>
+        <span class="mode-lab">Dark</span>
+      </button>
+      <button class="snd-btn" type="button" aria-pressed="false" aria-label="Toggle interface sound">
+        <svg class="snd-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><g class="snd-mute"><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></g><g class="snd-signal"><path class="snd-wave1" d="M15 8.2a5.2 5.2 0 0 1 0 7.6"/><path class="snd-wave2" d="M18.3 5a9.5 9.5 0 0 1 0 14"/></g></svg>
+        <span class="snd-lab">Sound off</span>
+      </button>
+    </div>
+    <p class="kh-sheet-note">Heads up: sound plays even on silent mode</p>
+    <a class="kh-sheet-cta" href="https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=kenchihilario@gmail.com" target="_blank" rel="noopener">Hire the intern &rarr;</a>
+  </div>
+</div>
+
+<div class="kh-page">
+  <main id="main" tabindex="-1">
+  <!-- section: hero -->
+  <section class="kh-hero hx" aria-label="Introduction">
+    <div class="kh-hero-top">
+      <div class="kh-top-left">
+      <span class="kh-brand" aria-label="Kenchi Hilario"><svg class="kh-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M8 14H22V43H38V14H52V41L79 14H94L58 50L94 86H79L52 59V86H38V57H22V86H8Z"/></svg></span>
+      <nav aria-label="Sections">
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a><a href="#infra">Infrastructure</a>
+        <a href="#work">Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="#certs">Certifications</a><a href="#events">Events</a>
+        <a href="#contact">Contacts</a>
+      </nav>
+      </div>
+      <div class="kh-top-right">
+      <button class="snd-btn" type="button" aria-pressed="false" aria-label="Toggle interface sound">
+        <svg class="snd-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><g class="snd-mute"><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></g><g class="snd-signal"><path class="snd-wave1" d="M15 8.2a5.2 5.2 0 0 1 0 7.6"/><path class="snd-wave2" d="M18.3 5a9.5 9.5 0 0 1 0 14"/></g></svg>
+        <span class="snd-lab">Sound off</span>
+      </button>
+      <button class="mode-btn" type="button" aria-pressed="false" aria-label="Toggle dark and light theme">
+        <svg class="mode-ico" viewBox="0 0 20 20" aria-hidden="true">
+          <g class="ic-sun"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.4v2.2M10 16.4v2.2M1.4 10h2.2M16.4 10h2.2M4 4l1.6 1.6M14.4 14.4L16 16M16 4l-1.6 1.6M5.6 14.4L4 16"/></g>
+          <g class="ic-moon"><path d="M16 12.4A6.8 6.8 0 0 1 7.6 4a6.8 6.8 0 1 0 8.4 8.4z"/></g>
+        </svg>
+        <span class="mode-lab">Dark</span>
+      </button>
+      </div>
+    </div>
+
+    <div class="hx-body">
+      <div class="hx-copy">
+        <p class="hx-status"><i aria-hidden="true"></i>Open to an OJT / internship: networking, IT infrastructure or cybersecurity</p>
+        <h1 class="hx-name"><span>Kenchi</span><span>Hilario</span></h1>
+        <p class="hx-role">Diploma in Computer Engineering Technology student, Network Engineering track at PUP.</p>
+        <p class="hx-lede">I am learning network defense and monitoring, backed by hands-on networking and infrastructure work in Linux, Active Directory and Docker. I hold a TESDA NC II and finished a 300-hour systems administration internship this summer.</p>
+        <div class="hx-btns">
+          <a class="hx-btn hx-main" href="https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=kenchihilario@gmail.com" target="_blank" rel="noopener">Email me</a>
+          <a class="hx-btn" href="docs/Kenchi_Hilario_CV.pdf" download>Download CV</a>
+          <a class="hx-btn" href="docs/Kenchi_Hilario_Resume.pdf" download>Download Resume</a>
+          <a class="hx-btn" href="https://github.com/kenchihilario" target="_blank" rel="noopener">GitHub</a>
+          <a class="hx-btn" href="https://www.linkedin.com/in/kenchi-hilario/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="hx-stage">
+        <div class="hx-arch" aria-hidden="true"></div>
+        <img class="hx-photo" src="kenchi-hero.webp" alt="Kenchi Paul M. Hilario" width="490" height="509" fetchpriority="high" decoding="async">
+        <button class="hx-tag t1" type="button" data-badge="ethical"><img src="logos/cisco/ethical-hacker.png" alt=""><b>Ethical Hacker</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t2" type="button" data-badge="ctm"><img src="logos/cisco/cyber-threat-management.png" alt=""><b>Cyber Threat Mgmt</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t3" type="button" data-badge="junior"><img src="logos/cisco/junior-analyst.png" alt=""><b>Jr. Cyber Analyst</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t4" type="button" data-badge="netdef"><img src="logos/cisco/network-defense.png" alt=""><b>Network Defense</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t5" type="button" data-badge="ccna1"><img src="logos/cisco/ccna-itn.png" alt=""><b>CCNA: Intro to Networks</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t6 hx-isc" type="button" data-badge="isc2"><img src="logos/cisco/isc2-candidate.png" alt=""><b>ISC2</b><small>Candidate</small></button>
+        <button class="hx-tag t7" type="button" data-badge="nss"><img src="logos/cisco/network-support-and-security.png" alt=""><b>Network Support &amp; Security</b><small>Cisco · Earned</small></button>
+        <button class="hx-tag t8" type="button" data-badge="nt"><img src="logos/cisco/network-technician.png" alt=""><b>Network Technician</b><small>Cisco · Earned</small></button>
+        <p class="hx-hint">Tap a sticker to see the certificate</p>
+      </div>
+    </div>
+
+    <dl class="hx-facts">
+      <div><dt>300 hours</dt><dd>Systems administration internship at Cornersteel Systems</dd></div>
+      <div><dt>11 courses</dt><dd>Completed with Cisco Networking Academy</dd></div>
+      <div><dt>82 of 143</dt><dd>CyberPH PacketCapture, entered solo</dd></div>
+      <div><dt>7 projects</dt><dd>Public on GitHub, from Python to C++</dd></div>
+    </dl>
+    <p class="hx-offer"><span>Ready to learn</span>I have started with Wireshark and Nmap, and I worked with Linux, Samba Active Directory, Docker and Grafana / Loki during my 300-hour internship. I want to learn more from your team.</p>
+
+  </section>
+
+  <!-- section: speaking (offline view) -->
+  <section class="sec kh-sec" id="route" aria-label="Route to interview" style="padding-top:0">
+    <div class="kh-head"><h2>Route to interview</h2><span class="kh-head-note kh-head-note-lg">Toy demo: cut a cable, watch the packet reroute</span></div>
+    <div class="route-card">
+      <svg class="route-svg" id="routeSvg" viewBox="0 0 900 300" role="img" aria-label="Network map with five nodes: kenchi, switch A, switch B, router and contact, joined by six cables."></svg>
+      <div class="route-ctl">
+        <button type="button" class="rbtn" id="rSend">Send packet</button>
+        <button type="button" class="rbtn" id="rCut">Cut a cable</button>
+        <button type="button" class="rbtn" id="rRestore">Restore links</button>
+        <span class="rhint">Click any cable to cut or fix it. Illustration only, no real measurements.</span>
+      </div>
+      <ol class="route-log" id="routeLog" aria-live="polite"><li>Ready. Send a packet from kenchi to contact.</li></ol>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="education" aria-label="Education">
+    <div class="kh-head"><h2>Education</h2><span class="kh-head-note kh-head-note-lg">Diploma · TESDA · senior high</span></div>
+    <div class="kh-edu">
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/pup.png" alt=""><div class="kh-edu-txt"><h3>Polytechnic University of the Philippines</h3><span class="kh-edu-when">Sta. Mesa, Manila · 2024 to Present</span></div></div>
+        <p class="kh-edu-role">Diploma in Computer Engineering Technology · 3rd year<span class="kh-edu-focus">Network Engineering specialization</span></p>
+        <ul class="kh-edu-pts"><li>Network-engineering track built around TCP/IP, routing and switching, VLANs and subnetting, with hands-on lab work on top. My thesis group is building a two-way LoRa GPS tracking and geofence warning system for hiker safety, and our fault-trainer school project turned into a 3D demo anyone can try online.</li><li>Plan after graduating: ladderize into a Bachelor&rsquo;s degree in Computer Engineering and keep adding certifications, with CCNA now and CCNP next.</li><li>Academic honors: President&rsquo;s Lister in the 2nd semester of both SY 2024&ndash;2025 and SY 2025&ndash;2026; Dean&rsquo;s Lister in the 1st semester of both years.</li></ul></article>
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/arandia.png" alt=""><div class="kh-edu-txt"><h3>TESDA · Arandia College, Main</h3><span class="kh-edu-when">National Certificate II</span></div></div>
+        <p class="kh-edu-role">Computer Systems Servicing<span class="kh-edu-focus">NC II holder</span></p>
+        <ul class="kh-edu-pts"><li>Units covered: installing and configuring computer systems, setting up computer networks and servers (including Active Directory and Group Policy), and maintaining and repairing computer systems and networks, plus workplace safety, quality standards and computer operations.</li></ul></article>
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/metrologyx.png" alt="" style="border-radius:12px"><div class="kh-edu-txt"><h3>TESDA · Metrologyx Training and Assessment Center, Inc.</h3><span class="kh-edu-when">National Certificate II</span></div></div>
+        <p class="kh-edu-role">Mechatronics<span class="kh-edu-focus">Assessment Nov 24, 2026</span></p>
+        <ul class="kh-edu-pts"><li>Training at Metrologyx in Manila ran from September 28 to October 26, 2026. The competency assessment is scheduled for November 24, 2026, so this certificate is still ongoing and not earned yet.</li></ul></article>
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/donbosco.png" alt=""><div class="kh-edu-txt"><h3>Don Bosco High School</h3><span class="kh-edu-when">2022 to 2024</span></div></div>
+        <p class="kh-edu-role">Senior High School <span class="kh-edu-focus">ICT · Computer Systems Servicing</span></p>
+        <ul class="kh-edu-pts"><li>Where the Computer Systems Servicing track began: PC assembly, OS installation, networking basics and troubleshooting.</li><li>Graduated senior high school as valedictorian and delivered the valedictory speech.</li></ul></article>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="experience" aria-label="Experience" style="padding-top:0">
+    <div class="kh-head"><h2>Experience</h2><span class="kh-head-note kh-head-note-lg">300-hour OJT · cybersecurity cadet</span></div>
+    <div class="kh-xp">
+      <button class="kh-xp-row" type="button" aria-expanded="true">
+        <div class="kh-xp-co"><img class="kh-xp-logo" src="logos/cornersteel.png" alt=""><div class="kh-xp-co-txt"><h3>Cornersteel Systems Corporation</h3><span class="kh-xp-dates">Mandaluyong City · Jul to Aug 2026 · 2 mos</span></div></div>
+        <div class="kh-xp-right">
+          <ul class="kh-xp-roles"><li><h4>Systems Administration / IT Infrastructure Intern</h4><p class="kh-xp-when">Cornersteel Systems Corp. · Jul 1 to Aug 24, 2026 · 300 hours</p></li></ul>
+          <div class="kh-xp-desc"><div class="kh-xp-desc-in"><ul class="kh-xp-pts">
+            <li>Installed and configured Ubuntu Linux, ran system updates, and practiced command-line administration and file management.</li>
+            <li>Deployed containerized applications with Docker and Docker Compose: frontend, backend, database and Nginx services.</li>
+            <li>Assisted with server and storage configuration: RAID 5, Dell PowerEdge servers, Proxmox VE and Synology NAS.</li>
+            <li>Implemented Samba Active Directory, including user accounts, Organizational Units, domain joining and basic domain administration.</li>
+            <li>Created and tested Windows Group Policies and assisted with centralized Linux configuration using Ansible.</li>
+            <li>Supported monitoring and troubleshooting with Grafana, Loki and Grafana Alloy: SSH, domain connectivity, policy and network issues.</li>
+          </ul></div></div>
+        </div>
+        <span class="kh-xp-cue" aria-hidden="true"></span>
+      </button>
+      <button class="kh-xp-row" type="button" aria-expanded="false">
+        <div class="kh-xp-co"><img class="kh-xp-logo" src="logos/netconnect-pup.png" alt=""><div class="kh-xp-co-txt"><h3>Cisco NetConnect PUP</h3><span class="kh-xp-dates">PUP · Nov 2026 to present</span></div></div>
+        <div class="kh-xp-right">
+          <ul class="kh-xp-roles"><li><h4>Cybersecurity Cadet</h4><p class="kh-xp-when">Cisco NetConnect PUP · Nov 15, 2026 to present</p></li></ul>
+          <div class="kh-xp-desc"><div class="kh-xp-desc-in"><ul class="kh-xp-pts">
+            <li>Serving as a Cybersecurity Cadet in Cisco NetConnect at PUP.</li>
+          </ul></div></div>
+        </div>
+        <span class="kh-xp-cue" aria-hidden="true"></span>
+      </button>
+      <button class="kh-xp-row" type="button" aria-expanded="false">
+        <div class="kh-xp-co"><img class="kh-xp-logo" src="logos/msc-pup.png" alt=""><div class="kh-xp-co-txt"><h3>Microsoft Campus Club PUP</h3><span class="kh-xp-dates">PUP · Oct to Dec 2024 · 2 mos</span></div></div>
+        <div class="kh-xp-right">
+          <ul class="kh-xp-roles"><li><h4>Cybersecurity Cadet</h4><p class="kh-xp-when">Microsoft Campus Club PUP · Oct 4 to Dec 22, 2024</p></li></ul>
+          <div class="kh-xp-desc"><div class="kh-xp-desc-in"><ul class="kh-xp-pts">
+            <li>Served as a Cybersecurity Cadet in the Microsoft Campus Club at PUP.</li>
+          </ul></div></div>
+        </div>
+        <span class="kh-xp-cue" aria-hidden="true"></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="infra" aria-label="Networking and infrastructure">
+    <div class="kh-head"><h2>Networks &amp; Infrastructure</h2><span class="kh-head-note kh-head-note-lg">What I have set up, supported and built</span></div>
+    <div class="ifg">
+      <article class="ifc"><h3>Directory &amp; policy</h3><p>Implemented Samba Active Directory with user accounts, Organizational Units, domain joining and basic administration. Created and tested Windows GPOs and assisted with centralized Linux configuration using Ansible.</p><span class="kh-ifc-fact">Samba AD · GPO · Ansible</span></article>
+      <article class="ifc"><h3>Servers &amp; storage</h3><p>Assisted with RAID 5, Dell PowerEdge servers, Proxmox VE and Synology NAS during my 300-hour internship at Cornersteel Systems Corporation.</p><span class="kh-ifc-fact">RAID 5 · Proxmox VE · NAS</span></article>
+      <article class="ifc"><h3>Containers</h3><p>Deployed containerized apps with Docker and Docker Compose: frontend, backend, database and Nginx services.</p><span class="kh-ifc-fact">Docker · Compose · Nginx</span></article>
+      <article class="ifc"><h3>Monitoring</h3><p>Supported monitoring and troubleshooting with Grafana, Loki and Grafana Alloy, covering SSH, domain, policy and network issues.</p><span class="kh-ifc-fact">Grafana · Loki · Alloy</span></article>
+      <article class="ifc"><h3>Networking fundamentals</h3><p>TCP/IP, routing and switching, VLANs, subnetting, DNS and DHCP, practiced in Cisco Packet Tracer and Cisco Networking Academy courses.</p><span class="kh-ifc-fact">VLANs · subnetting · DNS · DHCP</span></article>
+      <article class="ifc"><h3>Network projects</h3><p><a href="https://github.com/kenchihilario/net-anal" target="_blank" rel="noopener">net-anal</a> analyzes traffic and detects anomalies. <a href="https://networktrainer.vercel.app" target="_blank" rel="noopener">NetworkTrainer</a> is a 3D fault-trainer demo. <a href="https://github.com/kenchihilario/Monitoring-System" target="_blank" rel="noopener">Monitoring-System</a> streams live-updating data.</p><span class="kh-ifc-fact">Python · 3D demo · Docker on WSL2</span></article>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="work" aria-label="Projects" style="padding-top:0">
+    <div class="kh-head"><h2>Projects</h2><span class="kh-head-note kh-head-note-lg">Builds from my GitHub · school, thesis and free time</span></div>
+    <div class="pf-cases">
+      <article class="pf-case">
+        <figure class="pf-shot"><div class="pf-bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="photos/projects/lora-dashboard.webp" width="1984" height="994" alt="Trailwatch base camp console showing live hiker monitoring, a field map, alerts and a packet log" loading="lazy" decoding="async"></figure>
+        <div class="pf-text"><p class="pf-kicker">Featured 01</p><h3>LoRa Hiker Geofence Dashboard</h3><p class="pf-sub">Our PUP thesis · base camp console</p><p>A PHP and SQL dashboard for a two-way LoRa GPS tracking and geofence warning system for eco-trail hikers. It shows a field map, safe-zone status, hiker nodes, alerts and a packet log, and exports packet and event data as CSV.</p><p class="pf-result">Status: dashboard built, hardware integration is next.</p><ul class="pf-chips"><li>PHP</li><li>SQL</li><li>LoRa</li><li>GPS</li></ul><div class="pf-links"><a class="pf-link" href="https://github.com/kenchihilario/lora-hiker-geofence-dashboard" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></div></div>
+      </article>
+      <article class="pf-case">
+        <figure class="pf-shot"><div class="pf-bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="photos/projects/monitoring.webp" width="1920" height="1080" alt="Monitoring dashboard with live CPU, memory and network charts" loading="lazy" decoding="async"></figure>
+        <div class="pf-text"><p class="pf-kicker">Featured 02</p><h3>Monitoring System</h3><p class="pf-sub">Windows system monitoring dashboard</p><p>Live CPU, memory, network and disk I/O charts, per-core load, storage drives, top processes and recent Windows events. I built it to learn Windows system-level APIs and to work through the quirks of running Docker on WSL2.</p><p class="pf-result">Built end to end: data collection, backend and a frontend that handles lots of live-updating data.</p><ul class="pf-chips"><li>Windows APIs</li><li>Docker</li><li>WSL2</li></ul><div class="pf-links"><a class="pf-link" href="https://github.com/kenchihilario/Monitoring-System" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></div></div>
+      </article>
+      <article class="pf-case">
+        <figure class="pf-shot"><div class="pf-bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="photos/projects/networktrainer-live.webp" width="1624" height="662" alt="3D scene of three laptops, a switch and a fault injection box, with controls to cut a cable" loading="lazy" decoding="async"></figure>
+        <div class="pf-text"><p class="pf-kicker">Featured 03</p><h3>NetworkTrainer</h3><p class="pf-sub">Our school project at PUP</p><p>An interactive 3D demo of our network fault trainer. Cut the cable to a laptop, switch to the x-ray view to look inside the fault injection box, and see what happens to each laptop.</p><p class="pf-result">Live and playable in the browser.</p><ul class="pf-chips"><li>HTML</li><li>3D</li><li>Vercel</li></ul><div class="pf-links"><a class="pf-link pf-link-main" href="https://networktrainer.vercel.app" target="_blank" rel="noopener noreferrer">Live demo<span aria-hidden="true"> ↗</span></a><a class="pf-link" href="https://github.com/kenchihilario/NetworkTrainer" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></div></div>
+      </article>
+    </div>
+    <h3 class="pf-more">More builds</h3>
+    <ul class="pf-list">
+      <li class="pf-row"><div class="pf-thumb"><img src="photos/projects/net-anal-terminal.webp" width="160" height="100" alt="Terminal output listing wireless networks in range and available adapters" loading="lazy" decoding="async"></div><div class="pf-info"><h3>net-anal</h3><p>Real-time network analysis and anomaly detection in Python, with a traffic simulator and modular packet analyzers.</p></div><span class="pf-stack">Python</span><a class="pf-link" href="https://github.com/kenchihilario/net-anal" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></li>
+      <li class="pf-row"><div class="pf-thumb"><img src="photos/projects/pdf-editor.webp" width="160" height="100" alt="PDF editor open on a two-page resume" loading="lazy" decoding="async"></div><div class="pf-info"><h3>PDF-EDITOR</h3><p>A web-based PDF utility: edit documents, insert custom text overlays and manage page layouts.</p></div><span class="pf-stack">React · Vite</span><a class="pf-link" href="https://github.com/kenchihilario/PDF-EDITOR" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></li>
+      <li class="pf-row"><div class="pf-thumb"><span class="pf-mono" aria-hidden="true">E</span></div><div class="pf-info"><h3>EnrollmentSystem</h3><p>A Java Swing desktop app connected to a MySQL database that handles the whole enrollment process.</p></div><span class="pf-stack">Java · MySQL</span><a class="pf-link" href="https://github.com/kenchihilario/EnrollmentSystem" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></li>
+      <li class="pf-row"><div class="pf-thumb"><span class="pf-mono" aria-hidden="true">G</span></div><div class="pf-info"><h3>Game-C-</h3><p>A 2D top-down multiplayer survival game made in my free time to learn C++, multiplayer networking and WebAssembly.</p></div><span class="pf-stack">C++ · WebAssembly</span><a class="pf-link" href="https://github.com/kenchihilario/Game-C-" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a></li>
+    </ul>
+  </section>
+
+  <section class="sec kh-sec" id="stack" aria-label="Tech stack" style="padding-top:0">
+    <div class="kh-head"><h2>Tools I use</h2><span class="kh-head-note kh-head-note-lg">Networking, systems and coding tools I use and keep learning</span></div>
+    <div class="kh-stack">
+      <div class="kh-stack-group kh-stack-main"><h3 class="kh-stack-title">Networking &amp; infrastructure</h3><ul class="kh-stack-list">
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-packet-tracer.png" alt="" loading="lazy"><span class="kh-tool-name">Cisco Packet Tracer</span></li>
+          <li class="kh-tool"><img src="logos/tech/metasploit.png" alt="" loading="lazy"><span class="kh-tool-name">Metasploit</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-windows.png" alt="" loading="lazy"><span class="kh-tool-name">Active Directory &amp; GPO</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-proxmox.png" alt="" loading="lazy"><span class="kh-tool-name">Proxmox VE</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-docker.png" alt="" loading="lazy"><span class="kh-tool-name">Docker</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-ubuntu.png" alt="" loading="lazy"><span class="kh-tool-name">Ubuntu / Linux</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-ansible.png" alt="" loading="lazy"><span class="kh-tool-name">Ansible</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-grafana.png" alt="" loading="lazy"><span class="kh-tool-name">Grafana</span></li>
+          
+        </ul></div>
+      <div class="kh-stack-group"><h3 class="kh-stack-title">Languages</h3><ul class="kh-stack-list">
+          <li class="kh-tool"><img src="logos/tech/python.png" alt="" loading="lazy"><span class="kh-tool-name">Python</span></li>
+          <li class="kh-tool" style="--v-k:1.16"><img src="logos/tech/java.png" alt="" loading="lazy"><span class="kh-tool-name">Java</span></li>
+          <li class="kh-tool" style="--v-k:1.35"><img src="logos/tech/sql.png" alt="" loading="lazy"><span class="kh-tool-name">SQL</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-js.png" alt="" loading="lazy"><span class="kh-tool-name">JavaScript</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-react.png" alt="" loading="lazy"><span class="kh-tool-name">React JS</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-php.png" alt="" loading="lazy"><span class="kh-tool-name">PHP</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-cpp.png" alt="" loading="lazy"><span class="kh-tool-name">C++</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-html.png" alt="" loading="lazy"><span class="kh-tool-name">HTML</span></li>
+          <li class="kh-tool"><img class="tkn" src="logos/tech/n-css.png" alt="" loading="lazy"><span class="kh-tool-name">CSS</span></li>
+          
+        </ul></div>
+      <div class="kh-stack-group"><h3 class="kh-stack-title">Platforms &amp; tooling</h3><ul class="kh-stack-list">
+          <li class="kh-tool" style="--v-k:1.35"><img src="logos/tech/git.png" alt="" loading="lazy"><span class="kh-tool-name">Git</span></li>
+          <li class="kh-tool" style="--v-k:1.01"><img class="kh-mono-lg" src="logos/tech/github.png" alt="" loading="lazy"><span class="kh-tool-name">GitHub</span></li>
+          <li class="kh-tool"><img src="logos/tech/vscode.png" alt="" loading="lazy"><span class="kh-tool-name">VS Code</span></li>
+          <li class="kh-tool"><img src="logos/tech/wireshark.png" alt="" loading="lazy"><span class="kh-tool-name">Wireshark</span></li>
+          <li class="kh-tool"><img src="logos/tech/nmap.png" alt="" loading="lazy"><span class="kh-tool-name">Nmap</span></li>
+          <li class="kh-tool"><img src="logos/tech/kali.webp" alt="" loading="lazy"><span class="kh-tool-name">Kali Linux</span></li>
+          <li class="kh-tool"><img src="logos/tech/openai.png" alt="" loading="lazy"><span class="kh-tool-name">ChatGPT / OpenAI</span></li>
+          <li class="kh-tool"><img src="logos/tech/claude.png" alt="" loading="lazy"><span class="kh-tool-name">Claude</span></li>
+          <li class="kh-tool" style="--v-k:1.05"><img src="logos/tech/windows.png" alt="" loading="lazy"><span class="kh-tool-name">Windows 10/11</span></li>
+          <li class="kh-tool"><img src="logos/mono/mysql.png" alt="" loading="lazy"><span class="kh-tool-name">MySQL Workbench</span></li>
+          
+        </ul></div>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="certs" aria-label="Certifications" style="padding-top:0">
+    <div class="kh-head"><h2>Courses &amp; certificates</h2><span class="kh-head-note kh-head-note-lg">Cisco Networking Academy · TESDA · ISC2 candidate</span></div>
+    <div class="kh-ledger">
+      <div class="kh-led-row is-earned" data-badge="tesda" tabindex="0" role="button"><img class="kh-led-logo" src="logos/tesda.png" alt=""><div><h3>NC II · Computer Systems Servicing</h3><p class="kh-led-via">TESDA · Arandia College, Main</p></div><span class="kh-led-year">NC II</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="ccna1" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/ccna-itn.png" alt=""><div><h3>CCNA: Introduction to Networks</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="junior" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/junior-analyst.png" alt=""><div><h3>Junior Cybersecurity Analyst Career Path</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="nt" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/network-technician.png" alt=""><div><h3>Network Technician Career Path</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="ethical" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/ethical-hacker.png" alt=""><div><h3>Ethical Hacker</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="ctm" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/cyber-threat-management.png" alt=""><div><h3>Cyber Threat Management</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="netdef" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/network-defense.png" alt=""><div><h3>Network Defense</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="nss" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/network-support-and-security.png" alt=""><div><h3>Network Support and Security</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="ds" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/data-science-python.png" alt=""><div><h3>Data Science Essentials with Python</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="naddr" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/network-addressing.png" alt=""><div><h3>Network Addressing and Basic Troubleshooting</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="intro" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/intro-cybersecurity.png" alt=""><div><h3>Introduction to Cybersecurity</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row is-earned" data-badge="nbasics" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/networking-basics.png" alt=""><div><h3>Networking Basics</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">Earned</span></div>
+      <div class="kh-led-row" data-badge="mech" tabindex="0" role="button"><img class="kh-led-logo" src="logos/metrologyx.png" alt=""><div><h3>NC II · Mechatronics</h3><p class="kh-led-via">TESDA · Metrologyx Training and Assessment Center, Inc.</p></div><span class="kh-led-year">2026</span><span class="kh-led-status">In progress</span></div>
+      <div class="kh-led-row" data-badge="ccna2" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/ccna-2-learning.png" alt=""><div><h3>CCNA: Switching, Routing, and Wireless Essentials</h3><p class="kh-led-via">Cisco Networking Academy</p></div><span class="kh-led-year">2026 to 2027</span><span class="kh-led-status">In progress</span></div>
+      <div class="kh-led-row" data-badge="isc2" tabindex="0" role="button"><img class="kh-led-logo" src="logos/cisco/isc2-candidate.png" alt=""><div><h3>ISC2 Candidate</h3><p class="kh-led-via">ISC2</p></div><span class="kh-led-year">Candidate</span><span class="kh-led-status">Candidate</span></div>
+    </div>
+  </section>
+
+  <section class="sec kh-sec" id="events" aria-label="Events and learning">
+    <div class="kh-head"><h2>Competitions &amp; events</h2><span class="kh-head-note kh-head-note-lg">Where I have competed and learned</span></div>
+    <div class="kh-edu">
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/cyberph.png" alt="CyberPH" style="object-fit:contain;border-radius:12px;background:#000"><div class="kh-edu-txt"><h3>CyberPH: PacketCapture</h3><span class="kh-edu-when">Competition</span></div></div>
+        <p class="kh-edu-role">Solo participant<span class="kh-edu-focus">Ranked 82 of 143 teams</span></p>
+        <ul class="kh-edu-pts"><li>Entered the CyberPH PacketCapture competition solo, as a team of one, and ranked 82nd out of 143 teams.</li></ul></article>
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/microsoft.png" alt=""><div class="kh-edu-txt"><h3>TD Webinars Ep. 1: Microsoft Certification Playbooks</h3><span class="kh-edu-when">Zoom · Nov 15, 2026</span></div></div>
+        <p class="kh-edu-role">Attendee<span class="kh-edu-focus">SC-900 · AZ-900 · AI-200</span></p>
+        <ul class="kh-edu-pts"><li>Practical playbooks for the Microsoft security, Azure fundamentals and AI certification paths, followed by a live Q&amp;A. Useful input for the next certifications I plan to stack on top of my Cisco courses.</li></ul></article>
+      <article class="kh-edu-card"><div class="kh-edu-head"><img class="kh-edu-logo" src="logos/cisco/ccna-itn.png" alt=""><div class="kh-edu-txt"><h3>Cisco Networking Academy</h3><span class="kh-edu-when">Online · Nov 2026</span></div></div>
+        <p class="kh-edu-role">Eleven courses completed<span class="kh-edu-focus">Cybersecurity · Networking · Python</span></p>
+        <ul class="kh-edu-pts"><li>CCNA: Introduction to Networks, Ethical Hacker, Cyber Threat Management, Network Defense, Network Support and Security, Network Addressing and Basic Troubleshooting, Networking Basics, two career paths (Junior Cybersecurity Analyst and Network Technician), Introduction to Cybersecurity, and Data Science Essentials with Python.</li></ul></article>
+    </div>
+  </section>
+
+  <section class="kh-sec" id="summary" aria-label="About me">
+    <div class="kh-about kh-about-grid">
+      <div class="kh-about-copy">
+      <h2>About me</h2>
+      <p>I am a <span class="kh-hl">Computer Engineering Technology student</span> on the Network Engineering track. I worked on servers during a 300-hour internship at Cornersteel Systems (Linux, Docker, Active Directory, Proxmox, Grafana) and finished eleven Cisco Networking Academy courses in networking and cybersecurity.</p>
+      <p>I am looking for an <span class="kh-hl">OJT or internship in networking, IT infrastructure or cybersecurity</span> where I can learn from the team and help with daily work. I hold a TESDA NC II in Computer Systems Servicing, I am an ISC2 Candidate, and I keep my projects on GitHub, from a Python traffic anomaly detector to our LoRa hiker safety thesis.</p>
+      <p class="kh-about-meta">Parañaque, PH · Computer Engineering Technology (Diploma), PUP · 3rd year · Open to OJT and internships</p>
+      </div>
+
+      <form class="kh-form" id="msg-form" novalidate>
+        <h3>Send me a message</h3>
+        <label for="mf-name">Your name</label>
+        <input id="mf-name" name="name" type="text" autocomplete="name" placeholder="Juan Dela Cruz"
+               required aria-describedby="mf-err-name">
+        <p class="kh-form-err" id="mf-err-name"></p>
+        <label for="mf-from">Your email</label>
+        <input id="mf-from" name="from" type="email" autocomplete="email" placeholder="juan@company.com"
+               required aria-describedby="mf-err-from">
+        <p class="kh-form-err" id="mf-err-from"></p>
+        <label for="mf-msg">Message</label>
+        <textarea id="mf-msg" name="msg" rows="4" placeholder="Tell me about the role, the team and how I can help."
+                  required aria-describedby="mf-err-msg"></textarea>
+        <p class="kh-form-err" id="mf-err-msg"></p>
+        <button type="submit">Send message →</button>
+      </form>
+
+      <ol class="kh-shake" aria-label="How we can connect">
+        <li><b>SYN</b><span>You send me a message.</span></li>
+        <li><b>SYN-ACK</b><span>I read it and write back.</span></li>
+        <li><b>ACK</b><span>We set up a call or an interview.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- section: what's next -->
+
+  <section class="kh-sec" id="up-next" aria-label="Currently building" style="padding-top:1px">
+    <div class="kh-next">
+      <span class="kh-next-kick">In the lab</span>
+      <h2 class="kh-next-title">LoRa hiker safety</h2>
+      <p>Our PUP thesis: two-way LoRa GPS tracking with geofence warnings for eco-trail hikers. The dashboard is on GitHub and the hardware integration is next.</p>
+      <span class="kh-next-meta">Work in progress · PUP thesis</span>
+    </div>
+  </section>
+
+  </main>
+
+
+  <!-- section: footer -->
+  <footer id="contact" class="ft">
+    <div class="kh-foot-bg" aria-hidden="true"></div>
+    <div class="ft-in">
+      <div class="ft-l">
+        <p class="ft-kick">Open to OJT / internship</p>
+        <p class="ft-big"><a href="https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=kenchihilario@gmail.com" target="_blank" rel="noopener">Let&rsquo;s connect<span class="ft-cur" aria-hidden="true">_</span></a></p>
+        <p class="ft-sub">Looking for an OJT intern on your networking, IT infrastructure or cybersecurity team? I am a student with Cisco-certified fundamentals, a 300-hour infrastructure internship and projects on GitHub, and I am ready to learn from your team.</p>
+        <a class="ft-cv" href="docs/Kenchi_Hilario_CV.pdf" download>Download CV</a>
+        <a class="ft-cv ft-cv-alt" href="docs/Kenchi_Hilario_Resume.pdf" download>Download Resume</a>
+      </div>
+      <div class="ft-r">
+        <figure class="ft-fig"><img src="contact-card.webp" alt="The Pillars of Creation nebula" width="1142" height="1072" loading="lazy"><figcaption>Pillars of Creation · NASA, ESA, CSA, STScI</figcaption></figure>
+        <div class="ft-card" role="group" aria-label="Contact details">
+        <div class="ft-bar" aria-hidden="true"><i></i><i></i><i></i><span>contact.sh</span></div>
+        <p class="ft-cmd" aria-hidden="true"><b>$</b> ping kenchi</p>
+        <ul class="ft-list">
+          <li><span class="kh-foot-key">location</span><span>Parañaque City, Philippines</span></li>
+          <li><span class="kh-foot-key">email</span><a href="mailto:kenchihilario@gmail.com">kenchihilario@gmail.com</a></li>
+          <li><span class="kh-foot-key">linkedin</span><a href="https://www.linkedin.com/in/kenchi-hilario/" target="_blank" rel="noopener">in/kenchi-hilario</a></li>
+          <li><span class="kh-foot-key">github</span><a href="https://github.com/kenchihilario" target="_blank" rel="noopener">kenchihilario</a></li>
+          <li class="ok"><span class="kh-foot-key">status</span><span>ready for interview</span></li>
+        </ul>
+        </div>
+      </div>
+      <p class="ft-foot">© 2026 Kenchi Paul M. Hilario · plain HTML, CSS and JavaScript</p>
+    </div>
+  </footer>
+</div>
+
+
+
+<div class="kh-all" id="proj-all" role="dialog" aria-modal="true" aria-label="All projects">
+  <button class="kh-all-x" type="button" aria-label="Close">&times;</button>
+  <div class="kh-all-wrap">
+    <div class="kh-all-top">
+      <span class="kh-all-title">Projects</span>
+      <span class="kh-all-note">Everything, in one view · Click a project for code and demo links</span>
+    </div>
+    <div class="kh-all-grid" id="proj-all-grid"></div>
+  </div>
+</div>
+
+<div class="kh-pop" id="proj-panel" role="dialog" aria-modal="true" aria-label="Project detail">
+  <div class="kh-pop-card">
+    <div class="kh-pop-pic"><img id="pp-img" src="" alt=""></div>
+    <div class="kh-pop-text">
+      <button class="kh-pop-x" type="button" aria-label="Close">&times;</button>
+      <h3 id="pp-title"></h3>
+      <p id="pp-copy"></p>
+      <span class="kh-pop-fact" id="pp-fact"></span>
+      <div class="kh-pop-links" id="pp-links">
+        <a class="kh-pop-btn kh-pop-btn-off" id="pp-repo" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.6.69.5A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
+          <span>Code</span>
+        </a>
+        <a class="kh-pop-btn kh-pop-btn-off" id="pp-demo" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+          <span>Live demo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="kh-pop" id="badge-panel" role="dialog" aria-modal="true" aria-label="Certification detail">
+  <div class="kh-pop-card">
+    <div class="kh-pop-pic" id="bp-shot">
+      <img id="bp-img" src="" alt="" hidden>
+      <div class="kh-cert-empty" id="bp-empty" hidden>
+        <svg class="kh-cert-empty-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="14" rx="2"/>
+          <path d="M7 8h10M7 11.5h6"/>
+          <path d="M9 17v4l3-1.5L15 21v-4"/>
+        </svg>
+        <span id="bp-empty-txt">Certificate not uploaded yet</span>
+      </div>
+    </div>
+    <div class="kh-pop-text">
+      <button class="kh-pop-x" type="button" aria-label="Close">&times;</button>
+      <span class="kh-cert-tag" id="bp-status"></span>
+      <h3 id="bp-title"></h3>
+      <p id="bp-copy"></p>
+      <span class="kh-pop-fact" id="bp-fact"></span>
+      <div class="kh-pop-links">
+        <a class="kh-pop-btn" id="bp-pdf" target="_blank" rel="noopener" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+          <span>View PDF</span>
+        </a>
+        <a class="kh-pop-btn kh-pop-btn-off" id="bp-verify" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+          <span>Verify</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

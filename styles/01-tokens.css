@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Design tokens and page defaults
+   Colours come in two themes (dark and light) set on <html data-theme>.
+   Everything else on this site reads these variables, so a theme switch is
+   one attribute change.
+   ========================================================================== */
+
+:root{
+  /* shared across both themes */
+  --kh-matte:#A3A8C4;
+  --kh-cyan:#7CD9D2;
+  --kh-pink:#F2699E;
+  --kh-yellow:#F2CC3F;
+  --kh-green:#A9D958;
+  --kh-on-accent:#fff;
+  --kh-radius:16px;
+  --kh-dur:.25s;
+  --kh-ease-out:cubic-bezier(.32,.72,0,1);
+
+  /* side margin of the page; past 1900px the margin grows instead of the
+     content, so wide monitors keep a readable measure with full-bleed bands */
+  --kh-gutter:clamp(20px,4vw,64px);
+
+  --kh-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --kh-sans:'Instrument Sans',Helvetica,Arial,sans-serif;
+  --kh-display:'Anton',Haettenschweiler,'Arial Narrow',sans-serif;
+}
+@media (min-width:1900px){
+  :root{--kh-gutter:max(64px,calc((100vw - 1800px) / 2))}
+}
+
+/* ---------- dark ---------- */
+html[data-theme="dark"]{
+  --kh-base:#0E1330;
+  --kh-text:#EAEEFB;
+  --kh-text-soft:#B4BCD6;
+  --kh-wash:#E4E8FA;
+  --kh-paper:#EEF0FB;
+  --kh-rule:#CBD2EE;
+  --kh-ink:#0E1330;
+  --kh-accent:#8C9BFF;
+  --kh-on-accent:#0E1330;
+  --kh-dock-bg:rgba(14,19,48,.88);
+  --kh-dock-line:#252C54;
+  --kh-pill-edge:#3A4373;
+  --kh-pill-dim:#2C3460;
+  --kh-pill-text:#9AA3C8;
+  --kh-scroll:#4A5385;
+  --kh-scroll-hi:#6A74AD;
+  --kh-rail:#8C9BFF;
+  --kh-lens:#1A2150;
+  --kh-cue:var(--kh-accent);
+  --kh-chip-bg:#EAEEFB;
+  --kh-chip-text:#0E1330;
+  --kh-muted:#56608A;
+  --kh-muted-strong:#3E4770;
+  /* --kh-base, --kh-ink and --kh-paper deliberately keep these values: the
+     hero and its badges already read correctly against them, and changing
+     them would drag the hero along. The sections below the hero get their
+     own dark surface instead (see the section.kh-sec rule at the end). */
+  --kh-sec-bg:#0E1330;
+  --kh-sec-hi:#171E48;
+}
+
+/* ---------- light ---------- */
+html[data-theme="light"]{
+  --kh-base:#E8ECFA;
+  --kh-text:#12162E;
+  --kh-text-soft:#555C7E;
+  --kh-wash:#DAE0F5;
+  --kh-paper:#F3F5FD;
+  --kh-rule:#C4CBEA;
+  --kh-ink:#12162E;
+  --kh-accent:#4854D8;
+  --kh-dock-bg:rgba(232,236,250,.92);
+  --kh-dock-line:#C9D0EC;
+  --kh-pill-edge:#A9B1D6;
+  --kh-pill-dim:#BFC6E6;
+  --kh-pill-text:#666E92;
+  --kh-scroll:#9AA3CC;
+  --kh-scroll-hi:#7A84B4;
+  --kh-rail:#4854D8;
+  --kh-lens:#D6DCF3;
+  --kh-cue:var(--kh-accent);
+  --kh-chip-bg:#12162E;
+  --kh-chip-text:#F3F5FD;
+  --kh-muted:#565E84;
+  --kh-muted-strong:#3F4668;
+}
+
+/* ---------- page defaults ---------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  /* no grey flash on tap in Android Chrome; the site's own animations are the feedback */
+  -webkit-tap-highlight-color:transparent;
+}
+[hidden]{display:none!important}
+html{
+  scroll-behavior:smooth;
+  scrollbar-color:var(--kh-scroll) var(--kh-base);
+  scrollbar-width:thin;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  background:var(--kh-base);
+  color:var(--kh-ink);
+  font-family:var(--kh-sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--kh-accent);color:var(--kh-on-accent)}
+a{color:inherit}
+
+/* one focus ring for everything you can tab to */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+  outline:2px solid var(--kh-accent);
+  outline-offset:3px;
+  border-radius:3px;
+}
+
+/* "Skip to content": first tab stop, parked above the screen until focused */
+.kh-skip{
+  position:fixed;
+  left:12px;
+  top:-120px;
+  z-index:200;
+  padding:12px 18px;
+  background:var(--kh-accent);
+  color:var(--kh-on-accent);
+  border-radius:10px;
+  text-decoration:none;
+  font-family:var(--kh-mono);
+  font-size:12px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  transition:top .18s ease-out;
+}
+.kh-skip:focus{top:12px}
+
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--kh-base)}
+::-webkit-scrollbar-thumb{background:var(--kh-scroll);border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--kh-scroll-hi)}
+
+/* the wrapper around the whole page */
+.kh-page{
+  margin:0 auto;
+  background:var(--kh-paper);
+  overflow:hidden;
+}
+
+/* Dark mode for the sections under the hero. They re-point the ink, paper,
+   rule and muted tokens, so every card border, paragraph and label inside
+   them turns dark without being touched one by one. */
+html[data-theme="dark"] section.kh-sec{
+  background:var(--kh-sec-bg);
+  color:var(--kh-text);
+  --kh-ink:var(--kh-text);
+  --kh-paper:var(--kh-sec-bg);
+  --kh-rule:var(--kh-pill-edge);
+  --kh-muted:var(--kh-pill-text);
+  --kh-muted-strong:var(--kh-text-soft);
+}

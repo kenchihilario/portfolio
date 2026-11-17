@@ -1,0 +1,57 @@
+/* Polish layer (loads after the hero): the "what I bring" line, mobile fixes,
+   a few smoother hover states, and the footer credit. */
+/* ---------- "what I bring" line under the stats ---------- */
+.hx-offer{
+  max-width:1240px;margin:22px auto 0;padding:2px 0 2px 16px;
+  border-left:2px solid var(--kh-accent);
+  font:500 clamp(14.5px,1.2vw,16.5px)/1.6 'Manrope','Segoe UI',sans-serif;color:var(--kh-text-soft);
+}
+.hx-offer span{
+  display:block;margin-bottom:3px;
+  font:700 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--kh-accent);
+}
+/* ---------- footer credit ---------- */
+/* ---------- phone fixes ----------
+   A bare 1fr column grows to fit its content, which pushed the Education
+   cards and the Experience row wider than the screen. minmax(0,1fr) stops that. */
+@media (max-width:900px){
+  /* anchor jumps stop below the fixed top bar instead of under it */
+  section[id]{scroll-margin-top:76px}
+}
+/* ---------- hover and focus ---------- */
+.ifc{transition-timing-function:cubic-bezier(.2,.7,.2,1)}
+/* ---------- section headings ease in once ----------
+   Only the heading of each section, only the first time it appears. */
+.kh-head{transition:opacity .6s ease,translate .6s cubic-bezier(.2,.7,.2,1)}
+.rv-on .kh-head:not(.rv-in){opacity:0;translate:0 14px}
+@media (prefers-reduced-motion:reduce){
+  .rv-on .kh-head:not(.rv-in){opacity:1;translate:none}
+}
+
+/* ---------- the ending: handshake strip, prompt line, blinking cursor ---------- */
+.kh-shake{
+  grid-column:1/-1; list-style:none; margin:clamp(8px,2vw,20px) 0 0; padding:0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  border-top:1px dashed var(--kh-rule); counter-reset:shake;
+}
+.kh-shake li{
+  position:relative; display:flex; flex-direction:column; gap:6px;
+  padding:22px clamp(12px,2vw,28px) 4px 0; counter-increment:shake;
+}
+.kh-shake li::before{
+  content:""; position:absolute; top:-6px; left:0; width:11px; height:11px;
+  border-radius:50%; background:var(--kh-accent);
+}
+.kh-shake b{ font:700 13px var(--kh-mono); letter-spacing:.14em; color:var(--kh-accent) }
+.kh-shake span{ font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:var(--kh-text-soft) }
+@media (max-width:700px){
+  .kh-shake{ grid-template-columns:1fr; border-top:0; border-left:1px dashed var(--kh-rule); padding-left:18px }
+  .kh-shake li{ padding:0 0 18px }
+  .kh-shake li::before{ top:3px; left:-24px }
+}
+
+.ft-cmd{ margin:0; padding:14px 20px 0; font:500 14px var(--kh-mono); color:#EAEEFB }
+.ft-cmd b{ color:#7CE3A4; margin-right:8px }
+.ft-cur{ display:inline-block; margin-left:.06em; animation:kh-cur 1.05s steps(1) infinite }
+@keyframes kh-cur{ 50%{ opacity:0 } }
+@media (prefers-reduced-motion:reduce){ .ft-cur{ animation:none } }

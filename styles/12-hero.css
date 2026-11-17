@@ -1,0 +1,137 @@
+/* Hero: name + facts on the left, arched portrait with cert stickers on the right.
+   Loads last so it wins over the older hero rules. */
+.kh-hero.hx{
+  zoom:1;
+  padding:clamp(16px,2vw,28px) var(--kh-gutter) clamp(36px,5vw,64px);
+  --hx-ink:var(--kh-text);
+  --hx-dim:var(--kh-text-soft);
+  --hx-acc:var(--kh-accent);
+  --hx-line:#2A3370;
+  --hx-panel:rgba(22,30,82,.55);
+  --hx-arch1:#161E52;
+  --hx-arch2:#0F1542;
+  --hx-ok:#7CD9A8;
+  font-family:'Manrope','Segoe UI',system-ui,sans-serif;
+}
+html[data-theme="light"] .kh-hero.hx{
+  --hx-line:#C4CBEA;
+  --hx-panel:rgba(255,255,255,.7);
+  --hx-arch1:#DDE2FA;
+  --hx-arch2:#C9D0F4;
+  --hx-ok:#14804F;
+}
+.hx-body{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  gap:clamp(20px,3vw,48px);align-items:center;
+  max-width:1240px;margin:0 auto;
+}
+/* ---------- left: words ---------- */
+.hx-status{
+  display:inline-flex;align-items:center;gap:10px;margin:0;
+  padding:7px 14px;border:1px solid var(--hx-line);border-radius:99px;
+  background:var(--hx-panel);color:var(--hx-dim);font:600 13px 'Manrope',sans-serif;
+}
+.hx-status i{width:8px;height:8px;border-radius:50%;background:var(--hx-ok);animation:hx-ping 2.6s ease-out infinite}
+@keyframes hx-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--hx-ok) 60%,transparent)}70%,100%{box-shadow:0 0 0 9px transparent}}
+.hx-name{
+  margin:20px 0 16px;font:800 clamp(52px,7.4vw,104px)/.93 'Sora','Segoe UI',sans-serif;
+  letter-spacing:-.035em;color:var(--hx-ink);
+}
+.hx-name span{display:block}
+.hx-name span+span{color:var(--hx-acc);padding-left:.07em}
+.hx-role{margin:0;max-width:30ch;font:700 clamp(17px,1.7vw,21px)/1.4 'Sora','Segoe UI',sans-serif;color:var(--hx-ink)}
+.hx-lede{margin:14px 0 0;max-width:52ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:var(--hx-dim)}
+.hx-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.hx-btn{
+  display:inline-flex;align-items:center;padding:12px 20px;border-radius:12px;
+  border:1.5px solid var(--hx-acc);color:var(--hx-ink);text-decoration:none;
+  font:700 14.5px 'Manrope',sans-serif;
+  transition:transform .15s ease,background .15s ease,filter .15s ease;
+}
+.hx-btn:hover{background:color-mix(in srgb,var(--hx-acc) 16%,transparent);transform:translateY(-2px)}
+.hx-btn:focus-visible,.hx-tag:focus-visible{outline:2px solid var(--hx-acc);outline-offset:3px}
+.hx-main{background:var(--hx-acc);color:var(--kh-on-accent)}
+.hx-main:hover{background:var(--hx-acc);filter:brightness(1.1)}
+/* ---------- right: portrait + stickers ---------- */
+.hx-stage{position:relative;width:100%;max-width:640px;justify-self:end;aspect-ratio:1/.9}
+.hx-arch{
+  position:absolute;left:26%;right:26%;top:7%;bottom:0;
+  border-radius:50% 50% 18px 18px / 34% 34% 18px 18px;
+  background:linear-gradient(165deg,var(--hx-arch1),var(--hx-arch2));
+  border:1px solid var(--hx-line);
+}
+.hx-photo{
+  position:absolute;left:21%;right:21%;bottom:0;width:58%;height:auto;
+  max-height:100%;object-fit:contain;object-position:bottom;
+  pointer-events:none;-webkit-user-drag:none;
+}
+.hx-tag{
+  position:absolute;width:clamp(104px,18%,132px);
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:0;margin:0;border:0;background:none;cursor:pointer;text-align:center;
+  font-family:inherit;color:var(--hx-ink);
+  rotate:var(--r,0deg);
+  animation:hx-pop .6s cubic-bezier(.34,1.56,.64,1) backwards,hx-float 6s ease-in-out infinite;
+  animation-delay:var(--d,0s),calc(var(--d,0s) + .7s);
+  transition:transform .2s ease,filter .2s ease;
+}
+.hx-tag:hover{transform:scale(1.09);filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));z-index:5}
+.hx-tag img{width:100%;height:clamp(60px,6.6vw,86px);object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
+.hx-tag b{font:700 clamp(11.5px,.95vw,13.5px)/1.25 'Manrope',sans-serif;color:var(--hx-ink)}
+.hx-tag small{font:500 9.5px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--hx-dim);margin-top:-2px}
+/* ISC2's logo is dark on transparent, so it gets its own light tile in dark mode */
+.hx-isc img{height:clamp(54px,5.6vw,74px);width:auto;aspect-ratio:1;padding:7px;border-radius:16px;background:#EAEEFB}
+html[data-theme="light"] .hx-isc img{background:transparent;padding:0}
+/* staggered down both sides, overlapping the arch edge a little, like stickers on a laptop lid */
+.t1{left:0;top:2%;--r:-7deg;--d:.05s}
+.t2{left:14%;top:25%;--r:3deg;--d:.12s}
+.t3{left:0;top:49%;--r:4deg;--d:.19s}
+.t4{left:2%;top:74%;--r:-4deg;--d:.26s}
+.t5{right:0;top:3%;--r:6deg;--d:.09s}
+.t6{right:15%;top:27%;--r:-5deg;--d:.16s}
+.t7{right:0;top:50%;--r:-3deg;--d:.23s}
+.t8{right:2%;top:75%;--r:5deg;--d:.3s}
+@keyframes hx-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes hx-pop{from{transform:perspective(700px) rotateY(150deg) scale(.2);opacity:0}}
+.hx-hint{
+  position:absolute;left:50%;bottom:-6px;translate:-50% 100%;margin:0;white-space:nowrap;
+  font:500 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--hx-dim);
+}
+/* ---------- facts row ---------- */
+.hx-facts{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1240px;margin:clamp(40px,4.4vw,60px) auto 0;
+  border:1px solid var(--hx-line);border-radius:14px;background:var(--hx-panel);overflow:hidden;
+}
+.hx-facts div{padding:18px 20px;border-left:1px solid var(--hx-line)}
+.hx-facts div:first-child{border-left:0}
+.hx-facts dt{font:800 clamp(22px,2.3vw,30px)/1.1 'Sora','Segoe UI',sans-serif;color:var(--hx-ink)}
+.hx-facts dd{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:var(--hx-dim)}
+/* ---------- tablet / phone ---------- */
+@media (max-width:900px){
+  .hx-body{grid-template-columns:1fr;gap:28px}
+  .hx-stage{order:-1;justify-self:center;max-width:520px;aspect-ratio:1/1.02;margin-bottom:22px}
+  .hx-facts{grid-template-columns:1fr 1fr}
+  .hx-facts div:nth-child(3){border-left:0}
+  .hx-facts div:nth-child(n+3){border-top:1px solid var(--hx-line)}
+}
+@media (max-width:560px){
+  .hx-name{font-size:clamp(48px,15vw,64px)}
+  .hx-tag{width:27%}
+  .hx-tag img{height:clamp(44px,13vw,60px)}
+  .hx-tag b{font-size:10.5px}
+  .hx-tag small{font-size:8px;letter-spacing:.08em}
+  .hx-isc img{height:clamp(44px,12vw,56px)}
+  .hx-arch{left:22%;right:22%}
+  .hx-photo{left:17%;right:17%;width:66%}
+  .t2{left:9%}.t6{right:9%}
+  .hx-btn{padding:11px 16px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hx-tag{animation:none}
+  .hx-status i{animation:none}
+}
+/* the nav row keeps v8's smaller size so Sound + theme buttons fit */
+@media (min-width:901px){
+  .kh-hero.hx .kh-hero-top{zoom:.8;margin-bottom:clamp(20px,2.4vw,36px)}
+}

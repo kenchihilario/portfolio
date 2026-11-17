@@ -1,0 +1,280 @@
+/* ==========================================================================
+   Projects
+   A row of cards that drifts by itself (scripts/project-rail.js moves
+   it), the "See all" button inside the heading, and the full-screen list
+   that button opens. The detail popup lives in popup.css.
+   ========================================================================== */
+
+/* ---------- the rail ---------- */
+.kh-pj-rail{
+  --kh-gap:clamp(20px,2.4vw,32px);
+  --kh-drift:68s;              /* time for one full set of cards to pass; the script reads it */
+  position:relative;
+  overflow:auto hidden;
+  overscroll-behavior-x:contain;
+  cursor:grab;
+  user-select:none;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  /* let the row run past the section padding, edge to edge */
+  margin-inline:calc(var(--kh-gutter) * -1);
+  padding-inline:var(--kh-gutter);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+}
+.kh-pj-rail::-webkit-scrollbar{display:none}
+.kh-pj-rail.is-dragging{cursor:grabbing}
+.kh-pj-rail.is-dragging .kh-pj{pointer-events:none}
+/* the rail can take keyboard focus; the mask clips anything outside it, so the ring sits inside */
+.kh-pj-rail:focus-visible{outline:2px solid var(--kh-accent);outline-offset:-3px;border-radius:8px}
+
+.kh-pj-strip{
+  display:flex;
+  gap:var(--kh-gap);
+  width:max-content;
+  padding:6px 0 18px;
+}
+
+/* wider screens cover more ground per second, so the loop is shortened to feel the same */
+@media (min-width:1400px){.kh-pj-rail{--kh-drift:52s}}
+@media (min-width:1900px){.kh-pj-rail{--kh-drift:46s}}
+@media (prefers-reduced-motion:reduce){
+  .kh-pj-rail{scroll-snap-type:x mandatory}
+  .kh-pj{scroll-snap-align:center}
+}
+
+/* ---------- a project card ---------- */
+.kh-pj{
+  flex:none;
+  width:clamp(360px,44vw,660px);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  padding:clamp(20px,1.6vw,26px);
+  background:var(--kh-paper);
+  border:2px solid var(--kh-ink);
+  border-radius:18px;
+  cursor:pointer;
+  transition:background .18s ease-out,box-shadow .18s ease-out,translate .18s ease-out;
+}
+.kh-pj:hover{
+  background:#fff;
+  box-shadow:0 14px 30px rgba(14,19,48,.14);
+  translate:0 -4px;
+}
+.kh-pj h3{
+  font-size:clamp(22px,2vw,32px);
+  font-weight:700;
+  letter-spacing:-.015em;
+  line-height:1.15;
+  transition:color .18s ease-out;
+}
+.kh-pj:hover h3{color:var(--kh-accent)}
+.kh-pj p{
+  font-size:clamp(15px,1.05vw,17px);
+  line-height:1.55;
+  color:#54514A;
+}
+.kh-pj-text{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  flex:1;
+  min-width:0;
+}
+
+/* cover picture: a tinted frame with faint diagonal hatching behind the image */
+.kh-pj-pic{
+  position:relative;
+  display:grid;
+  place-items:center;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:var(--tint,rgba(14,19,48,.06));
+  border:2px solid var(--kh-ink);
+  border-radius:12px;
+}
+.kh-pj-pic::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(45deg,rgba(14,19,48,.09) 0 2px,transparent 2px 9px);
+}
+.kh-pj-pic img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.kh-pj-pic img.kh-crop-top{object-position:top}
+.kh-tone-1 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-cyan) 30%,var(--kh-paper))}
+.kh-tone-2 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-yellow) 30%,var(--kh-paper))}
+.kh-tone-3 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-pink) 24%,var(--kh-paper))}
+.kh-tone-4 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-green) 30%,var(--kh-paper))}
+
+/* the one-line takeaway at the bottom of each card */
+.kh-pj-fact{
+  margin-top:auto;
+  padding-top:15px;
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  border-top:1.5px solid var(--kh-ink);
+  font-family:var(--kh-mono);
+  font-size:clamp(15px,1.35vw,20px);
+  font-weight:700;
+  letter-spacing:-.01em;
+  line-height:1.35;
+  color:var(--kh-ink);
+}
+.kh-pj-fact::before{
+  content:"»";
+  color:var(--kh-accent);
+  font-size:1.2em;
+  line-height:1;
+}
+
+/* ---------- "See all" button in the heading ---------- */
+.kh-head h2 .kh-all-btn{
+  margin:0;
+  padding:0;
+  background:none;
+  border:0;
+  font:inherit;
+  letter-spacing:inherit;
+  text-transform:inherit;
+  color:inherit;
+  cursor:pointer;
+  transition:color .18s ease-out;
+}
+.kh-head h2 .kh-all-btn:hover{color:var(--kh-accent)}
+.kh-head h2 .kh-all-btn:focus-visible{outline:2px solid var(--kh-accent);outline-offset:5px}
+
+.kh-head-cue{
+  display:inline-flex;
+  align-items:center;
+  vertical-align:middle;
+  /* the display font's caps sit high, so plain "middle" rides the pill into
+     the letters above it; this drops it back clear */
+  translate:0 8px;
+  margin-left:clamp(12px,1.5vw,26px);
+  padding:9px 19px;
+  white-space:nowrap;
+  border:2px solid var(--kh-accent);
+  border-radius:99px;
+  color:var(--kh-accent);
+  font-family:var(--kh-mono);
+  font-size:clamp(12.5px,1.05vw,17px);
+  font-weight:500;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  transition:background .18s ease-out,color .18s ease-out;
+}
+.kh-all-btn:hover .kh-head-cue,
+.kh-all-btn:focus-visible .kh-head-cue{background:var(--kh-accent);color:#fff}
+
+/* ---------- full-screen list ---------- */
+body.kh-all-lock{overflow:hidden}
+
+.kh-all{
+  position:fixed;
+  inset:0;
+  z-index:96;
+  display:none;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  background:var(--kh-base);
+}
+.kh-all.on{
+  display:block;
+  animation:kh-all-fade .28s cubic-bezier(.16,1,.3,1);
+}
+@keyframes kh-all-fade{from{opacity:0}}
+
+/* This layer sits outside every themed section, so it never got the dark
+   recolour of --kh-ink, --kh-rule and --kh-muted. Without these, the role titles in
+   the copied cards came out dark on dark. */
+html[data-mode="dark"] .kh-all{
+  --kh-ink:var(--kh-text);
+  --kh-paper:var(--kh-sec-bg);
+  --kh-rule:var(--kh-pill-edge);
+  --kh-muted:var(--kh-pill-text);
+  --kh-muted-strong:var(--kh-text-soft);
+}
+
+.kh-all-wrap{
+  max-width:1800px;
+  margin:0 auto;
+  padding:clamp(22px,4vw,64px) clamp(20px,4vw,64px) clamp(44px,6vw,96px);
+}
+.kh-all-top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:clamp(22px,3vw,42px);
+}
+.kh-all-title{
+  font-family:var(--kh-display);
+  font-size:clamp(30px,4.6vw,62px);
+  font-weight:400;
+  line-height:1;
+  text-transform:uppercase;
+  color:var(--kh-text);
+}
+.kh-all-note{
+  font-family:var(--kh-mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--kh-text-soft);
+}
+
+/* in the rail the cards have a fixed width; here each one fills its cell */
+.kh-all-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,370px),1fr));
+  gap:clamp(18px,2vw,32px);
+}
+.kh-all-grid .kh-pj{width:auto;flex:none;cursor:pointer}
+
+.kh-all-x{
+  position:fixed;
+  top:clamp(12px,2vw,26px);
+  right:clamp(12px,2vw,26px);
+  z-index:2;
+  display:grid;
+  place-items:center;
+  width:clamp(40px,3.4vw,52px);
+  height:clamp(40px,3.4vw,52px);
+  background:var(--kh-base);
+  border:2px solid var(--kh-pill-edge);
+  border-radius:50%;
+  color:var(--kh-text);
+  font-family:var(--kh-sans);
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+  transition:background .18s ease-out,color .18s ease-out,border-color .18s ease-out;
+}
+.kh-all-x:hover{background:var(--kh-accent);border-color:var(--kh-accent);color:#fff}
+
+/* ---------- dark theme ---------- */
+/* a few colours here were written as plain hex, so the section recolour missed them */
+html[data-mode="dark"] .kh-pj p{color:var(--kh-pill-text)}
+html[data-mode="dark"] .kh-pj:hover{background:var(--kh-sec-hi)}
+
+/* ---------- smaller screens ---------- */
+@media (max-width:760px){
+  .kh-pj{width:min(82vw,420px)}
+  .kh-pj h3{font-size:clamp(20px,5.4vw,26px)}
+  .kh-head-cue{padding:9px 14px;font-size:11.5px;letter-spacing:.1em}
+}
+@media (max-width:700px){
+  .kh-all-grid{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .kh-pj{width:86vw}
+}

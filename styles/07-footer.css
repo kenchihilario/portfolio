@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Footer shell: the pinned light palette, the blurred photo behind it and
+   the scrim between them. The lockup and the contact card are in 11-redesign.
+   ========================================================================== */
+.ft{
+  /* the photo is dark in both themes, so the footer keeps its own light
+     tokens instead of following the theme (otherwise --kh-text turns near-black
+     in the light theme and disappears into the image) */
+  --kh-text:#F3EEE2; --kh-text-soft:#C7C0AE;
+  --kh-pill-edge:rgba(255,255,255,.24); --kh-pill-dim:rgba(255,255,255,.28); --kh-pill-text:#BFB8A8;
+
+  position:relative; isolation:isolate; overflow:hidden;
+  padding:clamp(56px,9vh,100px) var(--kh-gutter) clamp(40px,6vh,64px);
+  color:var(--kh-text); background-color:var(--kh-base);
+  border-top:1px solid var(--kh-pill-edge);   /* seam against the section above */
+}
+html[data-theme="dark"] .ft{ background-color:var(--kh-sec-hi); }
+
+/* photo layer: fades and rises into place each time the footer scrolls into view (.on) */
+.ft .kh-foot-bg{
+  position:absolute; inset:-8%; z-index:-1;
+  background:
+    linear-gradient(180deg,rgba(10,14,40,.7) 0%,rgba(10,14,40,.4) 50%,rgba(10,14,40,.82) 100%),
+    url(../contact-bg.webp) center 35% / cover no-repeat;
+  filter:blur(18px) saturate(1.15);
+  opacity:0; translate:0 42px;
+  transition:opacity .9s cubic-bezier(.16,1,.3,1), translate .9s cubic-bezier(.16,1,.3,1);
+}
+.ft.on .kh-foot-bg{ opacity:1; translate:0 0; }
+@media (prefers-reduced-motion:reduce){ .ft .kh-foot-bg{ transition:opacity .3s ease-out; } }
+
+/* darkening veil so light text stays readable over any part of the photo */
+.ft::before{
+  content:""; position:absolute; inset:0; z-index:0; opacity:.3;
+  background:linear-gradient(180deg,rgba(10,9,7,.55),rgba(10,9,7,.72) 55%,rgba(10,9,7,.86));
+}

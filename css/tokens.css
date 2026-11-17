@@ -1,0 +1,21 @@
+/* Colors, type and spacing for both themes. Everything else reads from these. */
+:root{
+  --kh-display:'Sora','Segoe UI',system-ui,sans-serif;
+  --kh-body:'Manrope','Segoe UI',system-ui,sans-serif;
+  --kh-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --kh-rail:232px;
+  --kh-gut:clamp(20px,4.4vw,72px);
+  --kh-r:14px;
+}
+html[data-theme="dark"]{
+  --kh-bg:#0E1330; --kh-bg2:#121945; --kh-panel:rgba(22,30,82,.62); --kh-panel-solid:#161E52;
+  --kh-ink:#EEF0FF; --kh-dim:#A9B0DC; --kh-line:#2A3370;
+  --kh-acc:#8C9BFF; --kh-acc-ink:#0E1330; --kh-ok:#7CD9A8; --kh-bad:#FF5C7A;
+  --kh-chip:#EEF0FF; color-scheme:dark;
+}
+html[data-theme="light"]{
+  --kh-bg:#F3F4FF; --kh-bg2:#E9ECFF; --kh-panel:rgba(255,255,255,.78); --kh-panel-solid:#FFFFFF;
+  --kh-ink:#14183A; --kh-dim:#555B8E; --kh-line:#CDD2F3;
+  --kh-acc:#4854D8; --kh-acc-ink:#FFFFFF; --kh-ok:#14804F; --kh-bad:#D12A4A;
+  --kh-chip:#FFFFFF; color-scheme:light;
+}

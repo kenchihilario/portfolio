@@ -1,0 +1,5 @@
+1. Unzip this file. index.html must sit at the top of the folder.
+2. Go to vercel.com, sign in, and click Add New > Project (or drag the folder onto vercel.com/new).
+3. Pick "Other" as the framework. Leave Build Command and Output Directory empty.
+4. Click Deploy. Your site goes live at a vercel.app link.
+5. To update: replace the files and redeploy. Swap your photo by replacing kenchi-hero.webp (same name).

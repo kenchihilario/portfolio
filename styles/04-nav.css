@@ -1,0 +1,276 @@
+/* ==========================================================================
+   Top dock: the fixed bar that appears after the hero, the pill controls
+   (sound, theme), the phone menu button and the full-screen menu sheet.
+   Phone widths come first-class at the bottom of the file.
+   ========================================================================== */
+
+/* ---- the dock itself: slides down from above the viewport once .on is set ---- */
+.kh-dock{
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding:12px clamp(16px,3vw,40px);
+  color:var(--kh-text);
+  background:var(--kh-dock-bg);
+  border-bottom:1px solid var(--kh-dock-line);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  overflow:hidden;
+  translate:0 -101%;
+  transition:translate .34s cubic-bezier(.32,.72,0,1), border-color .45s ease-out;
+}
+.kh-dock.on{ translate:0 0; }
+
+/* thin line along the bottom edge that grows with scroll (--p is 0..1 on <html>) */
+.kh-dock-prog{
+  position:absolute; left:0; right:0; bottom:0; height:3px;
+  background:var(--kh-accent);
+  transform-origin:left center;
+  scale:var(--p,0) 1;
+}
+
+/* home button (brand) */
+.kh-dock-home{
+  display:flex; align-items:center; gap:10px; white-space:nowrap;
+  padding:0; border:0; background:none;
+  font:inherit; font-weight:700; font-size:15px; color:inherit;
+  cursor:pointer;
+  transition:color .18s ease-out;
+}
+.kh-dock-home:hover{ color:var(--kh-accent); }
+.kh-dock-home:focus-visible{ outline:2px solid var(--kh-accent); outline-offset:4px; border-radius:4px; }
+.kh-dock-home .kh-mark{ display:block; flex:none; width:21px; height:21px; }
+
+/* section links; each one drops in a beat after the previous (--i set in the HTML) */
+.kh-dock-links{
+  display:flex; align-items:center; gap:clamp(12px,1.8vw,26px);
+}
+.kh-dock-links a{
+  display:inline-block;
+  font-size:13px; text-decoration:none; color:var(--kh-text-soft);
+  transition:color .18s ease-out;
+  animation:kh-drop-in .62s cubic-bezier(.22,1.35,.36,1) backwards;
+  animation-delay:calc(.06s + var(--i,0) * .07s);
+}
+.kh-dock-links a:hover{ color:var(--kh-text); }
+@keyframes kh-drop-in{
+  0%  { opacity:0; translate:0 -26px; scale:.86; filter:blur(6px); }
+  60% { opacity:1; filter:blur(0); }
+  100%{ opacity:1; translate:0 0; scale:1; }
+}
+
+/* right-hand cluster: scroll % readout plus the two toggles */
+.kh-dock-tools{ display:flex; align-items:center; gap:clamp(8px,1vw,14px); }
+.kh-dock-pct{
+  min-width:4.4ch; text-align:right;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.12em;
+  font-variant-numeric:tabular-nums; color:var(--kh-text-soft);
+}
+
+/* ---- pill toggles (class names are shared with the sound script) ---- */
+.sfx-btn,.thm-btn{
+  display:flex; align-items:center; gap:9px; white-space:nowrap; cursor:pointer;
+  padding:9px 14px;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--kh-pill-text); background:transparent;
+  border:1.5px solid var(--kh-pill-dim); border-radius:99px;
+  transition:border-color .18s ease-out, color .18s ease-out;
+}
+.sfx-btn:hover,.thm-btn:hover{ border-color:var(--kh-accent); color:var(--kh-text); }
+.sfx-btn[aria-pressed="true"]{ color:var(--kh-text); border-color:#5A554C; }
+/* inside the dock a switched-on sound button fills with the accent */
+.kh-dock .sfx-btn[aria-pressed="true"]{ background:var(--kh-accent); color:var(--kh-on-accent); border-color:var(--kh-accent); }
+
+/* labels keep the width of their longer state ("Sound off" vs "Sound on") so the
+   pills do not jitter. The font is monospaced: 9 chars x 0.72em = 6.48em, padded a little. */
+.sfx-lab{ display:inline-block; min-width:6.7em; text-align:left; }
+.thm-lab{ display:inline-block; min-width:3.8em; text-align:left; }
+
+.sfx-ico,.thm-ico{ flex:none; width:15px; height:15px; overflow:visible; }
+.sfx-ico path,.sfx-ico line{ fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.sfx-ico .sfx-signal{ display:none; }
+.sfx-btn[aria-pressed="true"] .sfx-mute{ display:none; }
+.sfx-btn[aria-pressed="true"] .sfx-signal{ display:inline; }
+.sfx-btn[aria-pressed="true"] .sfx-wave1{ animation:kh-wave .9s ease-in-out infinite; }
+.sfx-btn[aria-pressed="true"] .sfx-wave2{ animation:kh-wave .9s ease-in-out .15s infinite; }
+@keyframes kh-wave{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+.thm-ico circle,.thm-ico path{ fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.thm-ico .i-moon path{ fill:currentColor; stroke:none; }
+html[data-theme="dark"]  .thm-ico .i-sun{ display:none; }
+html[data-theme="light"] .thm-ico .i-moon{ display:none; }
+
+@media (prefers-reduced-motion:reduce){
+  .sfx-btn[aria-pressed="true"] .sfx-wave1,
+  .sfx-btn[aria-pressed="true"] .sfx-wave2{ animation:none; opacity:1; }
+}
+
+/* ---- the same two toggles when they sit in the hero's top row ---- */
+.kh-top-left { display:flex; align-items:center; gap:clamp(18px,2.8vw,40px); }
+.kh-top-right{ display:flex; align-items:center; gap:clamp(10px,1.6vw,22px); }
+.kh-hero-top .sfx-btn,.kh-hero-top .thm-btn{
+  gap:11px; padding:11px 19px;
+  font-size:clamp(12.5px,1.05vw,16px);
+  color:var(--kh-text); border:2px solid var(--kh-accent);
+}
+.kh-hero-top .sfx-ico,.kh-hero-top .thm-ico{ width:18px; height:18px; }
+.kh-hero-top .sfx-btn:hover,.kh-hero-top .sfx-btn[aria-pressed="true"],
+.kh-hero-top .thm-btn:hover{ background:var(--kh-accent); color:var(--kh-on-accent); border-color:var(--kh-accent); }
+/* three soft rings on arrival, then it stops asking for attention */
+.kh-hero-top .sfx-btn[aria-pressed="false"]{ animation:kh-ring 2.2s ease-out 1.4s 3; }
+@keyframes kh-ring{
+  0%  { box-shadow:0 0 0 0 rgba(140,155,255,.35); }
+  45% { box-shadow:0 0 0 10px rgba(140,155,255,0); }
+  100%{ box-shadow:0 0 0 0 rgba(140,155,255,0); }
+}
+
+/* ---- menu button (phones only) ---- */
+.kh-menu{
+  display:none; align-items:center; gap:9px; white-space:nowrap; cursor:pointer;
+  min-height:44px; padding:10px 16px;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--kh-text); background:transparent;
+  border:1.5px solid var(--kh-pill-edge); border-radius:99px;
+  transition:border-color .18s ease-out, background .18s ease-out, color .18s ease-out;
+}
+.kh-menu:hover{ color:#fff; background:var(--kh-accent); border-color:var(--kh-accent); }
+.kh-menu-ico{ display:flex; flex-direction:column; justify-content:center; gap:3px; width:16px; height:12px; }
+.kh-menu-ico i{ display:block; height:2px; border-radius:2px; background:currentColor; transition:translate .2s ease-out; }
+.kh-menu[aria-expanded="true"] .kh-menu-ico i:first-child{ translate:0 5px; }
+.kh-menu[aria-expanded="true"] .kh-menu-ico i:last-child { translate:0 -5px; }
+
+/* ---- full-screen menu sheet ---- */
+.kh-sheet{
+  position:fixed; inset:0; z-index:90;
+  display:flex; flex-direction:column;
+  padding:clamp(16px,4vw,28px) clamp(18px,5vw,32px) clamp(24px,6vw,36px);
+  color:var(--kh-text); background:var(--kh-base);
+  overflow-y:auto; overscroll-behavior:contain;
+  animation:kh-sheet-in .24s cubic-bezier(.16,1,.3,1);
+}
+@supports (height:100dvh){ .kh-sheet{ height:100dvh; } }
+@keyframes kh-sheet-in{ from{ opacity:0; translate:0 -14px; } }
+body.kh-sheet-open{ overflow:hidden; }
+
+.kh-sheet-top{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding-bottom:14px; border-bottom:1px solid var(--kh-dock-line);
+}
+.kh-sheet-title{
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--kh-text-soft);
+}
+.kh-sheet-close{
+  display:grid; place-items:center; flex:none; width:44px; height:44px;
+  font:26px/1 var(--kh-sans); color:var(--kh-text); background:transparent;
+  border:1.5px solid var(--kh-pill-edge); border-radius:50%; cursor:pointer;
+  transition:background .18s ease-out, border-color .18s ease-out, color .18s ease-out;
+}
+.kh-sheet-close:hover{ color:#fff; background:var(--kh-accent); border-color:var(--kh-accent); }
+
+.kh-sheet-links{
+  display:flex; flex-direction:column; align-items:center;
+  margin:clamp(14px,4vh,30px) 0 clamp(20px,5vh,36px);
+}
+.kh-sheet-links a{
+  padding:14px 0; border-bottom:1px solid var(--kh-dock-line);
+  font-family:var(--kh-display); font-weight:400; font-size:clamp(28px,8.5vw,46px);
+  line-height:1.05; letter-spacing:.01em; text-transform:uppercase;
+  text-decoration:none; color:var(--kh-text);
+  transition:color .18s ease-out;
+}
+.kh-sheet-links a:hover,.kh-sheet-links a:focus-visible{ color:var(--kh-accent); }
+
+.kh-sheet-foot{ display:flex; flex-direction:column; gap:12px; margin-top:auto; }
+.kh-sheet-ctl{ display:flex; flex-wrap:wrap; gap:10px; }
+.kh-sheet-ctl .sfx-btn,.kh-sheet-ctl .thm-btn{
+  flex:1 1 auto; justify-content:center; min-height:48px; padding:12px 14px; font-size:10.5px;
+}
+/* in the sheet the text labels are the point, so they stay visible at any width */
+.kh-sheet-ctl .sfx-lab,.kh-sheet-ctl .thm-lab{ display:inline-block !important; }
+/* a plain heads-up: the page cannot read the phone's silent switch */
+.kh-sheet-note{
+  margin:2px 0 0; text-align:center;
+  font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.05em; color:var(--kh-text-soft);
+}
+.kh-sheet-cta{
+  display:block; padding:17px 20px; text-align:center; text-decoration:none;
+  font-family:var(--kh-mono); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:#fff; background:var(--kh-accent); border-radius:99px;
+}
+
+/* ==========================================================================
+   Wide screens (861px and up): the dock becomes a floating pill
+   ========================================================================== */
+@media (min-width:861px){
+  .kh-dock{
+    inset:16px auto auto 50%;
+    width:max-content; max-width:97vw;
+    justify-content:flex-start; gap:clamp(14px,1.8vw,28px);
+    padding:8px 12px 8px 20px;
+    border:1px solid var(--kh-dock-line); border-radius:999px;
+    box-shadow:0 16px 40px rgba(0,0,0,.28);
+    translate:-50% -140%;
+  }
+  .kh-dock.on{ translate:-50% 0; }
+
+  .kh-dock-links{ position:relative; gap:2px; }
+  .kh-dock-links a{ position:relative; z-index:1; padding:9px 14px; border-radius:999px; white-space:nowrap; }
+  .kh-dock-links a[aria-current="true"],
+  .kh-dock-links a[aria-current="true"]:hover{ color:#fff; }
+
+  /* the highlight that slides to whichever section is current */
+  .kh-dock-glow{
+    position:absolute; top:0; bottom:0; left:0; z-index:0;
+    width:0; opacity:0; border-radius:999px; background:var(--kh-accent);
+    transition:transform .42s cubic-bezier(.22,.61,.36,1), width .42s cubic-bezier(.22,.61,.36,1), opacity .25s ease-out;
+  }
+  .kh-dock-glow.on{ opacity:1; }
+  @media (prefers-reduced-motion:reduce){ .kh-dock-glow{ transition:opacity .25s ease-out; } }
+
+  /* a centred pill cannot afford the extra width, so icons only */
+  .kh-dock .kh-dock-pct,.kh-dock .sfx-lab,.kh-dock .thm-lab{ display:none; }
+  .kh-dock .sfx-btn,.kh-dock .thm-btn{ padding:9px 11px; }
+}
+
+/* ==========================================================================
+   Phones and small tablets
+   ========================================================================== */
+@media (max-width:860px){
+  .kh-dock-links{ display:none; }
+  /* without scripts the menu button is useless, so show the plain links instead */
+  html:not(.js) .kh-dock-links{ display:flex; flex-wrap:wrap; gap:8px 14px; }
+
+  /* always on screen at this width, and the blur would be re-sampled on every
+     scroll frame; the background is already near-opaque so just drop it */
+  .kh-dock{ translate:0 0; justify-content:flex-start; gap:0; backdrop-filter:none; -webkit-backdrop-filter:none; }
+  html.js .kh-menu{ display:flex; }
+
+  .kh-dock-tools{ display:flex; gap:8px; margin:0 10px 0 auto; }
+  .kh-dock-tools .sfx-btn,.kh-dock-tools .thm-btn{ min-width:44px; min-height:44px; justify-content:center; padding:10px; }
+
+  /* the name is hidden while the hero's own wordmark is on screen, and eases
+     open (pushing the menu button over) once the dock is switched on */
+  .kh-dock-home{
+    font-size:13px; max-width:0; margin-right:0; opacity:0; overflow:hidden; pointer-events:none;
+    transition:max-width .7s cubic-bezier(.22,.61,.36,1), margin-right .7s cubic-bezier(.22,.61,.36,1), opacity .35s ease-out;
+  }
+  .kh-dock-home .kh-mark{ display:none; }
+  .kh-dock.on .kh-dock-home{
+    max-width:220px; margin-right:10px; opacity:1; pointer-events:auto;
+    transition:max-width .7s cubic-bezier(.22,.61,.36,1), margin-right .7s cubic-bezier(.22,.61,.36,1), opacity .55s ease-out .15s;
+  }
+}
+@media (max-width:600px){
+  .kh-dock-pct{ display:none; }
+  .sfx-btn .sfx-lab,.thm-btn .thm-lab{ display:none; }
+  .sfx-btn,.thm-btn{ padding:9px 11px; }
+}
+@media (max-width:760px){
+  .kh-hero-top .sfx-btn,.kh-hero-top .thm-btn{ padding:10px 15px; font-size:12px; }
+}
+@media (max-width:420px){ .kh-dock-home{ font-size:11.5px; } }
+@media (max-height:560px){
+  /* the sheet is full height, so it has to be able to scroll: tighter rows */
+  .kh-sheet-links a{ padding:9px 0; font-size:clamp(20px,5vw,28px); }
+  .kh-sheet-links{ margin:12px 0 18px; }
+  .kh-sheet-foot{ margin-top:18px; }
+}
