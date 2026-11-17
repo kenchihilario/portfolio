@@ -1,4 +1,4 @@
-/* Experience list: one role is open at a time, and tapping the open one closes it. */
+
 (function () {
   var roles = document.querySelector('.kh-xp');
   if (!roles) return;
@@ -11,7 +11,6 @@
     var row = event.target.closest('.kh-xp-row');
     if (!row) return;
 
-    /* the visitor is selecting text in this row, so leave it as it is */
     var sel = window.getSelection();
     if (sel && String(sel).trim() && row.contains(sel.anchorNode)) return;
 

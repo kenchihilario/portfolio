@@ -1,4 +1,4 @@
-/* Certificate popup. Opens from any element with data-cert="<key>". */
+
 (function(){
   var modal = document.getElementById('kh-cert');
   if(!modal) return;
@@ -11,9 +11,6 @@
       verify = document.getElementById('kh-cert-verify'),
       lastFocus = null;
 
-  /* Verify links are empty until the real credential URLs are added.
-     Add a  verify: 'https://...'  line to a cert below and its button turns on. */
-  /* the data below is the single source of truth for every certificate */
   var CERTS = {
     ethical: {
       title: "Ethical Hacker", earned: true, statusLabel: 'Earned',

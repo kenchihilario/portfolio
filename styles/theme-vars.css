@@ -1,12 +1,7 @@
-/* ==========================================================================
-   Design tokens and page defaults
-   Colours come in two themes (dark and light) set on <html data-mode>.
-   Everything else on this site reads these variables, so a theme switch is
-   one attribute change.
-   ========================================================================== */
+
 
 :root{
-  /* shared across both themes */
+
   --kh-matte:#A3A8C4;
   --kh-cyan:#7CD9D2;
   --kh-pink:#F2699E;
@@ -17,8 +12,6 @@
   --kh-dur:.25s;
   --kh-ease-out:cubic-bezier(.32,.72,0,1);
 
-  /* side margin of the page; past 1900px the margin grows instead of the
-     content, so wide monitors keep a readable measure with full-bleed bands */
   --kh-gutter:clamp(20px,4vw,64px);
 
   --kh-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
@@ -29,7 +22,6 @@
   :root{--kh-gutter:max(64px,calc((100vw - 1800px) / 2))}
 }
 
-/* ---------- dark ---------- */
 html[data-mode="dark"]{
   --kh-base:#0E1330;
   --kh-text:#EAEEFB;
@@ -54,15 +46,11 @@ html[data-mode="dark"]{
   --kh-chip-text:#0E1330;
   --kh-muted:#56608A;
   --kh-muted-strong:#3E4770;
-  /* --kh-base, --kh-ink and --kh-paper deliberately keep these values: the
-     hero and its badges already read correctly against them, and changing
-     them would drag the hero along. The sections below the hero get their
-     own dark surface instead (see the section.kh-sec rule at the end). */
+
   --kh-sec-bg:#0E1330;
   --kh-sec-hi:#171E48;
 }
 
-/* ---------- light ---------- */
 html[data-mode="light"]{
   --kh-base:#E8ECFA;
   --kh-text:#12162E;
@@ -88,12 +76,11 @@ html[data-mode="light"]{
   --kh-muted-strong:#3F4668;
 }
 
-/* ---------- page defaults ---------- */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  /* no grey flash on tap in Android Chrome; the site's own animations are the feedback */
+
   -webkit-tap-highlight-color:transparent;
 }
 [hidden]{display:none!important}
@@ -117,7 +104,6 @@ body{
 ::selection{background:var(--kh-accent);color:var(--kh-on-accent)}
 a{color:inherit}
 
-/* one focus ring for everything you can tab to */
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible,
@@ -128,7 +114,6 @@ textarea:focus-visible{
   border-radius:3px;
 }
 
-/* "Skip to content": first tab stop, parked above the screen until focused */
 .kh-skip{
   position:fixed;
   left:12px;
@@ -152,16 +137,12 @@ textarea:focus-visible{
 ::-webkit-scrollbar-thumb{background:var(--kh-scroll);border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:var(--kh-scroll-hi)}
 
-/* the wrapper around the whole page */
 .kh-page{
   margin:0 auto;
   background:var(--kh-paper);
   overflow:hidden;
 }
 
-/* Dark mode for the sections under the hero. They re-point the ink, paper,
-   rule and muted tokens, so every card border, paragraph and label inside
-   them turns dark without being touched one by one. */
 html[data-mode="dark"] section.kh-sec{
   background:var(--kh-sec-bg);
   color:var(--kh-text);

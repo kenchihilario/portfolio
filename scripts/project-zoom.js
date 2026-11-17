@@ -1,6 +1,4 @@
-/* Click a "More builds" thumbnail to see the screenshot full size.
-   One shared lightbox, built on first use. Esc, a click outside or the
-   close button dismiss it. */
+
 (function () {
   var thumbs = document.querySelectorAll('.pf-thumb');
   var box, big, cap, closer, lastFocus;
@@ -45,7 +43,7 @@
   }
 
   thumbs.forEach(function (t) {
-    if (!t.querySelector('img')) return; /* letter tiles have nothing to enlarge */
+    if (!t.querySelector('img')) return;
     t.classList.add('pf-zoomable');
     t.setAttribute('role', 'button');
     t.setAttribute('tabindex', '0');

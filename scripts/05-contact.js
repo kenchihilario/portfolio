@@ -1,6 +1,4 @@
-/* Contact form. There is no server, so a valid form opens the visitor's mail
-   app with a prepared draft. Problems are shown in the page (next to the
-   field, and as a toast) instead of through the browser's own bubbles. */
+
 (function () {
   var form = document.getElementById('cform');
   if (!form) return;
@@ -31,7 +29,6 @@
   function field(rule) { return document.getElementById(rule.input); }
   function valueOf(rule) { return field(rule).value.trim(); }
 
-  /* shows or clears the message for one rule; returns true when the field is fine */
   function report(rule, message) {
     var input = field(rule);
     var slot = document.getElementById(rule.note);

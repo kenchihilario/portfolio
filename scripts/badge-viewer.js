@@ -1,6 +1,4 @@
-/* Certificate viewer. A hero sticker or a ledger row carrying data-badge="key"
-   opens the shared panel (#badge-panel, built on the project panel's shell) with that
-   certificate's picture, a short description and a status line. */
+
 (function () {
   var panel = document.getElementById('badge-panel');
   if (!panel) return;
@@ -19,12 +17,8 @@
   };
   var defaultEmptyText = parts.emptyText ? parts.emptyText.textContent : 'Certificate not uploaded yet';
 
-  /* ---- the certificates ---- */
   var CISCO_NOTE = 'Completed via Cisco Networking Academy. Issued November 2026.';
 
-  /* Each earned Cisco course has its certificate as a PDF (certs/<key>.pdf)
-     and a picture of that PDF (certs/<key>.webp) that the popup shows. The
-     verify links come from the QR code printed on each certificate. */
   var BADGES = 'https://www.credly.com/badges/';
   var CREDLY = {
     ccna1: 'e23aa8f3-40fe-47f6-8bfb-70902cdbf7d6',
@@ -95,7 +89,6 @@
     }
   };
 
-  /* No verify link means the button shows greyed out. */
   function aimVerify(url) {
     var a = parts.verify;
     if (!a) return;
@@ -105,7 +98,6 @@
     else { a.setAttribute('aria-disabled', 'true'); a.tabIndex = -1; }
   }
 
-  /* the PDF button only exists for certificates that have a PDF */
   function aimPdf(url) {
     var a = parts.pdf;
     if (!a) return;
@@ -115,8 +107,7 @@
 
   function showPicture(cert) {
     parts.frame.classList.remove('is-broken');
-    /* the markup starts the <img> hidden; that attribute has to come off
-       once, after which style.display does the toggling */
+
     parts.img.hidden = false;
     if (cert.image) {
       parts.img.src = cert.image;
@@ -125,8 +116,7 @@
       parts.empty.hidden = true;
     } else {
       parts.img.style.display = 'none';
-      /* removing src (instead of setting it to '') avoids a request that
-         would be mistaken for a broken image */
+
       parts.img.removeAttribute('src');
       if (parts.emptyText) parts.emptyText.textContent = cert.emptyNote || defaultEmptyText;
       parts.empty.hidden = false;

@@ -5,14 +5,12 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   root.classList.add('js');
 
-  /* ---- Toast ---- */
   var toastEl = $('toast'), toastT;
   function toast(msg) {
     toastEl.textContent = msg; toastEl.classList.add('show');
     clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
   }
 
-  /* ---- Sound: off by default, synthesized with Web Audio, no files ---- */
   var soundOn = true, ctx = null, sBtn = $('sound');
   try { if (localStorage.getItem('sound') === 'off') soundOn = false; } catch (e) {}
   function tone(f, at, dur, vol, type, f2) {
@@ -48,7 +46,7 @@
     return true;
   }
   label();
-  /* Browsers only allow audio after a user gesture, so sound starts on the first tap, click or key press. */
+
   function firstGesture(e) {
     if (e.target && e.target.closest && e.target.closest('#sound')) return;
     ['pointerdown', 'keydown', 'touchstart'].forEach(function (n) { removeEventListener(n, firstGesture, true); });
@@ -72,7 +70,6 @@
     if (e.target.closest && e.target.closest('.btn,.bb,.hops a,.trace-list a')) play('click');
   }, true);
 
-  /* ---- Theme ---- */
   var tBtn = $('theme');
   function setTheme(t, save) {
     if (t === 'dark') root.dataset.theme = 'dark'; else root.removeAttribute('data-theme');
@@ -85,7 +82,6 @@
   setTheme(root.dataset.theme === 'dark' ? 'dark' : 'light', false);
   tBtn.addEventListener('click', toggleTheme);
 
-  /* ---- Scroll cable: progress + one tick per hop ---- */
   var rail = document.querySelector('.rail'), ticksEl = $('ticks'), sections = [].slice.call(document.querySelectorAll('main > section'));
   var ticks = [], ticking = false;
   function layoutTicks() {
@@ -108,7 +104,6 @@
   addEventListener('resize', function () { clearTimeout(layoutTicks._t); layoutTicks._t = setTimeout(layoutTicks, 150); });
   addEventListener('load', layoutTicks); layoutTicks();
 
-  /* ---- Active hop + arrival sound ---- */
   var links = {}, current = null;
   [].forEach.call(document.querySelectorAll('.hops a'), function (a) { links[a.getAttribute('href').slice(1)] = a; });
   if ('IntersectionObserver' in window) {
@@ -126,7 +121,6 @@
     sections.forEach(function (s) { io.observe(s); });
   }
 
-  /* ---- Keyboard: 1-6 jump to a hop, T toggles theme ---- */
   addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var tag = (e.target.tagName || '').toLowerCase();
@@ -137,7 +131,6 @@
     } else if (k === 't' || k === 'T') toggleTheme();
   });
 
-  /* ---- Copy email ---- */
   var email = 'kenchihilario@gmail.com', copy = $('copy');
   copy.addEventListener('click', function () {
     function done(ok) { toast(ok ? 'Email copied' : 'Copy failed. Use the email button.'); if (ok) play('ok'); }
@@ -146,7 +139,6 @@
   });
   [].forEach.call(document.querySelectorAll('a[download]'), function (a) { a.addEventListener('click', function () { toast('Downloading CV'); }); });
 
-  /* ---- Boot curtain (first visit this session; any key or click skips) ---- */
   var cur = $('curtain');
   if (root.classList.contains('boot') && cur) {
     var gone = false;

@@ -1,9 +1,4 @@
-/* Original background music, generated in the browser (no audio files).
-   Two seamless 32-second loops:
-   pro = dark, slow, tense pad with a low pulse (security side)
-   off = warm, plucky, major-seventh arpeggio (off the clock)
-   Every frequency is snapped so it finishes whole cycles inside the loop,
-   and every note decays before the loop ends, so the join is clean. */
+
 window.KenchiMusic = (function(){
   var DUR = 32, TAU = Math.PI * 2;
   function snap(f){ return Math.round(f * DUR) / DUR; }
@@ -14,11 +9,11 @@ window.KenchiMusic = (function(){
     var pro = kind === 'pro';
     var bpm = pro ? 60 : 84, beat = 60 / bpm, bars = pro ? 8 : 12;
     var chords = pro
-      ? [[57,60,64],[53,57,60],[48,52,55],[55,59,62]]          /* Am F C G */
-      : [[60,64,67,71],[57,60,64,67],[53,57,60,64],[55,59,62,65]]; /* Cmaj7 Am7 Fmaj7 G7 */
-    var barLen = DUR / (pro ? 8 : 8);                           /* 4s per chord */
+      ? [[57,60,64],[53,57,60],[48,52,55],[55,59,62]]
+      : [[60,64,67,71],[57,60,64,67],[53,57,60,64],[55,59,62,65]];
+    var barLen = DUR / (pro ? 8 : 8);
     var i, c, k, t, v;
-    /* pad: each chord crossfades with a raised-cosine, periodic in 32s */
+
     for(c = 0; c < 8; c++){
       var ch = chords[c % 4], t0 = c * barLen;
       for(k = 0; k < ch.length; k++){
@@ -34,7 +29,7 @@ window.KenchiMusic = (function(){
       }
     }
     if(pro){
-      /* low pulse on every beat, softly accented on beat 1 of each bar */
+
       for(t = 0; t < DUR - 1; t += beat * 2){
         var root = snap(hz(chords[Math.floor(t / barLen) % 4][0] - 24)), s = Math.floor(t * sr);
         for(i = 0; i < sr * 1.4; i++){
@@ -44,7 +39,7 @@ window.KenchiMusic = (function(){
         }
       }
     } else {
-      /* eighth-note plucks climbing through each chord */
+
       var step = beat / 2, idx = 0;
       for(t = 0; t < DUR - 1.6; t += step, idx++){
         var cc = chords[Math.floor(t / barLen) % 4];
@@ -57,7 +52,7 @@ window.KenchiMusic = (function(){
         }
       }
     }
-    /* normalise gently */
+
     var peak = 0;
     for(i = 0; i < n; i++) peak = Math.max(peak, Math.abs(L[i]), Math.abs(R[i]));
     var g = peak ? .8 / peak : 1;

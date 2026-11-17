@@ -1,8 +1,4 @@
-/* ==========================================================================
-   Tech stack
-   Bare logos in three groups. The first group (networking) is the one that
-   matters most, so its marks and names are drawn larger.
-   ========================================================================== */
+
 
 .kh-stack{
   display:flex;
@@ -46,8 +42,6 @@
 }
 .kh-tool:hover{translate:0 -5px}
 
-/* Every logo gets the same square. --v-k (set inline on the small ones) scales
-   a mark up so they all carry about the same visual weight. */
 .kh-tool img{
   width:var(--tile);
   height:var(--tile);
@@ -64,9 +58,6 @@
 }
 .kh-stack-main .kh-tool-name{font-size:clamp(14px,1.15vw,18px)}
 
-/* ---------- dark theme ----------
-   A few marks are solid black or dark-on-transparent, so on the dark grid
-   they get a light tile or an inverted fill. Everything else keeps its own colours. */
 html[data-mode="dark"] .kh-mono-lg{filter:invert(1) brightness(1.35)}
 html[data-mode="dark"] .kh-tool img[src*="openai.png"]{filter:brightness(0) invert(1)}
 html[data-mode="dark"] .kh-tool img[src*="logos/tech/git.png"]{

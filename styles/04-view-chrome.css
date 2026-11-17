@@ -1,4 +1,4 @@
-  /* ===== view chrome: sticky bar, corner badge, flip wipe ===== */
+
   .bar{
     position:fixed;top:0;left:0;right:0;z-index:60;
     display:flex;align-items:center;justify-content:space-between;gap:24px;
@@ -10,7 +10,7 @@
   .bar.on{translate:0 0}
   .bar-brand{
     display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;white-space:nowrap;
-    /* it is a button now: strip the UA chrome, keep the type */
+
     background:none;border:0;padding:0;color:inherit;font-family:inherit;
     cursor:pointer;transition:color .18s ease-out;
   }
@@ -29,10 +29,7 @@
     transition:border-color .18s ease-out,background .18s ease-out,color .18s ease-out;
   }
   .bar-flip:hover,.vbadge:hover{border-color:var(--orange);background:var(--orange);color:var(--on-accent)}
-  /* --cream is whichever of white/near-black reads against the bar in the
-     palette you are in: #EAEEFB on the dark security bar, #15171A on the
-     light one. So one value gives a white dot here and still holds up if the
-     theme is flipped, where a literal #fff would disappear. */
+
   .bar-flip .dot,.vbadge .dot{
     width:8px;height:8px;border-radius:50%;background:var(--cream);flex:none;
     transition:background .18s ease-out;
@@ -40,18 +37,11 @@
   .bar-flip:hover .dot,.vbadge:hover .dot{background:#fff}
   body.offline .bar-flip:hover .dot,body.offline .vbadge:hover .dot{background:var(--ink)}
   .bar-flip .swap{color:var(--cream-dim);border-left:1px solid var(--pill-line);padding-left:9px}
-  /* the header pill (#barflip only - #msheetflip in the mobile menu shares
-     .bar-flip for base styling but keeps its own profile-name text, so its
-     divider still separates two real segments and is left alone): Kenchi
-     wanted the "Security profile"/"Off the clock" state text gone here,
-     replaced by the same swap-arrows icon .vbadge already uses, leaving
-     just an icon + the word "Switch." With no state-name segment before it
-     any more, the divider that used to separate it from one has nothing
-     left to divide. */
+
   .bar-flip-ico{width:14px;height:14px;flex:none;color:var(--cream)}
   .bar-flip:hover .bar-flip-ico{color:#fff}
   #barflip .swap{border-left:none;padding-left:0}
-  /* sound toggle - same pill language as the flip control */
+
   .bar-right{display:flex;align-items:center;gap:clamp(8px,1vw,14px)}
   .sfx-btn{
     display:flex;align-items:center;gap:9px;cursor:pointer;white-space:nowrap;
@@ -62,14 +52,9 @@
   }
   .sfx-btn:hover{border-color:var(--orange);color:var(--cream)}
   .sfx-btn[aria-pressed="true"]{color:var(--cream);border-color:#5A554C}
-  /* in the floating bar specifically, "on" reads as filled orange, same
-     accent .hero-top already uses for its own pressed state below - the
-     bar's own base rule above stays the neutral outline for "off" */
+
   .bar .sfx-btn[aria-pressed="true"]{background:var(--orange);color:var(--on-accent);border-color:var(--orange)}
-  /* one speaker glyph either way - off wears the muted X any OS volume
-     control uses, on swaps that for a pair of signal arcs that pulse
-     outward, so the icon itself carries the "it's on" state rather than
-     relying on the label alone. */
+
   .sfx-ico{width:15px;height:15px;flex:none;overflow:visible}
   .sfx-ico path,.sfx-ico line{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .sfx-ico .sfx-signal{display:none}
@@ -85,11 +70,7 @@
   @media (prefers-reduced-motion: reduce){
     .sfx-btn[aria-pressed="true"] .sfx-ico{animation:none}
   }
-  /* the control stays on touch: most of the set is wired to clicks, not
-     hovers, so a phone still gets the taps, the flips and the modals */
-  /* music pill: same shell as the sound pill, but the note itself bobs in
-     place once playing rather than swapping to a second icon - one glyph
-     that just starts moving reads as simpler than two icons trading off */
+
   .mus-btn{
     display:flex;align-items:center;gap:9px;cursor:pointer;white-space:nowrap;
     font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
@@ -99,25 +80,17 @@
   }
   .mus-btn:hover{border-color:var(--orange);color:var(--cream)}
   .mus-btn[aria-pressed="true"]{color:var(--cream);border-color:#5A554C}
-  /* same filled-orange "on" treatment as the sound toggle above, scoped
-     to the floating bar */
+
   .bar .mus-btn[aria-pressed="true"]{background:var(--orange);color:var(--on-accent);border-color:var(--orange)}
   .mus-btn[disabled]{opacity:.45;cursor:not-allowed}
-  /* a beamed pair of quavers - at 15px a single note with a flag turns to
-     mush, while two noteheads under a beam stay legible. It matters more
-     than it used to: below 600px these buttons lose their labels and the
-     icon is the only thing naming them. */
+
   .mus-ico{width:15px;height:15px;flex:none;overflow:visible}
   .mus-ico path{
     fill:none;stroke:currentColor;stroke-width:2;
     stroke-linecap:round;stroke-linejoin:round;
   }
   .mus-ico circle{fill:currentColor;stroke:none}
-  /* the same note, dancing rather than just nodding once it's actually
-     playing - a bouncy overshoot easing on the whole glyph plus each
-     notehead pulsing on its own offbeat, so it reads as keeping time
-     rather than one flat up-down loop. The icon itself carries the
-     "it's on" state rather than relying on the label alone. */
+
   .mus-btn[aria-pressed="true"] .mus-ico{
     animation:mus-bob .55s cubic-bezier(.34,1.56,.64,1) infinite;
     transform-origin:9px 20px;
@@ -146,51 +119,19 @@
   .hero-top .mus-btn[aria-pressed="true"]{background:var(--orange);color:var(--on-accent);border-color:var(--orange)}
   @media (max-width:760px){.hero-top .mus-btn{font-size:12px;padding:10px 15px}}
   @media (max-width:600px){.mus-btn .mus-lab{display:none}.mus-btn{padding:9px 11px}}
-  /* volume popover: only on the two desktop music pills (the bar and the
-     hero), not the mobile sheet's copy - that one lives inside a touch
-     menu with no hover to trigger this from anyway, so it was left as a
-     plain button with no wrapper. Gated on (hover:hover) and (pointer:fine)
-     rather than just a width breakpoint, since a touch device pressing and
-     holding can trigger a lingering ":hover" match on some browsers - this
-     keeps it desktop-only regardless of viewport width. */
+
   .mus-wrap{position:relative;display:inline-flex}
-  /* position is now fixed and never animates - only opacity/pointer-events
-     toggle. It used to also translate a few px further down on entry
-     (a small "settle into place" polish), but that meant the real gap
-     between the button and the popover moved during the entry transition
-     while the bridge below stayed a fixed size, so the bridge only fully
-     covered it part of the time - reported as the popover not staying
-     open even with the cursor genuinely resting on the slider, confirmed
-     directly (pointer-events/opacity both computed as the closed state
-     while hovering). A static position removes that moving target
-     entirely rather than trying to size the bridge for every state. */
+
   .mus-vol{
     position:absolute;top:100%;left:50%;translate:-50% 10px;z-index:5;
     display:flex;align-items:center;padding:10px 12px;
     background:var(--card);border:1px solid var(--bar-line);border-radius:99px;
     box-shadow:0 10px 24px rgba(0,0,0,.28);
     opacity:0;pointer-events:none;
-    /* the delay lives here, on the hidden state, not the visible one - a
-       transition takes its timing from whichever rule the property is
-       transitioning TO, so leaving hover (falling back to this rule) waits
-       1.5s before the fade even starts, while entering hover below matches
-       its own zero-delay rule instead and appears instantly. pointer-events
-       is carried in the same transition (0s duration, same delay) purely
-       so it flips to none in step with the fade rather than the instant
-       the cursor leaves - without that, the popover would go visually
-       fading-but-unclickable for the whole delay window, and a cursor
-       doubling back onto it mid-fade would land on a dead slider. */
+
     transition:opacity .16s ease-out 1.5s,pointer-events 0s linear 1.5s;
   }
-  /* :focus-visible, not :focus-within - clicking into the slider to drag
-     it focuses it same as tabbing to it would, but a plain click focus
-     does not count as focus-visible in any current browser's own
-     heuristic (keyboard focus does). :focus-within kept the popover open
-     forever after a single click, since focus doesn't clear on its own
-     just because the cursor later moved away - only tabbing elsewhere (or
-     clicking a DIFFERENT focusable element) would clear it. This still
-     keeps the popover open for a real keyboard tab into the slider, which
-     is the actual accessibility case :focus-within was for. */
+
   @media (hover:hover) and (pointer:fine){
     .mus-wrap:hover .mus-vol,
     .mus-wrap:has(.mus-vol-slider:focus-visible) .mus-vol{
@@ -198,26 +139,9 @@
       transition:opacity .16s ease-out,pointer-events 0s linear;
     }
   }
-  /* the gap between the pill and the popover would otherwise be a dead
-     zone the cursor can lose hover crossing on the way down to the slider
-     - this pseudo-element bridges it invisibly so the popover stays open.
-     Generously oversized (24px against a gap that measures roughly
-     10-12px) on purpose: the position above is fixed now so this no
-     longer needs to track a moving target, but erring wide costs nothing
-     (it sits behind the button itself, which already owns clicks in that
-     area) and guarantees full coverage regardless of small measurement
-     differences between the bar and hero instances. */
+
   .mus-vol::before{content:'';position:absolute;top:-24px;left:0;right:0;height:24px}
-  /* a plain <input type=range>, custom-styled, kept fighting itself on a
-     real mouse: a fully -webkit-appearance:none range still has its own
-     native drag-tracking underneath, and native's own click-positioning
-     for that element only ever engages when the pointer lands pixel-for-
-     pixel on the 14px thumb - everywhere else on the track did nothing.
-     preventDefault should have been enough to settle that fight and
-     didn't fix it either, so rather than keep patching around one native
-     element's behavior, this is a plain <div role="slider"> instead -
-     two child spans (fill + thumb), positioned by percentage in JS, with
-     no native form-control drag handling underneath to ever fight. */
+
   .mus-vol-slider{
     position:relative;width:90px;height:14px;cursor:pointer;
     touch-action:none;user-select:none;-webkit-user-select:none;outline:none;
@@ -236,10 +160,9 @@
     width:14px;height:14px;border-radius:50%;background:var(--orange);
     translate:-50% -50%;pointer-events:none;
   }
-  /* fixed position, same reasoning as the base rule above - no separate
-     hover-state offset to keep the bridge covering a static gap. */
+
   .hero-top .mus-vol{top:100%;translate:-50% 12px}
-  /* theme pill - same shell again; the icon shows the mode you are in */
+
   .thm-btn{
     display:flex;align-items:center;gap:9px;cursor:pointer;white-space:nowrap;
     font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
@@ -248,13 +171,7 @@
     transition:border-color .18s ease-out,color .18s ease-out;
   }
   .thm-btn:hover{border-color:var(--orange);color:var(--cream)}
-  /* "off" is one character wider than "on", so these pills used to shrink as
-     you switched them on. Hold each label at the width of its longer state.
-     The type is monospaced, so that width is exactly
-     characters x (0.6em advance + 0.12em letter-spacing) - 9 x .72 = 6.48em
-     for "Sound off" and "Music off", 5 x .72 = 3.6em for "Light" - with a
-     little over the top for a fallback mono with a wider advance. Left
-     aligned, so the text does not shuffle inside the reserved box. */
+
   .sfx-lab,.mus-lab{display:inline-block;min-width:6.7em;text-align:left}
   .thm-lab{display:inline-block;min-width:3.8em;text-align:left}
 
@@ -274,12 +191,10 @@
   .hero-top .thm-btn:hover{background:var(--orange);color:var(--on-accent)}
   @media (max-width:760px){.hero-top .thm-btn{font-size:12px;padding:10px 15px}}
   @media (max-width:600px){.thm-btn .thm-lab{display:none}.thm-btn{padding:9px 11px}}
-  /* gap sizes are tuned per content, not per side - the wider gap suits
-     the brand-to-nav and nav-link spacing now living in hero-top-left,
-     the tighter one suits the three toggle buttons now in hero-top-right */
+
   .hero-top-left{display:flex;align-items:center;gap:clamp(18px,2.8vw,40px)}
   .hero-top-right{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px)}
-  /* the hero control is the one people meet first - it wears the accent */
+
   .hero-top .sfx-btn{
     font-size:clamp(12.5px,1.05vw,16px);padding:11px 19px;gap:11px;
     border:2px solid var(--orange);color:var(--cream);
@@ -287,7 +202,7 @@
   .hero-top .sfx-ico{width:18px;height:18px}
   .hero-top .sfx-btn:hover,
   .hero-top .sfx-btn[aria-pressed="true"]{background:var(--orange);color:var(--on-accent);border-color:var(--orange)}
-  /* three soft pulses on arrival, then it stops asking */
+
   .hero-top .sfx-btn[aria-pressed="false"]{animation:sfx-pulse 2.2s ease-out 1.4s 3}
   @keyframes sfx-pulse{
     0%{box-shadow:0 0 0 0 rgba(140,155,255,.35)}
@@ -298,7 +213,7 @@
   @media (max-width:600px){.sfx-btn .sfx-lab{display:none}.sfx-btn{padding:9px 11px}}
 
   .bar-flip:hover .swap{color:#fff;border-color:rgba(255,255,255,.5)}
-  /* nav swap: links drop in one after another, the bar sweeps behind them */
+
   .bar-nav a,.bar-flip span:not(.swap),.vbadge span:not(.dot){
     display:inline-block;
     animation:nav-in .62s cubic-bezier(.22,1.35,.36,1) backwards;
@@ -314,7 +229,7 @@
     60%{opacity:1;filter:blur(0)}
     100%{opacity:1;translate:0 0;scale:1}
   }
-  /* an orange light sweeps across the bar as the page underneath changes */
+
   .bar::after{
     content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
     background:linear-gradient(100deg,
@@ -329,7 +244,7 @@
   .bar.flipping{border-bottom-color:var(--orange)}
   .bar.flipping .bar-brand .mark{color:var(--orange);scale:1.25}
   .bar .bar-brand .mark{transition:color .45s ease-out,scale .45s cubic-bezier(.22,1.35,.36,1)}
-  /* the status dot snaps over as the view lands */
+
   .bar.flipping .dot,.vbadge.flipping .dot{animation:dot-pop .6s cubic-bezier(.22,1.35,.36,1)}
   @keyframes dot-pop{0%{scale:0}55%{scale:2.1}100%{scale:1}}
   .bar{
@@ -337,13 +252,6 @@
     transition:translate .34s cubic-bezier(.32,.72,0,1),border-color .45s ease-out;
   }
 
-  /* Desktop only: the bar floats as a self-width pill clear of both edges,
-     rather than spanning full-bleed with a single bottom rule - mobile
-     keeps the edge-to-edge bar untouched, since there is no spare width
-     there for anything to float in. The "where am I" job that the side
-     rail used to do moves in here too: a sliding highlight tracks the
-     current section behind the nav links themselves, segmented-control
-     style, instead of a separate dot trail down the side of the page. */
   @media (min-width:861px){
     .bar{
       left:50%;right:auto;top:16px;
@@ -372,42 +280,18 @@
     }
     .bar-nav-glow.on{opacity:1}
     @media (prefers-reduced-motion:reduce){.bar-nav-glow{transition:opacity .25s ease-out}}
-    /* the flip pulse used to ride the one bottom rule the full-bleed bar
-       had - now that the pill has an edge all the way round, the pulse
-       should too */
+
     .bar.flipping{border-color:var(--orange)}
 
-    /* Everything the bar carries - brand, five-item nav, percentage
-       readout, three labelled toggles, the flip control - measures out
-       comfortably wider than a centered pill can afford on an ordinary
-       laptop screen, brief before any narrow-window fallback ever gets a
-       chance to apply. So the readout and the toggle labels are icon-only
-       by default here, not just below some narrow threshold: the bar needs
-       the room on a normal screen already, not only a small one. */
     .bar .sprog{display:none}
     .bar .sfx-lab,.bar .mus-lab,.bar .thm-lab{display:none}
     .bar .sfx-btn,.bar .mus-btn,.bar .thm-btn{padding:9px 11px}
   }
 
-  /* corner badge: the same answer, kept in reach on small screens - docked
-     bottom-left so it doesn't compete with Bean (the site guide) in the
-     bottom-right corner (styles/11-assistant.css). Icon-only rather than
-     the text pill .bar-flip uses in the header - it never appears above
-     861px (see below), so there's no desktop appearance to preserve, and
-     a compact round icon button reads as a corner utility rather than a
-     second nav element competing for attention next to Bean. The "Security
-     profile"/"Off the clock" text spans stay in the DOM (still swapped by
-     the same [data-view] toggle everything else uses) but are hidden here
-     - aria-label="Switch view" on the button covers the accessible name. */
   .vbadge{
     position:fixed;left:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);z-index:60;
     width:76px;height:76px;padding:0;gap:0;justify-content:center;
-    /* brand orange, not the subdued glass pill every other chrome control
-       uses - the same color language as Bean's own launcher, so this reads
-       as a second thing worth noticing in the corner rather than a faint
-       utility icon (Note: "make it more noticable"). border-color is kept
-       transparent rather than removed outright so the shared .bar-flip,
-       .vbadge hover rule below still has something to transition from. */
+
     background:var(--orange);border-color:transparent;color:var(--on-accent);
     box-shadow:0 10px 28px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.18);
     opacity:0;pointer-events:none;translate:0 12px;
@@ -415,27 +299,17 @@
                border-color .18s ease-out,background .18s ease-out,color .18s ease-out,filter .18s ease-out;
   }
   .vbadge.on{opacity:1;pointer-events:auto;translate:0 0}
-  /* the shared .bar-flip,.vbadge hover rule sets the same orange background
-     this already rests at, so hovering would otherwise show no feedback at
-     all - a slight darken stands in for the color change that rule can't
-     provide here. */
+
   .vbadge:hover{filter:brightness(.9)}
   .vbadge-ico{width:28px;height:28px;flex:none}
   .vbadge .dot,.vbadge span[data-view]{display:none}
   @media (min-width:861px){.vbadge{display:none}}
-  /* matches Bean's own phone-width shrink (.asst-launch, 76px -> 48px
-     under 640px, styles/11-assistant.css) so the two stay the same size
-     at every width, not just above 640px. (An earlier, more drastic 28px
-     test value confirmed the real bug: .asst-mk svg was a fixed 46px
-     regardless of .asst-launch's own size, so the icon never actually
-     shrank with the button - now fixed with a % size there, so this can
-     go back to a size that just looks like "smaller," not "diagnostic.") */
+
   @media (max-width:640px){
     .vbadge{width:48px;height:48px}
     .vbadge-ico{width:18px;height:18px}
   }
 
-  /* the flip itself: a short wipe so the change is never missed */
   .wipe{
     position:fixed;inset:0;z-index:95;background:var(--card);
     opacity:0;pointer-events:none;transition:opacity .22s ease-out;
@@ -443,8 +317,7 @@
   .wipe.on{opacity:1}
 
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
-  /* the first section of the incoming view leads itself in as it reaches the
-     fold - a moving thing just below the hero is the scroll invitation */
+
   .lead-arm .sec-head h2,.lead-arm .sec-head .meta{opacity:0;translate:0 26px;filter:blur(5px)}
   .lead-go .sec-head h2,.lead-go .sec-head .meta{
     animation:lead-in .72s cubic-bezier(.22,1.35,.36,1) forwards;

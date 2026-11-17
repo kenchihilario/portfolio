@@ -1,9 +1,4 @@
-/* Sound for the portfolio - everything is synthesized live with Web Audio.
-   Effects use a networking vocabulary (relay clicks, sonar pings, packet blips).
-   Music is a small generative sequencer: a slow sonar-and-pulse bed in dark mode,
-   a bright pentatonic mallet loop in day mode. Browsers only allow audio after a
-   first click, tap or key press, so sound starts on that first interaction unless
-   the visitor has muted it before. */
+
 (function(){
   var btns = [].slice.call(document.querySelectorAll('.sfx-btn'));
   var root = document.documentElement;
@@ -18,7 +13,7 @@
     master = ctx.createGain(); master.gain.value = .9; master.connect(comp);
     sfxBus = ctx.createGain(); sfxBus.gain.value = .5; sfxBus.connect(master);
     musBus = ctx.createGain(); musBus.gain.value = 0; musBus.connect(master);
-    /* soft feedback echo for pings and mallets */
+
     echo = ctx.createDelay(1); echo.delayTime.value = .34;
     var fb = ctx.createGain(); fb.gain.value = .38;
     var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1800;
@@ -27,7 +22,6 @@
   }
   function dayMode(){ return root.getAttribute('data-theme') === 'light'; }
 
-  /* ---------- effects ---------- */
   function env(g, t, a, d, peak){ g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d); }
   function tone(f, t, d, type, peak, f2, bus){
     var o = ctx.createOscillator(), g = ctx.createGain();
@@ -59,7 +53,6 @@
     try{ (lib[name] || lib.click)(ctx.currentTime + .005, arg); }catch(e){}
   }
 
-  /* ---------- music ---------- */
   var DARK_ROOTS = [55, 43.65, 65.41, 49], DARK_CH = [[220,261.63,329.63],[174.61,220,261.63],[196,261.63,329.63],[196,246.94,293.66]];
   var PENT = [523.25, 587.33, 659.25, 783.99, 880, 1046.5], DAY_ROOTS = [65.41, 55, 87.31, 98];
   var DAY_PAT = [0,2,3,-1,4,3,2,-1, 0,2,4,5,4,3,2,1];
@@ -106,7 +99,6 @@
     if(timer){ var t = timer; timer = null; setTimeout(function(){ clearInterval(t); }, 900); }
   }
 
-  /* ---------- control ---------- */
   function paint(){
     btns.forEach(function(b){
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -137,7 +129,7 @@
     if(!ctx) return;
     if(document.hidden) ctx.suspend(); else if(on) ctx.resume();
   });
-  /* hover blips and click ticks, never on touch-only devices for hover */
+
   var fine = window.matchMedia('(hover: hover)').matches;
   var TARGET = 'a,button,[role="button"],.kh-pj,.kh-tool,.ifc';
   if(fine) document.addEventListener('pointerover', function(e){
@@ -147,7 +139,7 @@
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest(TARGET); if(t && !t.classList.contains('sfx-btn') && !t.classList.contains('thm-btn')) play('click');
   });
-  /* a sonar ping when a new section scrolls into view */
+
   var seenFirst = false;
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(en){

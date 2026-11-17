@@ -1,5 +1,4 @@
-/* Top bar: hidden while the hero is on screen, shown once it has scrolled
-   away. The brand button jumps back to the top. */
+
 (function () {
   var bar = document.getElementById('bar');
   var hero = document.querySelector('.kh-hero');

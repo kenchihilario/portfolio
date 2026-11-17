@@ -1,10 +1,7 @@
-/* Page behaviour: loader, side rail (active link + mobile menu), contact form. */
+
 (function(){
   var root = document.documentElement;
 
-  /* ---- loader ----
-     The curtain lifts when the page has loaded and a short minimum has passed.
-     A hard timeout lifts it regardless, so it can never trap a visitor. */
   var boot = document.getElementById('kh-boot');
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var MIN = reduced ? 300 : 1500, t0 = Date.now(), lifted = false;
@@ -21,7 +18,6 @@
     (function tick(){ if(i < lines.length && !lifted){ lines[i++].classList.add('is-on'); setTimeout(tick, reduced ? 0 : 280); } })();
   }
 
-  /* ---- active link in the rail ---- */
   var links = [].slice.call(document.querySelectorAll('.kh-nav a'));
   var map = {};
   links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
@@ -36,7 +32,6 @@
     Object.keys(map).forEach(function(id){ var s = document.getElementById(id); if(s) io.observe(s); });
   }
 
-  /* ---- mobile menu ---- */
   var rail = document.getElementById('kh-bar'), btn = document.getElementById('kh-menu');
   function setMenu(open){
     rail.classList.toggle('is-open', open);
@@ -49,7 +44,6 @@
   addEventListener('keydown', function(e){ if(e.key === 'Escape') setMenu(false); });
   document.getElementById('kh-top').addEventListener('click', function(){ scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}); });
 
-  /* ---- contact form: opens the visitor's mail app with the message filled in ---- */
   var form = document.getElementById('kh-form');
   if(form){
     var fields = ['name','from','msg'];

@@ -1,4 +1,4 @@
-/* Gallery lightbox for the offline view. */
+
 (function(){
   var lb=document.getElementById('lb'), im=document.getElementById('lb-img'), cap=document.getElementById('lb-cap');
   if(!lb) return;
@@ -14,7 +14,6 @@
   addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
 })();
 
-/* Click a project card to blow it up: big image left, detail right. */
 (function(){
   var pm=document.getElementById('pm');
   if(!pm) return;
@@ -23,14 +22,6 @@
       fact=document.getElementById('pm-fact'), links=document.getElementById('pm-links'),
       repoLink=document.getElementById('pm-repo'), demoLink=document.getElementById('pm-demo');
 
-  /* repo/demo are optional per project and not all are filled in yet - a
-     card without one shows the button greyed out and inert rather than
-     hiding it outright, so the row still reads as "code + demo" while the
-     real links get added. That's for "not yet linked" projects. A project
-     that will never have either - an internship's private repo, a CTF
-     with no demo to show - opts out with data-links="none" instead, which
-     hides the whole row rather than showing two buttons that will always
-     be dead. */
   function setLink(a, url){
     if(url){
       a.href = url; a.removeAttribute('aria-disabled'); a.removeAttribute('tabindex');

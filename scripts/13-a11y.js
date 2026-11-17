@@ -1,7 +1,5 @@
-/* Keyboard and screen-reader support for the rail and the project panel. */
 
-/* The rail scrolls sideways, so it needs a tab stop and a name to be
-   reachable without a pointer. (Focus inside it also pauses the drift.) */
+
 (function () {
   var rail = document.querySelector('.kh-pj-rail');
   if (!rail) return;
@@ -10,8 +8,6 @@
   rail.setAttribute('aria-label', 'Projects, scrollable row');
 })();
 
-/* When the project panel opens, move focus to its close button; when it
-   closes, return focus to whatever opened it. */
 (function () {
   var panel = document.getElementById('pm');
   if (!panel) return;

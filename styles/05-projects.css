@@ -1,14 +1,8 @@
-/* ==========================================================================
-   Projects
-   A row of cards that drifts by itself (scripts/02-project-rail.js moves
-   it), the "See all" button inside the heading, and the full-screen list
-   that button opens. The detail popup lives in 05-popup.css.
-   ========================================================================== */
 
-/* ---------- the rail ---------- */
+
 .kh-pj-rail{
   --kh-gap:clamp(20px,2.4vw,32px);
-  --kh-drift:68s;              /* time for one full set of cards to pass; the script reads it */
+  --kh-drift:68s;
   position:relative;
   overflow:auto hidden;
   overscroll-behavior-x:contain;
@@ -16,7 +10,7 @@
   user-select:none;
   scrollbar-width:none;
   -ms-overflow-style:none;
-  /* let the row run past the section padding, edge to edge */
+
   margin-inline:calc(var(--kh-gutter) * -1);
   padding-inline:var(--kh-gutter);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
@@ -25,7 +19,7 @@
 .kh-pj-rail::-webkit-scrollbar{display:none}
 .kh-pj-rail.is-dragging{cursor:grabbing}
 .kh-pj-rail.is-dragging .kh-pj{pointer-events:none}
-/* the rail can take keyboard focus; the mask clips anything outside it, so the ring sits inside */
+
 .kh-pj-rail:focus-visible{outline:2px solid var(--kh-accent);outline-offset:-3px;border-radius:8px}
 
 .kh-pj-strip{
@@ -35,7 +29,6 @@
   padding:6px 0 18px;
 }
 
-/* wider screens cover more ground per second, so the loop is shortened to feel the same */
 @media (min-width:1400px){.kh-pj-rail{--kh-drift:52s}}
 @media (min-width:1900px){.kh-pj-rail{--kh-drift:46s}}
 @media (prefers-reduced-motion:reduce){
@@ -43,7 +36,6 @@
   .kh-pj{scroll-snap-align:center}
 }
 
-/* ---------- a project card ---------- */
 .kh-pj{
   flex:none;
   width:clamp(360px,44vw,660px);
@@ -83,7 +75,6 @@
   min-width:0;
 }
 
-/* cover picture: a tinted frame with faint diagonal hatching behind the image */
 .kh-pj-pic{
   position:relative;
   display:grid;
@@ -113,7 +104,6 @@
 .kh-tone-3 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-pink) 24%,var(--kh-paper))}
 .kh-tone-4 .kh-pj-pic{--tint:color-mix(in srgb,var(--kh-green) 30%,var(--kh-paper))}
 
-/* the one-line takeaway at the bottom of each card */
 .kh-pj-fact{
   margin-top:auto;
   padding-top:15px;
@@ -135,7 +125,6 @@
   line-height:1;
 }
 
-/* ---------- "See all" button in the heading ---------- */
 .kh-head h2 .kh-all-btn{
   margin:0;
   padding:0;
@@ -155,8 +144,7 @@
   display:inline-flex;
   align-items:center;
   vertical-align:middle;
-  /* the display font's caps sit high, so plain "middle" rides the pill into
-     the letters above it; this drops it back clear */
+
   translate:0 8px;
   margin-left:clamp(12px,1.5vw,26px);
   padding:9px 19px;
@@ -174,7 +162,6 @@
 .kh-all-btn:hover .kh-head-cue,
 .kh-all-btn:focus-visible .kh-head-cue{background:var(--kh-accent);color:#fff}
 
-/* ---------- full-screen list ---------- */
 body.kh-all-lock{overflow:hidden}
 
 .kh-all{
@@ -192,9 +179,6 @@ body.kh-all-lock{overflow:hidden}
 }
 @keyframes kh-all-fade{from{opacity:0}}
 
-/* This layer sits outside every themed section, so it never got the dark
-   recolour of --kh-ink, --kh-rule and --kh-muted. Without these, the role titles in
-   the copied cards came out dark on dark. */
 html[data-theme="dark"] .kh-all{
   --kh-ink:var(--kh-text);
   --kh-paper:var(--kh-sec-bg);
@@ -232,7 +216,6 @@ html[data-theme="dark"] .kh-all{
   color:var(--kh-text-soft);
 }
 
-/* in the rail the cards have a fixed width; here each one fills its cell */
 .kh-all-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(min(100%,370px),1fr));
@@ -261,12 +244,9 @@ html[data-theme="dark"] .kh-all{
 }
 .kh-all-x:hover{background:var(--kh-accent);border-color:var(--kh-accent);color:#fff}
 
-/* ---------- dark theme ---------- */
-/* a few colours here were written as plain hex, so the section recolour missed them */
 html[data-theme="dark"] .kh-pj p{color:var(--kh-pill-text)}
 html[data-theme="dark"] .kh-pj:hover{background:var(--kh-sec-hi)}
 
-/* ---------- smaller screens ---------- */
 @media (max-width:760px){
   .kh-pj{width:min(82vw,420px)}
   .kh-pj h3{font-size:clamp(20px,5.4vw,26px)}

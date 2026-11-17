@@ -1,10 +1,5 @@
-/* ==========================================================================
-   Top dock: the fixed bar that appears after the hero, the pill controls
-   (sound, theme), the phone menu button and the full-screen menu sheet.
-   Phone widths come first-class at the bottom of the file.
-   ========================================================================== */
 
-/* ---- the dock itself: slides down from above the viewport once .on is set ---- */
+
 .kh-dock{
   position:fixed; inset:0 0 auto 0; z-index:60;
   display:flex; align-items:center; justify-content:space-between; gap:24px;
@@ -19,7 +14,6 @@
 }
 .kh-dock.on{ translate:0 0; }
 
-/* thin line along the bottom edge that grows with scroll (--v-p is 0..1 on <html>) */
 .kh-dock-prog{
   position:absolute; left:0; right:0; bottom:0; height:3px;
   background:var(--kh-accent);
@@ -27,7 +21,6 @@
   scale:var(--v-p,0) 1;
 }
 
-/* home button (brand) */
 .kh-dock-home{
   display:flex; align-items:center; gap:10px; white-space:nowrap;
   padding:0; border:0; background:none;
@@ -39,7 +32,6 @@
 .kh-dock-home:focus-visible{ outline:2px solid var(--kh-accent); outline-offset:4px; border-radius:4px; }
 .kh-dock-home .kh-mark{ display:block; flex:none; width:21px; height:21px; }
 
-/* section links; each one drops in a beat after the previous (--i set in the HTML) */
 .kh-dock-links{
   display:flex; align-items:center; gap:clamp(12px,1.8vw,26px);
 }
@@ -57,7 +49,6 @@
   100%{ opacity:1; translate:0 0; scale:1; }
 }
 
-/* right-hand cluster: scroll % readout plus the two toggles */
 .kh-dock-tools{ display:flex; align-items:center; gap:clamp(8px,1vw,14px); }
 .kh-dock-pct{
   min-width:4.4ch; text-align:right;
@@ -65,7 +56,6 @@
   font-variant-numeric:tabular-nums; color:var(--kh-text-soft);
 }
 
-/* ---- pill toggles (class names are shared with the sound script) ---- */
 .snd-btn,.mode-btn{
   display:flex; align-items:center; gap:9px; white-space:nowrap; cursor:pointer;
   padding:9px 14px;
@@ -76,11 +66,9 @@
 }
 .snd-btn:hover,.mode-btn:hover{ border-color:var(--kh-accent); color:var(--kh-text); }
 .snd-btn[aria-pressed="true"]{ color:var(--kh-text); border-color:#5A554C; }
-/* inside the dock a switched-on sound button fills with the accent */
+
 .kh-dock .snd-btn[aria-pressed="true"]{ background:var(--kh-accent); color:var(--kh-on-accent); border-color:var(--kh-accent); }
 
-/* labels keep the width of their longer state ("Sound off" vs "Sound on") so the
-   pills do not jitter. The font is monospaced: 9 chars x 0.72em = 6.48em, padded a little. */
 .snd-lab{ display:inline-block; min-width:6.7em; text-align:left; }
 .mode-lab{ display:inline-block; min-width:3.8em; text-align:left; }
 
@@ -103,7 +91,6 @@ html[data-mode="light"] .mode-ico .ic-moon{ display:none; }
   .snd-btn[aria-pressed="true"] .snd-wave2{ animation:none; opacity:1; }
 }
 
-/* ---- the same two toggles when they sit in the hero's top row ---- */
 .kh-top-left { display:flex; align-items:center; gap:clamp(18px,2.8vw,40px); }
 .kh-top-right{ display:flex; align-items:center; gap:clamp(10px,1.6vw,22px); }
 .kh-hero-top .snd-btn,.kh-hero-top .mode-btn{
@@ -114,7 +101,7 @@ html[data-mode="light"] .mode-ico .ic-moon{ display:none; }
 .kh-hero-top .snd-ico,.kh-hero-top .mode-ico{ width:18px; height:18px; }
 .kh-hero-top .snd-btn:hover,.kh-hero-top .snd-btn[aria-pressed="true"],
 .kh-hero-top .mode-btn:hover{ background:var(--kh-accent); color:var(--kh-on-accent); border-color:var(--kh-accent); }
-/* three soft rings on arrival, then it stops asking for attention */
+
 .kh-hero-top .snd-btn[aria-pressed="false"]{ animation:kh-ring 2.2s ease-out 1.4s 3; }
 @keyframes kh-ring{
   0%  { box-shadow:0 0 0 0 rgba(140,155,255,.35); }
@@ -122,7 +109,6 @@ html[data-mode="light"] .mode-ico .ic-moon{ display:none; }
   100%{ box-shadow:0 0 0 0 rgba(140,155,255,0); }
 }
 
-/* ---- menu button (phones only) ---- */
 .kh-menu{
   display:none; align-items:center; gap:9px; white-space:nowrap; cursor:pointer;
   min-height:44px; padding:10px 16px;
@@ -137,7 +123,6 @@ html[data-mode="light"] .mode-ico .ic-moon{ display:none; }
 .kh-menu[aria-expanded="true"] .kh-menu-ico i:first-child{ translate:0 5px; }
 .kh-menu[aria-expanded="true"] .kh-menu-ico i:last-child { translate:0 -5px; }
 
-/* ---- full-screen menu sheet ---- */
 .kh-sheet{
   position:fixed; inset:0; z-index:90;
   display:flex; flex-direction:column;
@@ -184,9 +169,9 @@ body.kh-sheet-open{ overflow:hidden; }
 .kh-sheet-ctl .snd-btn,.kh-sheet-ctl .mode-btn{
   flex:1 1 auto; justify-content:center; min-height:48px; padding:12px 14px; font-size:10.5px;
 }
-/* in the sheet the text labels are the point, so they stay visible at any width */
+
 .kh-sheet-ctl .snd-lab,.kh-sheet-ctl .mode-lab{ display:inline-block !important; }
-/* a plain heads-up: the page cannot read the phone's silent switch */
+
 .kh-sheet-note{
   margin:2px 0 0; text-align:center;
   font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.05em; color:var(--kh-text-soft);
@@ -197,9 +182,6 @@ body.kh-sheet-open{ overflow:hidden; }
   color:#fff; background:var(--kh-accent); border-radius:99px;
 }
 
-/* ==========================================================================
-   Wide screens (861px and up): the dock becomes a floating pill
-   ========================================================================== */
 @media (min-width:861px){
   .kh-dock{
     inset:16px auto auto 50%;
@@ -217,7 +199,6 @@ body.kh-sheet-open{ overflow:hidden; }
   .kh-dock-links a[aria-current="true"],
   .kh-dock-links a[aria-current="true"]:hover{ color:#fff; }
 
-  /* the highlight that slides to whichever section is current */
   .kh-dock-glow{
     position:absolute; top:0; bottom:0; left:0; z-index:0;
     width:0; opacity:0; border-radius:999px; background:var(--kh-accent);
@@ -226,29 +207,21 @@ body.kh-sheet-open{ overflow:hidden; }
   .kh-dock-glow.on{ opacity:1; }
   @media (prefers-reduced-motion:reduce){ .kh-dock-glow{ transition:opacity .25s ease-out; } }
 
-  /* a centred pill cannot afford the extra width, so icons only */
   .kh-dock .kh-dock-pct,.kh-dock .snd-lab,.kh-dock .mode-lab{ display:none; }
   .kh-dock .snd-btn,.kh-dock .mode-btn{ padding:9px 11px; }
 }
 
-/* ==========================================================================
-   Phones and small tablets
-   ========================================================================== */
 @media (max-width:860px){
   .kh-dock-links{ display:none; }
-  /* without scripts the menu button is useless, so show the plain links instead */
+
   html:not(.js) .kh-dock-links{ display:flex; flex-wrap:wrap; gap:8px 14px; }
 
-  /* always on screen at this width, and the blur would be re-sampled on every
-     scroll frame; the background is already near-opaque so just drop it */
   .kh-dock{ translate:0 0; justify-content:flex-start; gap:0; backdrop-filter:none; -webkit-backdrop-filter:none; }
   html.js .kh-menu{ display:flex; }
 
   .kh-dock-tools{ display:flex; gap:8px; margin:0 10px 0 auto; }
   .kh-dock-tools .snd-btn,.kh-dock-tools .mode-btn{ min-width:44px; min-height:44px; justify-content:center; padding:10px; }
 
-  /* the name is hidden while the hero's own wordmark is on screen, and eases
-     open (pushing the menu button over) once the dock is switched on */
   .kh-dock-home{
     font-size:13px; max-width:0; margin-right:0; opacity:0; overflow:hidden; pointer-events:none;
     transition:max-width .7s cubic-bezier(.22,.61,.36,1), margin-right .7s cubic-bezier(.22,.61,.36,1), opacity .35s ease-out;
@@ -269,7 +242,7 @@ body.kh-sheet-open{ overflow:hidden; }
 }
 @media (max-width:420px){ .kh-dock-home{ font-size:11.5px; } }
 @media (max-height:560px){
-  /* the sheet is full height, so it has to be able to scroll: tighter rows */
+
   .kh-sheet-links a{ padding:9px 0; font-size:clamp(20px,5vw,28px); }
   .kh-sheet-links{ margin:12px 0 18px; }
   .kh-sheet-foot{ margin-top:18px; }

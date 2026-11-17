@@ -1,14 +1,11 @@
-/* Dark / light toggle. The choice only lasts for the visit. When the browser
-   supports View Transitions, going to light the new theme spreads out from the
-   sun like dawn, and going to dark it spreads from the button; otherwise it
-   switches instantly. */
+
 (function () {
   var docEl = document.documentElement;
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.mode-btn'));
   var chromeTint = document.getElementById('chrome-tint');
   var TINT = { light: '#E8ECFA', dark: '#0E1330' };
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var FEATHER = 0.55; /* the mask is fully opaque out to this share of its radius */
+  var FEATHER = 0.55;
 
   function current() {
     return docEl.getAttribute('data-mode') === 'light' ? 'light' : 'dark';
@@ -33,8 +30,6 @@
     return Math.hypot(Math.max(o.x, window.innerWidth - o.x), Math.max(o.y, window.innerHeight - o.y));
   }
 
-  /* Feathered reveal: the new theme spreads from a point through a soft-edged
-     radial mask, so it reads as light seeping in rather than a hard circle. */
   function reveal(origin, theme, ms) {
     var R = (farthest(origin) / FEATHER) * 1.04;
     var grad = 'radial-gradient(circle closest-side, #000 ' + (FEATHER * 100) + '%, transparent 100%)';
@@ -52,7 +47,6 @@
     }).catch(function () {});
   }
 
-  /* warm bloom that expands from the sun while the dark gives way */
   function dawnBloom(origin, ms) {
     var el = document.createElement('div');
     el.className = 'dawn-bloom';
@@ -88,7 +82,7 @@
       }
       if (!document.startViewTransition || noMotion) { apply(after); return; }
       if (after === 'light') {
-        /* dark to light: dawn breaks from the sun in the corner */
+
         var sp = sunPoint() || origin;
         reveal(sp, 'light', 1500);
         dawnBloom(sp, 1500);

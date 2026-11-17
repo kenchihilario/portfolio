@@ -1,7 +1,4 @@
-/* ==========================================================================
-   Education: three static cards (short enough to read at a glance, so
-   nothing expands). Denser than the other sections on purpose.
-   ========================================================================== */
+
 #education .kh-head{ margin-bottom:clamp(20px,3vh,32px); }
 
 .kh-edu{
@@ -19,7 +16,7 @@
     box-shadow .32s cubic-bezier(.2,.7,.2,1),
     border-color .32s cubic-bezier(.2,.7,.2,1);
 }
-/* the hovered card lifts and grows over its neighbours, not under them */
+
 .kh-edu-card:hover{
   position:relative; z-index:1;
   translate:0 -6px; scale:1.035;
@@ -32,11 +29,11 @@
   flex:none; width:clamp(100px,9vw,136px); height:clamp(100px,9vw,136px); object-fit:contain;
   transition:rotate .4s cubic-bezier(.22,.61,.36,1), scale .4s cubic-bezier(.22,.61,.36,1);
 }
-/* the logo tilts toward the reader, like leaning in to a screen */
+
 .kh-edu-card:hover .kh-edu-logo{ rotate:-8deg; scale:1.08; }
 
 .kh-edu-txt{ display:flex; flex-direction:column; gap:5px; min-width:0; }
-/* the school name underlines itself in step with the logo's tilt */
+
 .kh-edu-txt h3{
   position:relative; padding-bottom:5px;
   font-size:clamp(18px,1.75vw,24px); font-weight:700; line-height:1.15; letter-spacing:-.015em;
@@ -63,12 +60,11 @@
 }
 html[data-mode="dark"] .kh-edu-pts li{ color:var(--kh-pill-text); }
 
-/* four cards in the Education section sit better two by two than three plus one */
 @media (min-width:901px){
   #education .kh-edu{ grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:900px){
-  .kh-edu{ grid-template-columns:minmax(0,1fr); }   /* minmax stops long text widening the column */
+  .kh-edu{ grid-template-columns:minmax(0,1fr); }
   .kh-edu-when{ white-space:normal; text-overflow:clip; }
 }
 @media (prefers-reduced-motion:reduce){

@@ -56,7 +56,7 @@
   function animate(path, dropAt, done){
     var pts = path.map(function(id){ return N[id]; });
     var pk = el('circle', {'class':'kh-r-pk', r:9, cx:pts[0].x, cy:pts[0].y});
-    var seg = 0, t0 = performance.now(), speed = 520;   /* px per second */
+    var seg = 0, t0 = performance.now(), speed = 520;
     function len(a, b){ return Math.hypot(b.x - a.x, b.y - a.y); }
     function frame(now){
       var a = pts[seg], b = pts[seg + 1];

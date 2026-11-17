@@ -1,5 +1,4 @@
-/* Section styling of my own: numbered headings, a timeline for experience,
-   a project grid, and a separate underline-style contact card. Loads last. */
+
 body{counter-reset:kh-h}
 .kh-head{counter-increment:kh-h;display:flex!important;flex-direction:column;align-items:flex-start!important;gap:8px;
   padding-bottom:16px;margin-bottom:26px;border-bottom:1px solid var(--kh-dock-line)}
@@ -11,32 +10,27 @@ body{counter-reset:kh-h}
 .kh-head-cue{border:0!important;background:none!important;padding:0!important;margin-left:14px;font:600 13px var(--kh-mono)!important;
   color:var(--kh-accent)!important;text-decoration:underline;text-underline-offset:4px;text-transform:none!important}
 
-/* top bar: an underline marks the section you are in, not a filled pill */
 .kh-dock-glow{top:auto!important;bottom:-1px!important;height:3px!important;border-radius:3px!important;
   background:var(--kh-accent)!important;box-shadow:none!important}
 .kh-dock-links a{background:none!important}
 
-/* experience as a timeline */
 .kh-xp{position:relative;margin-left:8px;padding-left:28px;border-left:2px solid var(--kh-dock-line);gap:12px}
 .kh-xp-row{position:relative;border-radius:10px!important}
 .kh-xp-row::before{content:"";position:absolute;left:-37px;top:28px;width:12px;height:12px;border-radius:50%;
   border:2px solid var(--kh-accent);background:var(--kh-base);transition:background .2s ease-out}
 .kh-xp-row[aria-expanded="true"]::before{background:var(--kh-accent)}
 
-/* projects as a grid */
 .kh-pj-rail{overflow:visible!important;cursor:default!important;-webkit-mask-image:none!important;mask-image:none!important}
 .kh-pj-strip{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px;
   width:auto!important;transform:none!important;padding:0!important}
 .kh-pj{width:auto!important;min-width:0!important;max-width:none!important;flex:none!important}
 
-/* contact: its own card with underline fields */
 .kh-form{background:var(--kh-sec-hi);border-top:3px solid var(--kh-accent);border-radius:6px 24px 6px 24px;padding:28px 26px}
 .kh-form input,.kh-form textarea{background:transparent!important;border:0!important;border-bottom:1.5px solid var(--kh-pill-edge)!important;
   border-radius:0!important;padding-left:2px!important}
 .kh-form input:focus,.kh-form textarea:focus{border-bottom-color:var(--kh-accent)!important;outline:none}
 .kh-about-copy h2{text-transform:none!important;font-family:'Sora',var(--kh-sans)!important;font-weight:700!important;letter-spacing:-.025em!important}
 
-/* the loop copies of each card are only needed by the old scrolling row */
 .kh-pj[aria-hidden="true"]{display:none!important}
 .kh-pj h3{font-size:clamp(18px,1.6vw,22px)!important}
 .kh-pj-fact{font-size:12px!important;letter-spacing:.04em!important}
@@ -44,7 +38,6 @@ body{counter-reset:kh-h}
 .kh-form{background:rgba(8,11,32,.5)!important;box-shadow:0 18px 40px rgba(0,0,0,.25)}
 html[data-mode="light"] .kh-form{background:rgba(255,255,255,.7)!important;box-shadow:0 14px 30px rgba(40,50,110,.12)}
 
-/* projects: featured case studies, then a compact list */
 .pf-cases{display:grid;gap:clamp(36px,5vw,64px)}
 .pf-case{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(22px,3.4vw,48px);align-items:center}
 .pf-case:nth-child(even) .pf-shot{order:2}
@@ -71,7 +64,7 @@ html[data-mode="light"] .kh-form{background:rgba(255,255,255,.7)!important;box-s
 .pf-info h3{font:700 17px 'Sora',var(--kh-sans);margin:0 0 3px}
 .pf-info p{margin:0;font-size:14px;line-height:1.5;color:var(--kh-text-soft)}
 .pf-stack{font:500 12px var(--kh-mono);color:var(--kh-text-soft)}
-/* projects: enlarge on hover */
+
 .pf-shot{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease-out,border-color .3s ease-out;transform-origin:center;position:relative}
 .pf-case:hover .pf-shot,.pf-shot:hover{transform:scale(1.06);box-shadow:0 30px 70px rgba(0,0,0,.5);border-color:var(--kh-accent);z-index:3}
 .pf-row{transition:transform .25s cubic-bezier(.2,.7,.2,1),background .25s ease-out,box-shadow .25s ease-out;transform-origin:center;position:relative;border-radius:10px}
@@ -86,7 +79,6 @@ html[data-mode="light"] .kh-form{background:rgba(255,255,255,.7)!important;box-s
   .pf-thumb{width:72px;height:48px}.pf-stack,.pf-row .pf-link{grid-column:2}.pf-row .pf-link{justify-self:start}
 }
 
-/* projects: click-to-enlarge lightbox for the "More builds" thumbnails */
 .pf-zoomable{cursor:zoom-in;position:relative}
 .pf-zoomable::after{content:"+";position:absolute;right:3px;bottom:3px;width:16px;height:16px;border-radius:50%;background:rgba(10,13,36,.8);color:#fff;font:700 12px/16px var(--kh-mono);text-align:center;opacity:0;transition:opacity .2s}
 .pf-row:hover .pf-zoomable::after,.pf-zoomable:focus-visible::after{opacity:1}

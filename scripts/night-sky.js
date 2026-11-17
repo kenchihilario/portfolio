@@ -1,7 +1,4 @@
-/* Star field + a corner sun. Canvas stars drift up slowly and shift
-   with the mouse (nearer stars move more). In light theme the sun is parked in the
-   top-right corner. Reduced motion: stars are
-   drawn once and the sun parks in the top-right corner. */
+
 (function(){
   var sky = document.getElementById('sky-layer'); if(!sky) return;
   var root = document.documentElement, cv = sky.querySelector('canvas'), ctx = cv.getContext('2d');
@@ -17,8 +14,7 @@
     if(sx == null){ sx = W * .5; sy = H * .5; }
     aim();
   }
-  /* the sun stays put in the top-right corner (it no longer follows the scroll or the
-     mouse); its life comes from the slowly turning rays and the breathing glow in CSS */
+
   function aim(){
     var small = W < 700;
     tsx = W - (small ? 56 : 120);

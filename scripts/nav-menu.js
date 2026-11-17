@@ -1,16 +1,11 @@
-/* Navigation: scroll progress, the active-link highlight in the top bar,
-   the phone menu sheet, and the footer entrance. */
 
-/* 1. Scroll progress and active section.
-   Progress (0 to 1) goes onto <html> as --v-p and into the % readout.
-   The active link is the last section whose top has crossed 45% of the
-   screen height. */
+
 (function () {
   var html = document.documentElement;
   var readout = document.getElementById('scroll-meter');
   var nav = document.querySelector('.kh-dock-links');
   var glow = nav ? nav.querySelector('.kh-dock-glow') : null;
-  var items = [];   // { link, section }
+  var items = [];
   var queued = false;
 
   if (nav) {
@@ -61,8 +56,6 @@
   refresh();
 })();
 
-/* 2. Phone menu. The sheet's section list is copied from the top bar's
-   nav so the links are only written once in the HTML. */
 (function () {
   var opener = document.getElementById('menu-toggle');
   var sheet = document.getElementById('drawer');
@@ -120,8 +113,6 @@
   window.addEventListener('resize', function () { if (window.innerWidth > 860) close(); });
 })();
 
-/* 3. Footer: the contact block replays its entrance each time it
-   comes into view. */
 (function () {
   var footer = document.getElementById('contact');
   if (!footer) return;

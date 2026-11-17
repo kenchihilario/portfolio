@@ -1,5 +1,4 @@
-/* Interactive network map. A toy demo: packets cross a small graph from "kenchi"
-   to "contact". Cut a cable and they reroute, or are dropped if no path is left. */
+
 (function () {
   'use strict';
   var cv = document.getElementById('map');
@@ -17,7 +16,7 @@
   var isCut = function (a, b) { return !!cut[key(a, b)]; };
   var css = function (v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); };
 
-  function route() { /* shortest path 0 -> 6 over live cables; random tie-break */
+  function route() {
     var prev = {}, q = [0], seen = { 0: 1 };
     while (q.length) {
       var u = q.shift(); if (u === 6) break;

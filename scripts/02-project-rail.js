@@ -1,7 +1,4 @@
-/* Project rail: a row of cards that drifts sideways by itself.
-   The markup holds the card set twice, so once the scroll position has
-   moved one set-width the jump back is invisible. Mouse drag, touch, shift
-   or trackpad wheel all take over; the drift resumes after a short pause. */
+
 (function () {
   var rail = document.querySelector('.kh-pj-rail');
   var strip = rail && rail.querySelector('.kh-pj-strip');
@@ -43,9 +40,6 @@
   window.addEventListener('resize', measure);
   requestAnimationFrame(tick);
 
-  /* A mostly-vertical wheel over the rail belongs to the page, not the rail
-     (browsers would otherwise turn it into sideways panning and trap the
-     visitor). Horizontal gestures and shift+wheel pan the rail. */
   rail.addEventListener('wheel', function (e) {
     var vertical = !e.shiftKey && Math.abs(e.deltaY) > Math.abs(e.deltaX);
     if (vertical) {
@@ -59,8 +53,6 @@
   rail.addEventListener('touchstart', holdOff, { passive: true });
   rail.addEventListener('touchmove', holdOff, { passive: true });
 
-  /* Mouse drag. Touch already scrolls natively. Pointer capture waits for a
-     real drag so ordinary clicks on a card still reach the card. */
   var drag = { armed: false, startX: 0, startLeft: 0 };
 
   rail.addEventListener('pointerdown', function (e) {

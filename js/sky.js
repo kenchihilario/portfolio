@@ -1,7 +1,4 @@
-/* Star field + cursor-following sun. Canvas stars drift up slowly and shift
-   with the mouse (nearer stars move more). In light theme the sun eases
-   toward the pointer and stays above the page. Reduced motion: stars are
-   drawn once and the sun parks in the top-right corner. */
+
 (function(){
   var sky = document.getElementById('kh-sky'); if(!sky) return;
   var root = document.documentElement, cv = sky.querySelector('canvas'), ctx = cv.getContext('2d');
@@ -17,8 +14,7 @@
     if(sx == null){ sx = W * .5; sy = H * .5; }
     aim();
   }
-  /* the sun rides an arc across the sky as the page scrolls: low on the left at the
-     top of the page, highest in the middle, low on the right at the bottom */
+
   function aim(){
     var max = Math.max(1, document.documentElement.scrollHeight - H);
     var p = Math.min(1, Math.max(0, (window.pageYOffset || 0) / max));

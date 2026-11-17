@@ -1,6 +1,4 @@
-/* Dark / light toggle. The choice only lasts for the visit. When the browser
-   supports View Transitions the new theme spreads out as a circle from the
-   button that was pressed; otherwise it switches instantly. */
+
 (function () {
   var root = document.documentElement;
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.thm-btn'));

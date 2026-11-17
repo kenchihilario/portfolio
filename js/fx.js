@@ -1,9 +1,8 @@
-/* Extra interaction: decrypting headline, card glow, certificate lightbox. */
+
 (function () {
   'use strict';
   var k = window.kenchi || { play: function () {}, reduce: false };
 
-  /* Headline "decrypts" once after load (and again on hover). Screen readers get the plain name. */
   var h = document.querySelector('h1');
   if (h && !k.reduce) {
     var text = h.textContent.trim(), chars = [], busy = false, G = '01<>/#$%&=+*';
@@ -28,7 +27,6 @@
     if (document.documentElement.classList.contains('boot')) addEventListener('bootend', function () { setTimeout(run, 250); }); else setTimeout(run, 300);
   }
 
-  /* Pointer glow on cards (mouse only) */
   if (matchMedia('(hover: hover)').matches) {
     [].forEach.call(document.querySelectorAll('.grid .panel, .job'), function (el) {
       el.addEventListener('pointermove', function (e) {
@@ -38,7 +36,6 @@
     });
   }
 
-  /* Certificate lightbox */
   var dlg = document.getElementById('lb');
   if (dlg && dlg.showModal) {
     var img = dlg.querySelector('img'), t = dlg.querySelector('h3'), p = dlg.querySelector('p');

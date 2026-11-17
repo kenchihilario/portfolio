@@ -1,9 +1,5 @@
-/* ==========================================================================
-   Summary card with the contact form beside it, and the "currently
-   building" block that follows it.
-   ========================================================================== */
 
-/* ---- summary card (a two-column grid: text left, form right) ---- */
+
 .kh-about{
   margin:0 var(--kh-gutter);
   padding:clamp(28px,5vw,56px);
@@ -19,7 +15,7 @@
   font-family:var(--kh-display); font-weight:400; text-transform:uppercase;
   font-size:clamp(28px,4vw,52px);
 }
-/* note: this also reaches the form's own paragraphs, which then override size/colour where they need to */
+
 .kh-about p{
   max-width:74ch;
   font-size:clamp(16px,1.35vw,19px); line-height:1.6;
@@ -33,7 +29,6 @@
   color:var(--kh-muted);
 }
 
-/* ---- the form ---- */
 .kh-form{ display:flex; flex-direction:column; gap:7px; }
 .kh-form h3{
   margin-bottom:6px;
@@ -67,7 +62,6 @@
 }
 .kh-form button[type=submit]:hover{ background:var(--kh-accent); translate:0 -2px; }
 
-/* inline error under a field; script adds .on when there is something to say */
 .kh-form-err{
   display:none; align-items:center; gap:7px; margin-top:6px;
   font-family:var(--kh-mono); font-size:10.5px; letter-spacing:.07em; line-height:1.45;
@@ -76,8 +70,6 @@
 .kh-form-err.on{ display:flex; }
 .kh-form-err::before{ content:""; flex:none; width:5px; height:5px; border-radius:50%; background:currentColor; }
 
-
-/* ---- dark theme: the card and its fields flip to the dark palette ---- */
 html[data-mode="dark"] .kh-about{ background:var(--kh-sec-hi); }
 html[data-mode="dark"] .kh-about h2,
 html[data-mode="dark"] .kh-form h3{ color:var(--kh-text); }
@@ -89,7 +81,6 @@ html[data-mode="dark"] .kh-form textarea{ color:var(--kh-text); background:var(-
 html[data-mode="dark"] .kh-form ::placeholder{ color:var(--kh-pill-text); }
 html[data-mode="dark"] .kh-form button[type=submit]{ color:var(--kh-sec-hi); background:var(--kh-text); }
 
-/* ---- "currently building" ---- */
 .kh-next{
   display:flex; flex-direction:column; align-items:flex-start;
   gap:clamp(11px,1.3vw,17px);

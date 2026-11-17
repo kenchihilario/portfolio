@@ -1,29 +1,25 @@
-/* ==========================================================================
-   Experience: each job is a button-row (company | role). Opening it widens the
-   right column, slides the logo over the company name and unfolds the bullets.
-   ========================================================================== */
+
 .kh-xp{ display:flex; flex-direction:column; gap:10px; }
 
 .kh-xp-row{
   --inset:clamp(15px,1.5vw,20px);
-  --ease:.52s cubic-bezier(.32,.72,0,1);          /* shared curve for everything that grows */
+  --ease:.52s cubic-bezier(.32,.72,0,1);
 
   position:relative; overflow:hidden; width:100%;
-  /* two tracks written as minmax(0,..) so a long name cannot push the divider
-     out of line from one row to the next */
+
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); align-items:center;
   gap:clamp(18px,2.6vw,52px);
   padding:var(--inset) clamp(78px,7vw,110px) var(--inset) clamp(16px,1.7vw,24px);
 
   font:inherit; color:inherit; text-align:left; cursor:pointer;
-  -webkit-user-select:text; user-select:text;       /* buttons block selection by default; copy should still work */
+  -webkit-user-select:text; user-select:text;
   background:rgba(255,255,255,.5);
   border:1px solid var(--kh-rule); border-radius:16px;
   transition:
     background .22s ease-out, border-color .22s ease-out, translate .22s ease-out, box-shadow .22s ease-out,
     padding var(--ease), grid-template-columns var(--ease);
 }
-/* accent strip down the left edge: grows on hover, stays when open */
+
 .kh-xp-row::before{
   content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
   background:var(--kh-accent);
@@ -40,7 +36,6 @@
 .kh-xp-row:hover .kh-xp-co h3,.kh-xp-row:focus-visible .kh-xp-co h3,
 .kh-xp-row:hover .kh-xp-roles h4,.kh-xp-row:focus-visible .kh-xp-roles h4{ color:var(--kh-accent); }
 
-/* "What I did" / "Hide" label parked at the far right */
 .kh-xp-cue{
   position:absolute; right:clamp(16px,1.8vw,28px); top:50%; translate:0 -50%;
   display:flex; flex-direction:column; align-items:center; gap:9px;
@@ -51,9 +46,6 @@
 .kh-xp-row[aria-expanded="true"] .kh-xp-cue::after{ content:"Hide"; }
 .kh-xp-row:hover .kh-xp-cue,.kh-xp-row:focus-visible .kh-xp-cue{ color:var(--kh-accent); }
 
-/* ---- left column: logo laid over the company name ----
-   The logo is absolutely positioned so that opening the row can slide it across
-   the name and date, covering them, and land it larger in the middle. */
 .kh-xp-co{
   position:relative; display:flex; align-items:center;
   gap:clamp(14px,1.3vw,20px); min-height:clamp(42px,3.3vw,58px);
@@ -72,7 +64,7 @@
   width:clamp(88px,7.6vw,130px); height:clamp(88px,7.6vw,130px);
   border-radius:18px; box-shadow:0 14px 32px rgba(14,19,48,.26);
 }
-/* left padding reserves the space the floating logo would have taken */
+
 .kh-xp-co-txt{
   display:flex; flex-direction:column; gap:7px; min-width:0;
   padding-left:calc(clamp(42px,3.3vw,58px) + clamp(14px,1.3vw,20px));
@@ -83,7 +75,7 @@
 .kh-xp-co h3{
   font-family:var(--kh-display); font-weight:400; text-transform:uppercase; line-height:.98;
   font-size:clamp(17px,1.7vw,26px); letter-spacing:.03em; color:var(--kh-ink);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;   /* one line in both states */
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   transform-origin:left center;
   transition:font-size var(--ease), scale .22s ease-out;
 }
@@ -94,9 +86,8 @@
   transition:font-size var(--ease);
 }
 
-/* ---- right column: roles, then the unfolding description ---- */
 .kh-xp-right{ position:relative; padding-left:clamp(16px,1.8vw,28px); }
-/* divider spans the row's full height so the rules line up down the list */
+
 .kh-xp-right::before{
   content:""; position:absolute; left:0; width:1px; background:var(--kh-rule);
   top:calc(-1 * var(--inset)); bottom:calc(-1 * var(--inset));
@@ -111,14 +102,13 @@
   margin-top:5px;
   font-family:var(--kh-mono); font-size:clamp(12px,.85vw,14px); letter-spacing:0; color:var(--kh-muted);
 }
-/* earlier roles step down in size and weight */
+
 .kh-xp-roles li:not(:first-child) h4{
   font-size:clamp(12.5px,1vw,15px); font-weight:600; letter-spacing:-.015em; color:#57534B;
   transition:font-size .3s ease-out;
 }
 .kh-xp-roles li:not(:first-child) .kh-xp-when{ margin-top:4px; font-size:clamp(11.5px,.8vw,13px); }
 
-/* grid-rows 0fr -> 1fr is what animates the height */
 .kh-xp-desc{
   display:grid; grid-template-rows:0fr; opacity:0;
   transition:grid-template-rows var(--ease), opacity .3s ease-out .06s;
@@ -133,7 +123,6 @@
   content:""; position:absolute; left:2px; top:.62em; width:9px; height:2px; background:var(--kh-accent);
 }
 
-/* ---- open state ---- */
 .kh-xp-row[aria-expanded="true"]{
   --inset:clamp(24px,2.8vw,38px);
   grid-template-columns:minmax(0,.95fr) minmax(0,1.95fr);
@@ -143,7 +132,6 @@
 .kh-xp-row[aria-expanded="true"] .kh-xp-roles h4{ font-size:clamp(21px,2.3vw,34px); }
 .kh-xp-row[aria-expanded="true"] .kh-xp-roles li:not(:first-child) h4{ font-size:clamp(15px,1.3vw,19px); }
 
-/* ---- dark theme ---- */
 html[data-mode="dark"] .kh-xp-row{ background:rgba(255,255,255,.05); }
 html[data-mode="dark"] .kh-xp-row:hover,
 html[data-mode="dark"] .kh-xp-row:focus-visible,
@@ -151,7 +139,6 @@ html[data-mode="dark"] .kh-xp-row[aria-expanded="true"]{ background:var(--kh-sec
 html[data-mode="dark"] .kh-xp-roles li:not(:first-child) h4,
 html[data-mode="dark"] .kh-xp-pts li{ color:var(--kh-text-soft); }
 
-/* ---- narrow: stack the two columns; the label drops under the role ---- */
 @media (max-width:900px){
   .kh-xp-row,.kh-xp-row[aria-expanded="true"]{ grid-template-columns:minmax(0,1fr); }
   .kh-xp-row{
@@ -162,7 +149,7 @@ html[data-mode="dark"] .kh-xp-pts li{ color:var(--kh-text-soft); }
   .kh-xp-cue{ position:static; translate:0 0; flex-direction:row; justify-content:flex-start; gap:12px; margin-top:4px; }
   .kh-xp-right{ padding:14px 0 0; border-top:1px solid var(--kh-rule); }
   .kh-xp-right::before{ display:none; }
-  /* no expand-time column resize to protect here, so the name may wrap */
+
   .kh-xp-co h3{ white-space:normal; overflow:visible; text-overflow:clip; line-height:1.08; text-wrap:balance; }
   .kh-xp-dates{ font-size:clamp(11.5px,.85vw,14px); white-space:normal; text-overflow:clip; }
 }

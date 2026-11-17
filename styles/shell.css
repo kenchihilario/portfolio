@@ -1,9 +1,4 @@
-/* ==========================================================================
-   Page shell
-   The hero band and its top row (name on the left, sound and theme buttons
-   on the right), plus the small rules that only exist to make the page
-   behave on phones. The hero's own content is in landing.css.
-   ========================================================================== */
+
 
 .kh-hero{
   position:relative;
@@ -19,7 +14,6 @@
   margin-bottom:clamp(40px,3.6vw,52px);
 }
 
-/* ---------- name + logo mark ---------- */
 .kh-brand{
   display:flex;
   align-items:center;
@@ -30,7 +24,7 @@
   line-height:1;
   letter-spacing:-.028em;
 }
-/* one fill taken from currentColor, so the mark flips with the theme */
+
 .kh-mark{color:var(--kh-text)}
 .kh-mark path{fill:currentColor}
 .kh-brand .kh-mark{
@@ -40,9 +34,6 @@
   height:clamp(44px,4.4vw,64px);
 }
 
-/* ---------- plain <nav> elements ----------
-   These element selectors also style the dock and the phone menu, which
-   rely on the flex row, the gap and the link weight from here. */
 nav{
   display:flex;
   align-items:center;
@@ -57,7 +48,6 @@ nav a{
 }
 nav a:hover{color:var(--kh-text)}
 
-/* ---------- phones ---------- */
 @media (max-width:760px){
   nav{display:none}
   .kh-brand{
@@ -68,14 +58,13 @@ nav a:hover{color:var(--kh-text)}
     width:clamp(32px,7.6vw,44px);
     height:clamp(32px,7.6vw,44px);
   }
-  /* the sticky bar carries these on a phone, so the hero row drops them */
+
   .kh-top-right .snd-btn,
   .kh-top-right .mode-btn{display:none}
-  /* nothing on a phone may push the page sideways */
+
   html,body{overflow-x:hidden}
 }
 
-/* the pinned dock needs room above the page, and anchors must stop below it */
 @media (max-width:860px){
   body{padding-top:60px}
   section[id],footer[id]{scroll-margin-top:74px}

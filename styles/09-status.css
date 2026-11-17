@@ -1,12 +1,5 @@
-/* ==========================================================================
-   Status layer
-   The loading curtain, the little messages the page shows after you do
-   something (copy, send, go offline), the placeholder for a picture that
-   did not load, and the no-JavaScript banner. If scripts are off the
-   curtain never shows and the page is just there.
-   ========================================================================== */
 
-/* ---------- loading curtain ---------- */
+
 .kh-load{display:none}
 html.js .kh-load{
   position:fixed;
@@ -50,7 +43,7 @@ html.js.ready .kh-load{
   background:var(--kh-pill-dim);
   border-radius:2px;
 }
-/* the script sets --lp (0 to 1) as the first screen loads */
+
 .kh-load-fill{
   position:absolute;
   inset:0;
@@ -93,7 +86,6 @@ html.js.ready .kh-load{
 }
 @keyframes kh-load-blink{50%{opacity:0}}
 
-/* the hero plays an entrance; hold it until the curtain lifts */
 html.loading .kh-page *{animation-play-state:paused!important}
 
 @media (prefers-reduced-motion:reduce){
@@ -101,7 +93,6 @@ html.loading .kh-page *{animation-play-state:paused!important}
   .kh-load-fill{transition:none}
 }
 
-/* ---------- messages (window.toast in 14-feedback.js) ---------- */
 .kh-toasts{
   position:fixed;
   left:clamp(12px,2vw,24px);
@@ -158,16 +149,10 @@ html.loading .kh-page *{animation-play-state:paused!important}
   color:var(--kh-text-soft);
 }
 
-/* On phones the pinned dock owns the bottom-left edge, so the stack climbs. */
 @media (max-width:860px){
   .kh-toasts{bottom:calc(clamp(12px,2vw,24px) + 62px)}
 }
 
-/* The one message that interrupts instead of queuing: an incomplete contact
-   form. Same markup and lifecycle as the others, but it leaves the corner
-   stack, docks bottom-middle and is drawn bigger, because this one is meant
-   to stop you. It uses a fixed dark orange accent (not the shared error
-   pink) so it reads as the site speaking, not a generic form error. */
 .kh-toast.is-center{
   position:fixed;
   left:50%;
@@ -200,9 +185,6 @@ html.loading .kh-page *{animation-play-state:paused!important}
   .kh-toast.is-center,.kh-toast.is-center.is-out{animation:none}
 }
 
-/* ---------- pictures that did not load ----------
-   A broken-image icon is the one part of a page nobody designed. These keep
-   the shape of the missing picture and say so in the page's own voice. */
 .kh-pj-pic.is-broken,
 .kh-pop-pic.is-broken{
   display:grid;
@@ -221,10 +203,9 @@ html.loading .kh-page *{animation-play-state:paused!important}
   color:var(--kh-muted);
 }
 .kh-pj-pic.is-broken::before{display:none}
-/* a logo that fails just disappears; the label next to it already names it */
+
 img.is-gone{display:none}
 
-/* ---------- no JavaScript ---------- */
 .kh-nojs{
   position:relative;
   z-index:1;

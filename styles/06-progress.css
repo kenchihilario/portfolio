@@ -1,6 +1,4 @@
-  /* ===== scroll progress =====
-     --p (0..1) is written on <html> by one scroll handler; everything below
-     just reads it, so there is a single source of truth for "how far down". */
+
   .bar-prog{
     position:absolute;left:0;right:0;bottom:0;height:3px;
     background:var(--orange);transform-origin:left center;
@@ -13,7 +11,6 @@
   }
   @media (max-width:600px){.sprog{display:none}}
 
-  /* the skip pill fills as you go, so it carries progress too */
   .skipto::before{
     content:"";position:absolute;inset:0;border-radius:99px;pointer-events:none;
     background:var(--orange);opacity:.16;
@@ -21,7 +18,6 @@
   }
   .skipto > *{position:relative;z-index:1}
 
-  /* what's next: a dashed outline says "not here yet" without an empty page */
   .nx{
     margin:clamp(16px,2.2vw,32px) var(--gut) 0;
     padding:clamp(28px,4.4vw,56px) 0;
@@ -42,7 +38,6 @@
     color:var(--meta);
   }
 
-  /* section CTA - the hero/footer lockup, sized for a section */
   .sec-cta{
     display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
     margin:0 auto clamp(30px,4.5vh,52px);padding-bottom:clamp(26px,3.5vh,40px);
@@ -59,7 +54,7 @@
     position:relative;display:inline-block;text-decoration:none;color:var(--ink);
     transition:color .2s ease-out;
   }
-  /* the rule sweeps in from the left - hard to miss without shouting */
+
   .sec-cta a::after{
     content:"";position:absolute;left:0;right:0;bottom:-.08em;height:6px;background:var(--orange);
     scale:0 1;transform-origin:0 50%;transition:scale .32s cubic-bezier(.22,1,.36,1);
@@ -67,5 +62,4 @@
   .sec-cta a:hover{color:var(--orange)}
   .sec-cta a:hover::after{scale:1 1}
 
-  /* Security dark mode: the "what's next" copy was written for a light card */
   html[data-theme="dark"] .nx p{color:var(--pill-fg)}

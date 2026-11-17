@@ -1,5 +1,4 @@
-/* Project detail: clicking a card opens a panel with a large image on the
-   left and the write-up on the right. */
+
 (function () {
   var modal = document.getElementById('pm');
   if (!modal) return;
@@ -14,8 +13,6 @@
     demo: document.getElementById('pm-demo')
   };
 
-  /* A button with no URL yet stays visible but inert. A project that will
-     never have links (data-links="none") hides the whole row instead. */
   function aim(anchor, url) {
     var live = Boolean(url);
     if (live) anchor.href = url; else anchor.removeAttribute('href');

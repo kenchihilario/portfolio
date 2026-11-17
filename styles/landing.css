@@ -1,5 +1,4 @@
-/* Hero: name + facts on the left, arched portrait with cert stickers on the right.
-   Loads last so it wins over the older hero rules. */
+
 .kh-hero.hx{
   zoom:1;
   padding:clamp(16px,2vw,28px) var(--kh-gutter) clamp(36px,5vw,64px);
@@ -25,7 +24,7 @@ html[data-mode="light"] .kh-hero.hx{
   gap:clamp(20px,3vw,48px);align-items:center;
   max-width:1240px;margin:0 auto;
 }
-/* ---------- left: words ---------- */
+
 .hx-status{
   display:inline-flex;align-items:center;gap:10px;margin:0;
   padding:7px 14px;border:1px solid var(--hx-line);border-radius:99px;
@@ -52,7 +51,7 @@ html[data-mode="light"] .kh-hero.hx{
 .hx-btn:focus-visible,.hx-tag:focus-visible{outline:2px solid var(--hx-acc);outline-offset:3px}
 .hx-main{background:var(--hx-acc);color:var(--kh-on-accent)}
 .hx-main:hover{background:var(--hx-acc);filter:brightness(1.1)}
-/* ---------- right: portrait + stickers ---------- */
+
 .hx-stage{position:relative;width:100%;max-width:640px;justify-self:end;aspect-ratio:1/.9}
 .hx-arch{
   position:absolute;left:26%;right:26%;top:7%;bottom:0;
@@ -79,10 +78,10 @@ html[data-mode="light"] .kh-hero.hx{
 .hx-tag img{width:100%;height:clamp(60px,6.6vw,86px);object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
 .hx-tag b{font:700 clamp(11.5px,.95vw,13.5px)/1.25 'Manrope',sans-serif;color:var(--hx-ink)}
 .hx-tag small{font:500 9.5px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--hx-dim);margin-top:-2px}
-/* ISC2's logo is dark on transparent, so it gets its own light tile in dark mode */
+
 .hx-isc img{height:clamp(54px,5.6vw,74px);width:auto;aspect-ratio:1;padding:7px;border-radius:16px;background:#EAEEFB}
 html[data-mode="light"] .hx-isc img{background:transparent;padding:0}
-/* staggered down both sides, overlapping the arch edge a little, like stickers on a laptop lid */
+
 .t1{left:0;top:2%;--r:-7deg;--d:.05s}
 .t2{left:14%;top:25%;--r:3deg;--d:.12s}
 .t3{left:0;top:49%;--r:4deg;--d:.19s}
@@ -97,7 +96,7 @@ html[data-mode="light"] .hx-isc img{background:transparent;padding:0}
   position:absolute;left:50%;bottom:-6px;translate:-50% 100%;margin:0;white-space:nowrap;
   font:500 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--hx-dim);
 }
-/* ---------- facts row ---------- */
+
 .hx-facts{
   display:grid;grid-template-columns:repeat(4,1fr);
   max-width:1240px;margin:clamp(40px,4.4vw,60px) auto 0;
@@ -107,7 +106,7 @@ html[data-mode="light"] .hx-isc img{background:transparent;padding:0}
 .hx-facts div:first-child{border-left:0}
 .hx-facts dt{font:800 clamp(22px,2.3vw,30px)/1.1 'Sora','Segoe UI',sans-serif;color:var(--hx-ink)}
 .hx-facts dd{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:var(--hx-dim)}
-/* ---------- tablet / phone ---------- */
+
 @media (max-width:900px){
   .hx-body{grid-template-columns:1fr;gap:28px}
   .hx-stage{order:-1;justify-self:center;max-width:520px;aspect-ratio:1/1.02;margin-bottom:22px}
@@ -131,7 +130,64 @@ html[data-mode="light"] .hx-isc img{background:transparent;padding:0}
   .hx-tag{animation:none}
   .hx-status i{animation:none}
 }
-/* the nav row keeps v8's smaller size so Sound + theme buttons fit */
+
 @media (min-width:901px){
   .kh-hero.hx .kh-hero-top{zoom:.8;margin-bottom:clamp(20px,2.4vw,36px)}
+}
+
+.hx-shades{
+  position:absolute;left:51.5%;top:52.9%;width:18%;aspect-ratio:640/226;
+  translate:-50% -50%;z-index:2;pointer-events:none;opacity:0;
+  background:url(../assets/shades.webp) center/100% 100% no-repeat;
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.35));
+}
+.hx-shades::after{
+  content:"";position:absolute;inset:0;opacity:0;
+  -webkit-mask:url(../assets/shades.webp) center/100% 100% no-repeat;
+  mask:url(../assets/shades.webp) center/100% 100% no-repeat;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%);
+  background-size:260% 100%;background-position:160% 0;
+}
+.hx-shades::before{
+  content:"";position:absolute;right:14%;top:-34%;width:26%;aspect-ratio:1;
+  background:#fff;opacity:0;transform:scale(0) rotate(0deg);
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  filter:drop-shadow(0 0 4px #fff);
+}
+html[data-mode="light"] .hx-shades{
+  animation:shades-drop 1s cubic-bezier(.3,.7,.4,1) 1.3s both;
+}
+html[data-mode="light"] .hx-shades::after{
+  opacity:1;animation:shades-glint .9s ease-out 2.45s both;
+}
+html[data-mode="light"] .hx-shades::before{
+  animation:shades-ding .7s ease-out 2.4s both;
+}
+@keyframes shades-drop{
+  0%{opacity:0;transform:translateY(-480%) rotate(-26deg) scale(1.25)}
+  10%{opacity:1}
+  52%{transform:translateY(10%) rotate(5deg) scale(1)}
+  68%{transform:translateY(-9%) rotate(-2.5deg)}
+  84%{transform:translateY(3%) rotate(1deg)}
+  100%{opacity:1;transform:none}
+}
+@keyframes shades-glint{
+  from{background-position:160% 0}
+  to{background-position:-60% 0}
+}
+@keyframes shades-ding{
+  0%{opacity:0;transform:scale(0) rotate(0deg)}
+  40%{opacity:1;transform:scale(1.15) rotate(45deg)}
+  100%{opacity:0;transform:scale(0) rotate(90deg)}
+}
+@media (max-width:900px){
+  .hx-shades{top:58.4%}
+}
+@media (max-width:560px){
+  .hx-shades{left:51.75%;top:52.7%;width:20.5%}
+}
+@media (prefers-reduced-motion:reduce){
+  html[data-mode="light"] .hx-shades{animation:none;opacity:1}
+  html[data-mode="light"] .hx-shades::after,
+  html[data-mode="light"] .hx-shades::before{animation:none;opacity:0}
 }

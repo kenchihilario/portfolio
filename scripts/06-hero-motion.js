@@ -1,5 +1,4 @@
-/* Liquid-glass puck: tracks the cursor, but only inside the rendered photo
-   box - its bottom edge up to the top of the head, never the space above. */
+
 (function(){
   var host = document.querySelector('.stage-photo');
   var lens = document.getElementById('plens');
@@ -9,12 +8,11 @@
 
   function shown(){ return host.querySelector('img:not([hidden])'); }
 
-  /* object-fit:contain + object-position:bottom centre - work out the real box */
   function fit(){
     var img = shown();
     if(!img || !img.naturalWidth) return;
     var b = host.getBoundingClientRect();
-    var z = host.offsetWidth ? b.width / host.offsetWidth : 1;   /* hero zoom */
+    var z = host.offsetWidth ? b.width / host.offsetWidth : 1;
     var bw = host.offsetWidth, bh = b.height / z;
     var scale = Math.min(bw / img.naturalWidth, bh / img.naturalHeight);
     var w = img.naturalWidth * scale, h = img.naturalHeight * scale;
@@ -39,11 +37,9 @@
   }
   function kick(){ if(!running){ running = true; requestAnimationFrame(frame); } }
 
-  /* coordinates are relative to the measured box, so the puck can never
-     wander into the empty area above the head */
   function aim(e){
     var b = lens.getBoundingClientRect();
-    var z = lens.offsetWidth ? b.width / lens.offsetWidth : 1;   /* hero zoom */
+    var z = lens.offsetWidth ? b.width / lens.offsetWidth : 1;
     tx = (e.clientX - b.left) / z;
     ty = (e.clientY - b.top) / z;
     return b;
@@ -60,9 +56,6 @@
   });
   host.addEventListener('mouseleave', function(){ tr = 0; kick(); });
 
-  /* same problem as the headline lens: touch has no hover, so a tap opened
-     the puck and nothing ever closed it. Follow the finger while it's down,
-     then close shortly after it lifts. */
   var touchCloseT = null;
   function scheduleTouchClose(){
     clearTimeout(touchCloseT);
@@ -94,16 +87,15 @@
   host.addEventListener('touchcancel', scheduleTouchClose, {passive:true});
 })();
 
-/* Idle demo: the chip taps itself at random, never less than 2s apart. */
 (function(){
   var chip=document.getElementById('flip');
   if(!chip) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  chip.classList.add('landed');          /* entrance is done; keep it out of the way */
+  chip.classList.add('landed');
   function tap(){
     chip.classList.add('tap');
     setTimeout(function(){ chip.classList.remove('tap'); }, 520);
-    setTimeout(tap, 2000 + Math.random() * 4000);   /* 2s–6s gap */
+    setTimeout(tap, 2000 + Math.random() * 4000);
   }
-  setTimeout(tap, 2600);                            /* after the chip has arrived */
+  setTimeout(tap, 2600);
 })();

@@ -1,9 +1,5 @@
-/* Feedback: toasts and clipboard helper, the loading bar, broken-image
-   fallbacks, and offline notices. */
 
-/* 1. Toasts and copying.
-   window.toast(kind, title, detail, opts) shows a short message in the live
-   region; window.copyText(text, done) copies and reports whether it worked. */
+
 (function () {
   var stack = document.getElementById('toasts');
   var SHOW_MS = 5200;
@@ -44,8 +40,6 @@
     return card;
   };
 
-  /* The async clipboard API is missing without a secure context, so fall
-     back to a hidden textarea and execCommand. */
   function copyOldWay(text) {
     var box = document.createElement('textarea');
     box.value = text;
@@ -72,10 +66,6 @@
   };
 })();
 
-/* 2. Loading bar. The bar shows the smaller of two numbers: how much of the
-   first screen (images and fonts) has really loaded, and how far we are
-   into the minimum hold time. That way a fast load still shows a bar that
-   travels. It reaches 100% when the loader announces it is ready. */
 (function () {
   var bar = document.getElementById('pre-fill');
   var label = document.getElementById('pre-meta');
@@ -84,7 +74,7 @@
   var hold = window.__pre || { t0: Date.now(), min: 0 };
   var steps = Array.prototype.slice.call(document.querySelectorAll('#pre-log li'));
   var images = Array.prototype.slice.call(document.querySelectorAll('img:not([loading="lazy"])'));
-  var needed = images.length + 1;   // every eager image, plus the web fonts
+  var needed = images.length + 1;
   var arrived = 0;
   var shown = 0;
   var running = true;
@@ -131,7 +121,6 @@
   else requestAnimationFrame(step);
 })();
 
-/* 3. Images that fail to load keep their frame and fall back quietly. */
 (function () {
   var FRAMES = '.kh-pj-pic, .kh-pop-pic';
 
@@ -141,7 +130,7 @@
       img.style.display = 'none';
       frame.classList.add('is-broken');
     } else {
-      img.classList.add('is-gone');   // a logo or sticker: its label names it anyway
+      img.classList.add('is-gone');
     }
   }
 
@@ -155,12 +144,11 @@
   document.querySelectorAll('img').forEach(function (img) {
     if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) markBroken(img);
     img.addEventListener('error', function () { markBroken(img); });
-    /* the project panel reuses one <img>, so clear an old failure on success */
+
     img.addEventListener('load', function () { markFine(img); });
   });
 })();
 
-/* 4. Connection notices. */
 (function () {
   var wasOnline = navigator.onLine !== false;
 

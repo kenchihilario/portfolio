@@ -1,5 +1,4 @@
-/* Hero: name + facts on the left, arched portrait with cert stickers on the right.
-   Loads last so it wins over the older hero rules. */
+
 .kh-hero.hx{
   zoom:1;
   padding:clamp(16px,2vw,28px) var(--kh-gutter) clamp(36px,5vw,64px);
@@ -25,7 +24,7 @@ html[data-theme="light"] .kh-hero.hx{
   gap:clamp(20px,3vw,48px);align-items:center;
   max-width:1240px;margin:0 auto;
 }
-/* ---------- left: words ---------- */
+
 .hx-status{
   display:inline-flex;align-items:center;gap:10px;margin:0;
   padding:7px 14px;border:1px solid var(--hx-line);border-radius:99px;
@@ -52,7 +51,7 @@ html[data-theme="light"] .kh-hero.hx{
 .hx-btn:focus-visible,.hx-tag:focus-visible{outline:2px solid var(--hx-acc);outline-offset:3px}
 .hx-main{background:var(--hx-acc);color:var(--kh-on-accent)}
 .hx-main:hover{background:var(--hx-acc);filter:brightness(1.1)}
-/* ---------- right: portrait + stickers ---------- */
+
 .hx-stage{position:relative;width:100%;max-width:640px;justify-self:end;aspect-ratio:1/.9}
 .hx-arch{
   position:absolute;left:26%;right:26%;top:7%;bottom:0;
@@ -79,10 +78,10 @@ html[data-theme="light"] .kh-hero.hx{
 .hx-tag img{width:100%;height:clamp(60px,6.6vw,86px);object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.28))}
 .hx-tag b{font:700 clamp(11.5px,.95vw,13.5px)/1.25 'Manrope',sans-serif;color:var(--hx-ink)}
 .hx-tag small{font:500 9.5px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--hx-dim);margin-top:-2px}
-/* ISC2's logo is dark on transparent, so it gets its own light tile in dark mode */
+
 .hx-isc img{height:clamp(54px,5.6vw,74px);width:auto;aspect-ratio:1;padding:7px;border-radius:16px;background:#EAEEFB}
 html[data-theme="light"] .hx-isc img{background:transparent;padding:0}
-/* staggered down both sides, overlapping the arch edge a little, like stickers on a laptop lid */
+
 .t1{left:0;top:2%;--r:-7deg;--d:.05s}
 .t2{left:14%;top:25%;--r:3deg;--d:.12s}
 .t3{left:0;top:49%;--r:4deg;--d:.19s}
@@ -97,7 +96,7 @@ html[data-theme="light"] .hx-isc img{background:transparent;padding:0}
   position:absolute;left:50%;bottom:-6px;translate:-50% 100%;margin:0;white-space:nowrap;
   font:500 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--hx-dim);
 }
-/* ---------- facts row ---------- */
+
 .hx-facts{
   display:grid;grid-template-columns:repeat(4,1fr);
   max-width:1240px;margin:clamp(40px,4.4vw,60px) auto 0;
@@ -107,7 +106,7 @@ html[data-theme="light"] .hx-isc img{background:transparent;padding:0}
 .hx-facts div:first-child{border-left:0}
 .hx-facts dt{font:800 clamp(22px,2.3vw,30px)/1.1 'Sora','Segoe UI',sans-serif;color:var(--hx-ink)}
 .hx-facts dd{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:var(--hx-dim)}
-/* ---------- tablet / phone ---------- */
+
 @media (max-width:900px){
   .hx-body{grid-template-columns:1fr;gap:28px}
   .hx-stage{order:-1;justify-self:center;max-width:520px;aspect-ratio:1/1.02;margin-bottom:22px}
@@ -131,7 +130,7 @@ html[data-theme="light"] .hx-isc img{background:transparent;padding:0}
   .hx-tag{animation:none}
   .hx-status i{animation:none}
 }
-/* the nav row keeps v8's smaller size so Sound + theme buttons fit */
+
 @media (min-width:901px){
   .kh-hero.hx .kh-hero-top{zoom:.8;margin-bottom:clamp(20px,2.4vw,36px)}
 }

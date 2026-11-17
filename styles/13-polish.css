@@ -1,6 +1,5 @@
-/* Polish layer (loads after the hero): the "what I bring" line, mobile fixes,
-   a few smoother hover states, and the footer credit. */
-/* ---------- "what I bring" line under the stats ---------- */
+
+
 .hx-offer{
   max-width:1240px;margin:22px auto 0;padding:2px 0 2px 16px;
   border-left:2px solid var(--kh-accent);
@@ -10,25 +9,20 @@
   display:block;margin-bottom:3px;
   font:700 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--kh-accent);
 }
-/* ---------- footer credit ---------- */
-/* ---------- phone fixes ----------
-   A bare 1fr column grows to fit its content, which pushed the Education
-   cards and the Experience row wider than the screen. minmax(0,1fr) stops that. */
+
 @media (max-width:900px){
-  /* anchor jumps stop below the fixed top bar instead of under it */
+
   section[id]{scroll-margin-top:76px}
 }
-/* ---------- hover and focus ---------- */
+
 .ifc{transition-timing-function:cubic-bezier(.2,.7,.2,1)}
-/* ---------- section headings ease in once ----------
-   Only the heading of each section, only the first time it appears. */
+
 .kh-head{transition:opacity .6s ease,translate .6s cubic-bezier(.2,.7,.2,1)}
 .rv-on .kh-head:not(.rv-in){opacity:0;translate:0 14px}
 @media (prefers-reduced-motion:reduce){
   .rv-on .kh-head:not(.rv-in){opacity:1;translate:none}
 }
 
-/* ---------- the ending: handshake strip, prompt line, blinking cursor ---------- */
 .kh-shake{
   grid-column:1/-1; list-style:none; margin:clamp(8px,2vw,20px) 0 0; padding:0;
   display:grid; grid-template-columns:repeat(3,1fr); gap:0;

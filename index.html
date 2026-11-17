@@ -23,15 +23,13 @@
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<!-- One theme-color tag. scripts/mode-toggle.js keeps it matched to the
-     site's own dark/light mode (not the OS setting). Starts dark, like the
-     inline attribute below. -->
+
 <meta name="theme-color" content="#0E1330" id="chrome-tint">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script>
-/* Dark is the default look. Set it before first paint so there is no flash. */
+
 document.documentElement.setAttribute('data-mode', 'dark');
 </script>
 <link rel="stylesheet" href="styles/theme-vars.css">
@@ -68,18 +66,18 @@ document.documentElement.setAttribute('data-mode', 'dark');
 <script defer src="scripts/badge-viewer.js"></script>
 <script defer src="scripts/polish.js"></script>
 <script defer src="scripts/project-zoom.js"></script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
-<!-- Background sky: stars at night, birds in daylight. Fixed behind the page
-     and masked around the portrait by night-sky.js. Decorative only. -->
 <div class="kh-sky" id="sky-layer" aria-hidden="true">
   <canvas class="sky-canvas"></canvas>
   <div class="sun"><div class="sun-in"><i class="sun-rays"></i><i class="sun-glow"></i><i class="sun-halo"></i><i class="sun-core"></i></div></div>
 </div>
 
-<!-- Opening screen. Hidden by default and shown by the inline script below,
-     so a visitor with JavaScript off is never stuck behind it. -->
 <div class="kh-load" id="curtain" aria-hidden="true">
   <svg class="kh-load-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M8 14H22V43H38V14H52V41L79 14H94L58 50L94 86H79L52 59V86H38V57H22V86H8Z"/></svg>
   <p class="kh-load-name">Kenchi Hilario</p>
@@ -88,14 +86,11 @@ document.documentElement.setAttribute('data-mode', 'dark');
   <ul class="kh-load-log" id="curtain-log"><li>init interface</li><li>load fonts and images</li><li>open route: recruiter &rarr; kenchi</li><li>link up</li></ul>
 </div>
 <script>
-/* Opening screen controller. It runs first and always finishes, even if
-   something else on the page fails. */
+
 (function () {
   var html = document.documentElement;
   html.classList.add('js', 'loading');
 
-  /* Hold the screen briefly so a fast load does not just flash. Visitors who
-     prefer reduced motion wait much less. */
   var HOLD = matchMedia('(prefers-reduced-motion: reduce)').matches ? 400 : 1700;
   var began = Date.now();
   var waiting = null;
@@ -117,7 +112,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
     }, 180);
   }
 
-  /* skipWait is the emergency path and ignores the hold. */
   function showPage(skipWait) {
     if (lifted) return;
     var remaining = skipWait ? 0 : HOLD - (Date.now() - began);
@@ -179,9 +173,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
   </div>
 </header>
 
-<!-- Phone menu: the section links and the mode/sound buttons move into this
-     drawer, since the top bar has no room for them. Links are copied from the
-     desktop nav by nav-menu.js. -->
 <div class="kh-sheet" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
   <div class="kh-sheet-top">
     <span class="kh-sheet-title">Menu</span>
@@ -209,7 +200,7 @@ document.documentElement.setAttribute('data-mode', 'dark');
 
 <div class="kh-page">
   <main id="main" tabindex="-1">
-  <!-- section: hero -->
+
   <section class="kh-hero hx" aria-label="Introduction">
     <div class="kh-hero-top">
       <div class="kh-top-left">
@@ -256,6 +247,7 @@ document.documentElement.setAttribute('data-mode', 'dark');
       <div class="hx-stage">
         <div class="hx-arch" aria-hidden="true"></div>
         <img class="hx-photo" src="kenchi-hero.webp" alt="Kenchi Paul M. Hilario" width="490" height="509" fetchpriority="high" decoding="async">
+        <span class="hx-shades" aria-hidden="true"></span>
         <button class="hx-tag t1" type="button" data-badge="ethical"><img src="logos/cisco/ethical-hacker.png" alt=""><b>Ethical Hacker</b><small>Cisco · Earned</small></button>
         <button class="hx-tag t2" type="button" data-badge="ctm"><img src="logos/cisco/cyber-threat-management.png" alt=""><b>Cyber Threat Mgmt</b><small>Cisco · Earned</small></button>
         <button class="hx-tag t3" type="button" data-badge="junior"><img src="logos/cisco/junior-analyst.png" alt=""><b>Jr. Cyber Analyst</b><small>Cisco · Earned</small></button>
@@ -278,7 +270,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
 
   </section>
 
-  <!-- section: speaking (offline view) -->
   <section class="sec kh-sec" id="route" aria-label="Route to interview" style="padding-top:0">
     <div class="kh-head"><h2>Route to interview</h2><span class="kh-head-note kh-head-note-lg">Toy demo: cut a cable, watch the packet reroute</span></div>
     <div class="route-card">
@@ -401,7 +392,7 @@ document.documentElement.setAttribute('data-mode', 'dark');
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-ubuntu.png" alt="" loading="lazy"><span class="kh-tool-name">Ubuntu / Linux</span></li>
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-ansible.png" alt="" loading="lazy"><span class="kh-tool-name">Ansible</span></li>
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-grafana.png" alt="" loading="lazy"><span class="kh-tool-name">Grafana</span></li>
-          
+
         </ul></div>
       <div class="kh-stack-group"><h3 class="kh-stack-title">Languages</h3><ul class="kh-stack-list">
           <li class="kh-tool"><img src="logos/tech/python.png" alt="" loading="lazy"><span class="kh-tool-name">Python</span></li>
@@ -413,7 +404,7 @@ document.documentElement.setAttribute('data-mode', 'dark');
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-cpp.png" alt="" loading="lazy"><span class="kh-tool-name">C++</span></li>
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-html.png" alt="" loading="lazy"><span class="kh-tool-name">HTML</span></li>
           <li class="kh-tool"><img class="tkn" src="logos/tech/n-css.png" alt="" loading="lazy"><span class="kh-tool-name">CSS</span></li>
-          
+
         </ul></div>
       <div class="kh-stack-group"><h3 class="kh-stack-title">Platforms &amp; tooling</h3><ul class="kh-stack-list">
           <li class="kh-tool" style="--v-k:1.35"><img src="logos/tech/git.png" alt="" loading="lazy"><span class="kh-tool-name">Git</span></li>
@@ -426,7 +417,7 @@ document.documentElement.setAttribute('data-mode', 'dark');
           <li class="kh-tool"><img src="logos/tech/claude.png" alt="" loading="lazy"><span class="kh-tool-name">Claude</span></li>
           <li class="kh-tool" style="--v-k:1.05"><img src="logos/tech/windows.png" alt="" loading="lazy"><span class="kh-tool-name">Windows 10/11</span></li>
           <li class="kh-tool"><img src="logos/mono/mysql.png" alt="" loading="lazy"><span class="kh-tool-name">MySQL Workbench</span></li>
-          
+
         </ul></div>
     </div>
   </section>
@@ -501,8 +492,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
     </div>
   </section>
 
-  <!-- section: what's next -->
-
   <section class="kh-sec" id="up-next" aria-label="Currently building" style="padding-top:1px">
     <div class="kh-next">
       <span class="kh-next-kick">In the lab</span>
@@ -514,8 +503,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
 
   </main>
 
-
-  <!-- section: footer -->
   <footer id="contact" class="ft">
     <div class="kh-foot-bg" aria-hidden="true"></div>
     <div class="ft-in">
@@ -544,8 +531,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
     </div>
   </footer>
 </div>
-
-
 
 <div class="kh-all" id="proj-all" role="dialog" aria-modal="true" aria-label="All projects">
   <button class="kh-all-x" type="button" aria-label="Close">&times;</button>

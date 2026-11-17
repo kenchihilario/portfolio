@@ -1,7 +1,4 @@
-/* "See all" for projects. The rail repeats its cards, so this opens a full
-   overlay with one copy of each, cloned from the rail at open time (the rail
-   stays the only place the cards are written). Clicking a clone closes the
-   overlay and clicks the real card, which opens the detail panel. */
+
 (function () {
   var opener = document.querySelector('.kh-all-btn');
   var overlay = document.getElementById('pa');
@@ -28,7 +25,7 @@
       copy.removeAttribute('id');
       grid.appendChild(copy);
     });
-    /* clones lose their listeners, so give the hover tick back */
+
     if (window.wireHoverSound) window.wireHoverSound(grid);
   }
 

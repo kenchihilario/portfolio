@@ -1,5 +1,4 @@
-/* Each section heading eases in the first time it scrolls into view.
-   Nothing else on the page fades. Skipped for reduced motion. */
+
 (function(){
   if(!('IntersectionObserver' in window)) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

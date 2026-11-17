@@ -1,12 +1,5 @@
-  /* ============================================================
-     THE CHROME AROUND THE CONTENT
-     A curtain while the hero loads, a place for the page to answer
-     back when you do something, and a designed state for the things
-     that can fail. All of it degrades: with JavaScript off the
-     curtain never appears and the page is simply there.
-     ============================================================ */
 
-  /* ---------- loading curtain ---------- */
+
   .pre{display:none}
   html.js .pre{
     position:fixed;inset:0;z-index:300;
@@ -46,14 +39,13 @@
   .pre-log li.on:last-of-type::after{content:" ✓";color:var(--orange)}
   .pre-log li.cur::after{content:"_";color:var(--orange);animation:prebl .8s steps(1) infinite}
   @keyframes prebl{50%{opacity:0}}
-  /* the hero has an entrance - it should not spend it behind the curtain */
+
   html.loading .sheet *{animation-play-state:paused!important}
   @media (prefers-reduced-motion:reduce){
     html.js .pre{transition:opacity .01s linear,visibility .01s linear}
     .pre-fill{transition:none}
   }
 
-  /* ---------- the page answering back ---------- */
   .toasts{
     position:fixed;left:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);z-index:150;
     display:flex;flex-direction:column-reverse;gap:10px;
@@ -82,27 +74,13 @@
   .toast b{display:block;font-weight:500;color:var(--cream)}
   .toast span{display:block;color:var(--cream-dim);letter-spacing:.03em}
   @media (max-width:860px){
-    /* clear of the view badge and the skip pill sharing this edge */
+
     .toasts{bottom:calc(clamp(12px,2vw,24px) + 62px)}
   }
   @media (prefers-reduced-motion:reduce){
     .toast,.toast.out{animation:none}
   }
 
-  /* ---------- the one toast that interrupts instead of queuing: an
-     incomplete contact-form submit. Still the same .toast markup/host/
-     lifecycle (see window.toast in 14-feedback.js) - .center is a modifier
-     that lifts it out of the corner stack via position:fixed and gives it
-     more visual weight, since this one is meant to stop you, not just note
-     something in passing the way a copy/download toast does. Docked bottom
-     center (horizontally centered, anchored to the bottom edge - the class
-     name is left as "center" since that's what JS/opts call it, but the
-     positioning itself is bottom-middle, not screen-center) rather than the
-     corner queue. Sized and radiused off var(--rad) rather than the corner
-     toast's own fixed 14px, so it reads as a card in the site's own
-     language, not a bigger version of a notification. Uses a fixed dark
-     orange accent rather than the shared --pink error color - the design wanted
-     this one to read as "the brand talking," not a generic form error. */
   .toast.center{
     position:fixed;left:50%;bottom:clamp(20px,4vh,40px);translate:-50% 0;z-index:200;
     width:min(90vw,380px);padding:18px 20px;border-radius:var(--rad);
@@ -120,7 +98,6 @@
     .toast.center,.toast.center.out{animation:none}
   }
 
-  /* ---------- first-visit heads-up: sound survives the silent switch ---------- */
   .snote{
     position:fixed;left:50%;top:34px;z-index:150;translate:-50% -140%;
     display:flex;align-items:center;gap:14px;width:max-content;max-width:92vw;
@@ -145,7 +122,6 @@
   @media (min-width:861px){.snote{display:none}}
   @media (prefers-reduced-motion:reduce){.snote{transition:opacity .01s linear}}
 
-  /* ---------- form errors, said in the page rather than by the browser ---- */
   .cf-err{
     display:none;align-items:center;gap:7px;margin-top:6px;
     font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;line-height:1.45;
@@ -159,9 +135,6 @@
     border-color:#B4335F;box-shadow:0 0 0 3px rgba(180,51,95,.15);
   }
 
-  /* ---------- pictures that did not arrive ----------
-     A broken-image glyph is the one piece of a page nobody designed. These
-     keep the shape of what is missing and say so in the page's own voice. */
   .ph.img-fail,.proj-shot.img-fail,.pm-shot.img-fail{
     display:grid;place-items:center;background:var(--panel);
   }
@@ -173,10 +146,9 @@
   }
   .pm-shot.img-fail{background:var(--panel)}
   .proj-shot.img-fail::before{display:none}
-  /* a logo that fails just leaves; the label beside it already says the name */
+
   img.gone{display:none}
 
-  /* ---------- no JavaScript ---------- */
   .nojs{
     position:relative;z-index:1;
     margin:0;padding:14px clamp(20px,4vw,64px);
