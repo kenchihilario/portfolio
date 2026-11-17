@@ -163,6 +163,14 @@ html[data-mode="light"] .hx-shades::after{
 html[data-mode="light"] .hx-shades::before{
   animation:shades-ding .7s ease-out 2.4s both;
 }
+html.shades-off[data-mode="dark"] .hx-shades{
+  animation:shades-out .75s cubic-bezier(.5,0,.8,.4) .25s both;
+}
+@keyframes shades-out{
+  0%{opacity:1;transform:none}
+  22%{opacity:1;transform:translateY(-18%) rotate(-5deg)}
+  100%{opacity:0;transform:translateY(-560%) rotate(24deg) scale(1.2)}
+}
 @keyframes shades-drop{
   0%{opacity:0;transform:translateY(-480%) rotate(-26deg) scale(1.25)}
   10%{opacity:1}
@@ -187,6 +195,7 @@ html[data-mode="light"] .hx-shades::before{
   .hx-shades{left:51.75%;top:52.7%;width:20.5%}
 }
 @media (prefers-reduced-motion:reduce){
+  html.shades-off[data-mode="dark"] .hx-shades{animation:none;opacity:0}
   html[data-mode="light"] .hx-shades{animation:none;opacity:1}
   html[data-mode="light"] .hx-shades::after,
   html[data-mode="light"] .hx-shades::before{animation:none;opacity:0}

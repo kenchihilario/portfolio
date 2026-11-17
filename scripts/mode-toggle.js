@@ -20,9 +20,19 @@
     if (chromeTint) chromeTint.setAttribute('content', TINT[theme]);
   }
 
+  var shadesTimer;
+
   function apply(theme) {
+    var was = current();
     docEl.setAttribute('data-mode', theme);
     docEl.classList.toggle('sun-rise', theme === 'light');
+    clearTimeout(shadesTimer);
+    if (theme === 'dark' && was === 'light') {
+      docEl.classList.add('shades-off');
+      shadesTimer = setTimeout(function () { docEl.classList.remove('shades-off'); }, 1800);
+    } else {
+      docEl.classList.remove('shades-off');
+    }
     syncButtons();
   }
 
