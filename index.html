@@ -32,40 +32,15 @@
 
 document.documentElement.setAttribute('data-mode', 'dark');
 </script>
-<link rel="stylesheet" href="styles/theme-vars.css">
-<link rel="stylesheet" href="styles/shell.css">
-<link rel="stylesheet" href="styles/navbar.css">
-<link rel="stylesheet" href="styles/section-layout.css">
-<link rel="stylesheet" href="styles/education.css">
-<link rel="stylesheet" href="styles/experience.css">
-<link rel="stylesheet" href="styles/stack.css">
-<link rel="stylesheet" href="styles/ledger.css">
-<link rel="stylesheet" href="styles/projects.css">
-<link rel="stylesheet" href="styles/popup.css">
-<link rel="stylesheet" href="styles/contact.css">
-<link rel="stylesheet" href="styles/footer.css">
-<link rel="stylesheet" href="styles/status.css">
-<link rel="stylesheet" href="styles/sky-layer.css">
-<link rel="stylesheet" href="styles/redesign.css">
-<link rel="stylesheet" href="styles/landing.css">
-<link rel="stylesheet" href="styles/finish.css">
-<link rel="stylesheet" href="styles/signature.css">
-<script defer src="scripts/project-rail.js"></script>
-<script defer src="scripts/timeline.js"></script>
-<script defer src="scripts/project-popup.js"></script>
-<script defer src="scripts/contact-form.js"></script>
-<script defer src="scripts/topbar-state.js"></script>
-<script defer src="scripts/audio.js"></script>
-<script defer src="scripts/mode-toggle.js"></script>
-<script defer src="scripts/project-grid.js"></script>
-<script defer src="scripts/nav-menu.js"></script>
-<script defer src="scripts/access-labels.js"></script>
-<script defer src="scripts/intro-and-notices.js"></script>
-<script defer src="scripts/night-sky.js"></script>
-<script defer src="scripts/extras.js"></script>
-<script defer src="scripts/badge-viewer.js"></script>
-<script defer src="scripts/polish.js"></script>
-<script defer src="scripts/project-zoom.js"></script>
+<link rel="stylesheet" href="styles/style.css">
+<script defer src="scripts/main.js"></script>
+<script defer src="scripts/sound.js"></script>
+<script defer src="scripts/theme.js"></script>
+<script defer src="scripts/menu.js"></script>
+<script defer src="scripts/intro.js"></script>
+<script defer src="scripts/effects.js"></script>
+<script defer src="scripts/certs.js"></script>
+<script defer src="scripts/projects.js"></script>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -530,39 +505,6 @@ document.documentElement.setAttribute('data-mode', 'dark');
       <p class="ft-foot">© 2026 Kenchi Paul M. Hilario · plain HTML, CSS and JavaScript</p>
     </div>
   </footer>
-</div>
-
-<div class="kh-all" id="proj-all" role="dialog" aria-modal="true" aria-label="All projects">
-  <button class="kh-all-x" type="button" aria-label="Close">&times;</button>
-  <div class="kh-all-wrap">
-    <div class="kh-all-top">
-      <span class="kh-all-title">Projects</span>
-      <span class="kh-all-note">Everything, in one view · Click a project for code and demo links</span>
-    </div>
-    <div class="kh-all-grid" id="proj-all-grid"></div>
-  </div>
-</div>
-
-<div class="kh-pop" id="proj-panel" role="dialog" aria-modal="true" aria-label="Project detail">
-  <div class="kh-pop-card">
-    <div class="kh-pop-pic"><img id="pp-img" src="" alt=""></div>
-    <div class="kh-pop-text">
-      <button class="kh-pop-x" type="button" aria-label="Close">&times;</button>
-      <h3 id="pp-title"></h3>
-      <p id="pp-copy"></p>
-      <span class="kh-pop-fact" id="pp-fact"></span>
-      <div class="kh-pop-links" id="pp-links">
-        <a class="kh-pop-btn kh-pop-btn-off" id="pp-repo" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.58 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.6.69.5A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-          <span>Code</span>
-        </a>
-        <a class="kh-pop-btn kh-pop-btn-off" id="pp-demo" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-          <span>Live demo</span>
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="kh-pop" id="badge-panel" role="dialog" aria-modal="true" aria-label="Certification detail">

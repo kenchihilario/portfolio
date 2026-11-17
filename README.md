@@ -1,23 +1,23 @@
 # Kenchi Hilario | Portfolio
 
-This is my personal portfolio website. I made it to show my networking and cybersecurity projects, my Cisco certifications and my experience as a Computer Engineering Technology student at PUP.
+This is my personal portfolio. I'm a Computer Engineering Technology student at PUP, Networking track, and I made it to show my projects, certificates and experience while I look for an OJT.
 
-Live site: add your link here once deployed.
+Live site: https://kenchihilario.vercel.app
 
-## About the site
+## How it's built
 
-- Static site, no build step. Upload everything with `index.html` at the top level (see `DEPLOY.txt`).
-- Styles are in `styles/` and scripts are in `scripts/`. The load order is set by the tags in `index.html`, so keep the tags in the same order if you add or rename a file.
-- Certificates, photos and logos are in `certs/`, `photos/` and `logos/`.
+It's plain HTML, CSS and JavaScript. No framework and no build step. Open `index.html` in a browser and it works.
 
-## Certifications
+- `styles/style.css` has all the styling.
+- `scripts/` has a few small JS files: theme toggle, menu, sound, intro screen, effects, certificates and project screenshots.
+- `certs/`, `photos/` and `logos/` hold the images and certificate files.
 
-- CCNA: Introduction to Networks is earned.
-- CCNA: Switching, Routing, and Wireless Essentials is in progress (not earned yet).
-- Tesda NC II: CSS is earned
-- Tesda NC II: Mechatronics (assessment at November 24)
+It's hosted on Vercel and deploys from the `main` branch of this repo.
+
+## About the work
+
+I designed the site and decided what goes in it. I used AI (Claude) to help write the code, so I won't pretend I typed every line myself. I'm still going through it and changing things to make it more my own.
 
 ## Credits
 
-- Designed, built and written by Kenchi Hilario, with AI assistance (Claude).
 - Footer image: Pillars of Creation, NASA, ESA, CSA, STScI.
